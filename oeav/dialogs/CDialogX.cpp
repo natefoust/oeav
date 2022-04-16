@@ -53,7 +53,7 @@ BOOL CDialogX::OnEraseBkgnd(CDC* cdc)
 
 void CDialogX::drawElegantDialog(CDC& dc)
 {
-	COLORREF bgColor = CColor::linen;
+	COLORREF bgColor = 0xf0f0f0;
 	COLORREF navbarColor = CColor::bisque;
 	CPen borderPen(PS_SOLID, 1, bgColor);
 
@@ -67,16 +67,24 @@ void CDialogX::drawElegantDialog(CDC& dc)
 	dc.SelectObject(&borderPen);
 	dc.Rectangle(myRect);
 
-	CRect navbarRect{ myRect };
-	navbarRect.SetRect(myRect.left, myRect.top, myRect.right, myRect.bottom / 5);
+	DWORD style = GetStyle();
 
-	CBrush brush1;
-	brush1.CreateSolidBrush(navbarColor);
+	if (!(style & WS_CHILD))
+	{
+		CRect navbarRect{ myRect };
+		navbarRect.SetRect(myRect.left, myRect.top, myRect.right, myRect.bottom / 5);
 
-	dc.SelectObject(&brush1);
-	dc.SelectObject(&borderPen);
-	dc.Rectangle(navbarRect);
+		CBrush brush1;
+		brush1.CreateSolidBrush(navbarColor);
+
+		dc.SelectObject(&brush1);
+		dc.SelectObject(&borderPen);
+		dc.Rectangle(navbarRect);
+	}
+	
 
 	borderPen.DeleteObject();
 	brush.DeleteObject();
 }
+
+
