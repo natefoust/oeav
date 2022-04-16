@@ -18,9 +18,6 @@
     <ClInclude Include="oeav.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="oeavDlg.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -33,15 +30,18 @@
     <ClInclude Include="pch.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="main_window_dlg.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oeav.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="oeavDlg.cpp">
+    <ClCompile Include="pch.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="main_window_dlg.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
