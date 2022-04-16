@@ -27,9 +27,6 @@ protected:
 private:
 	void drawElegantDialog(CDC& dc);
 
-	void initControls();
-	void buildLayout();
-
 private:
 	CStaticX _productName;
 	CStaticX _emplName;
