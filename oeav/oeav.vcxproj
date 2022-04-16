@@ -189,9 +189,11 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="controls\CButtonX.h" />
     <ClInclude Include="controls\CStaticX.h" />
     <ClInclude Include="dialogs\CDialogX.h" />
     <ClInclude Include="dialogs\main_window_dlg.h" />
+    <ClInclude Include="dialogs\registry_list_dlg.h" />
     <ClInclude Include="ext\Color.h" />
     <ClInclude Include="ext\etslayout.h" />
     <ClInclude Include="framework.h" />
@@ -201,9 +203,11 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="controls\CButtonX.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
     <ClCompile Include="dialogs\CDialogX.cpp" />
     <ClCompile Include="dialogs\main_window_dlg.cpp" />
+    <ClCompile Include="dialogs\registry_list_dlg.cpp" />
     <ClCompile Include="ext\Color.cpp" />
     <ClCompile Include="ext\ETSLayout.cpp" />
     <ClCompile Include="oeav.cpp" />
@@ -221,7 +225,9 @@
     <None Include="res\oeav.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\exit.ico" />
     <Image Include="res\oeav.ico" />
+    <Image Include="res\settings.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
