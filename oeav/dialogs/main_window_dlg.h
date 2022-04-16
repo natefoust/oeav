@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "CDialogX.h"
 #include "../controls/CStaticX.h"
+#include "../controls/CButtonX.h"
 
 class MainWindowDlg : public CDialogX
 {
@@ -27,8 +28,15 @@ private:
 	void initControls();
 	void buildLayout();
 
+	afx_msg void OnBnClickedButtonSettings();
+	afx_msg void OnBnClickedButtonExit();
+	afx_msg void OnTcnSelchangeTabController(NMHDR *pNMHDR, LRESULT *pResult);
+
 private:
-	CStaticX _productName;
 	CStaticX _emplName;
-	CStaticX _wndId;
+
+	CTabCtrl _mainTab;
+
+	CButtonST _btnSettings;
+	CButtonST _btnExit;
 };
