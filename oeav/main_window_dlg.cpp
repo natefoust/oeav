@@ -3,6 +3,7 @@
 #include "oeav.h"
 #include "main_window_dlg.h"
 #include "afxdialogex.h"
+#include "ext/ETSLayout.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,7 +26,7 @@ void MainWindowDlg::DoDataExchange(CDataExchange* pDX)
 
 BOOL MainWindowDlg::OnInitDialog()
 {
-	CDialogEx::OnInitDialog();
+	__super::OnInitDialog();
 
 	return TRUE;  
 }
