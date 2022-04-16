@@ -1,8 +1,5 @@
 #pragma once
 
-
-// CTransparentStatic
-
 class CStaticX : public CStatic
 {
 	DECLARE_DYNAMIC(CStaticX)

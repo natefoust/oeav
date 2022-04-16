@@ -1,11 +1,5 @@
-// TransparentStatic.cpp : implementation file
-//
-
 #include "../pch.h"
 #include "CStaticX.h"
-
-
-// CTransparentStatic
 
 IMPLEMENT_DYNAMIC(CStaticX, CStatic)
 CStaticX::CStaticX()
@@ -21,7 +15,6 @@ BEGIN_MESSAGE_MAP(CStaticX, CStatic)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
-// CTransparentStatic message handlers
 
 void CStaticX::OnPaint()
 {
