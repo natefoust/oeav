@@ -37,6 +37,7 @@
 // AT YOUR OWN RISK! THE AUTHOR ACCEPTS NO LIABILITY FOR ANY DAMAGE/LOSS OF 
 // BUSINESS THAT THIS PRODUCT MAY CAUSE.
 
+#include "../pch.h"
 
 #if !defined(ETS_LAYOUTMGR_INCLUDED_)
 #define ETS_LAYOUTMGR_INCLUDED_
@@ -56,10 +57,10 @@ namespace ETSLayout
 	typedef ETSCSHelpDlgBar		CBaseDialogBar;
 	typedef ETSCSHelpPropPage	CBasePropertyPage;
 #else
-	typedef CDialog				CBaseDialog;
-	typedef CFormView			CBaseFormView;
-	typedef CDialogBar			CBaseDialogBar;
-	typedef CPropertyPage		CBasePropertyPage;
+	typedef CDialog	CBaseDialog;
+	typedef CFormView CBaseFormView;
+	typedef CDialogBar CBaseDialogBar;
+	typedef CPropertyPage CBasePropertyPage;
 #endif
 }
 
@@ -734,7 +735,7 @@ class ETSGUI_EXT_CLASS ETSLayoutDialog : public ETSLayout::CBaseDialog, protecte
 {
 // Construction
 public:
-	ETSLayoutDialog(UINT nID, CWnd* pParent = NULL, LPCTSTR strName = NULL, bool bGripper = true);   // standard constructor
+	ETSLayoutDialog(UINT nID, CWnd* pParent = NULL, LPCTSTR strName = NULL, bool bGripper = false);   // standard constructor
 
 // Dialog Data
 	//{{AFX_DATA(ETSLayoutDialog)

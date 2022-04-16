@@ -1,6 +1,8 @@
 ﻿#pragma once
+#include "CDialogX.h"
+#include "../controls/CStaticX.h"
 
-class MainWindowDlg : public CDialogEx
+class MainWindowDlg : public CDialogX
 {
 
 public:
@@ -20,5 +22,13 @@ protected:
 
 	virtual BOOL OnInitDialog();
 
-	afx_msg void onExitRequsted();
+private:
+
+	void initControls();
+	void buildLayout();
+
+private:
+	CStaticX _productName;
+	CStaticX _emplName;
+	CStaticX _wndId;
 };
