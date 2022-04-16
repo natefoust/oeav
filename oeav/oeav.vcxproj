@@ -88,12 +88,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -187,16 +189,24 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="controls\CStaticX.h" />
+    <ClInclude Include="dialogs\CDialogX.h" />
+    <ClInclude Include="dialogs\main_window_dlg.h" />
+    <ClInclude Include="ext\Color.h" />
+    <ClInclude Include="ext\etslayout.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="oeav.h" />
-    <ClInclude Include="main_window_dlg.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="controls\CStaticX.cpp" />
+    <ClCompile Include="dialogs\CDialogX.cpp" />
+    <ClCompile Include="dialogs\main_window_dlg.cpp" />
+    <ClCompile Include="ext\Color.cpp" />
+    <ClCompile Include="ext\ETSLayout.cpp" />
     <ClCompile Include="oeav.cpp" />
-    <ClCompile Include="main_window_dlg.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

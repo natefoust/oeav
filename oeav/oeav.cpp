@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "framework.h"
 #include "oeav.h"
-#include "main_window_dlg.h"
+#include "dialogs/main_window_dlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
