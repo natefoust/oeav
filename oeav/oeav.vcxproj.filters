@@ -51,6 +51,15 @@
     <ClInclude Include="controls\CButtonX.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="dialogs\balance_report_dlg.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\cardfiles_dlg.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\documents_dlg.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oeav.cpp">
@@ -80,6 +89,15 @@
     <ClCompile Include="controls\CButtonX.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="dialogs\balance_report_dlg.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\cardfiles_dlg.cpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\documents_dlg.cpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="oeav.rc">
@@ -99,6 +117,21 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="res\exit.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\book.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\book2.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\product.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\icon1.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\print.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

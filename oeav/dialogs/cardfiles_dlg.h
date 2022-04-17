@@ -3,11 +3,11 @@
 #include "../controls/CStaticX.h"
 #include "../controls/CButtonX.h"
 
-class RegistryListDlg : public CDialogX
+class CardfilesDlg : public CDialogX
 {
 
 public:
-	RegistryListDlg(CWnd* pParent = nullptr);
+	CardfilesDlg(CWnd* pParent = nullptr);
 
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_REGIST_LIST };
@@ -30,7 +30,7 @@ private:
 
 private:
 
-	CStaticX _emplName;
+	/*CStaticX _emplName;
 	CStaticX _wndName;
 	CStatic _lookGr;
 	CStatic _lookGrQ;
@@ -41,5 +41,5 @@ private:
 	CButtonST _lookABq;
 	CButtonST _generateAB;
 	CButtonST _printAB;
-
+*/
 };

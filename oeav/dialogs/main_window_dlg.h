@@ -27,10 +27,12 @@ private:
 
 	void initControls();
 	void buildLayout();
+	void setTabPos(CDialogX*);
 
 	afx_msg void OnBnClickedButtonSettings();
 	afx_msg void OnBnClickedButtonExit();
 	afx_msg void OnTcnSelchangeTabController(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnTcnSelchangingTabController(NMHDR *pNMHDR, LRESULT *pResult);
 
 private:
 	CStaticX _emplName;

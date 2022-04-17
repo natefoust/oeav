@@ -14,6 +14,7 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
+	int getWindowCenterForLayout(int part);
 
 protected:
 	DECLARE_MESSAGE_MAP()
@@ -31,4 +32,5 @@ private:
 	CStaticX _productName;
 	CStaticX _emplName;
 	CStaticX _wndId;
+
 };
