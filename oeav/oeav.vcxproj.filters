@@ -134,5 +134,35 @@
     <Image Include="res\print.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="res\folder.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\report.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\business-credit-report.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\inventory.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\analytics.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\content-management-system.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\file.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\task.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\web-page.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\input.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

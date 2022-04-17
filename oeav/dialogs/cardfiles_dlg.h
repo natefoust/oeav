@@ -30,16 +30,12 @@ private:
 
 private:
 
-	/*CStaticX _emplName;
+	CStaticX _emplName;
 	CStaticX _wndName;
-	CStatic _lookGr;
-	CStatic _lookGrQ;
 
-	CButtonST _lookRL;
-	CButtonST _lookAB;
-	CButtonST _lookRLq;
-	CButtonST _lookABq;
-	CButtonST _generateAB;
-	CButtonST _printAB;
-*/
+	CButtonST _rawDocs;
+	CButtonST _accPlan;
+	CButtonST _typOperations;
+	CButtonST _analitTypes;
+	CButtonST _analitCodes;
 };

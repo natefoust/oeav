@@ -172,6 +172,6 @@ void MainWindowDlg::setTabPos(CDialogX* tab)
 	CRect tabRect;
 	_mainTab.GetClientRect(&tabRect);
 
-	tab->MoveWindow(0, 0, tabRect.Width() + 45, tabRect.Height() + 7);
+	tab->MoveWindow(0, 0, tabRect.Width() + 45, tabRect.Height() + 8);
 	tab->SetWindowPos(NULL, 1, 24, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }

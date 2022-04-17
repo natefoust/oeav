@@ -26,16 +26,14 @@ CardfilesDlg::CardfilesDlg(CWnd* pParent /*=nullptr*/)
 void CardfilesDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogX::DoDataExchange(pDX);
-	//DDX_Control(pDX, IDC_RL_B_LOOKRL, _lookRL);
-	//DDX_Control(pDX, IDC_RL_B_LOOKAB, _lookAB);
-	//DDX_Control(pDX, IDC_RL_B_LOOKRL_Q, _lookRLq);
-	//DDX_Control(pDX, IDC_RL_B_LOOKAB_Q, _lookABq);
-	//DDX_Control(pDX, IDC_RL_B_PRINT_AB, _printAB);
-	//DDX_Control(pDX, IDC_RL_B_GENERATEAB, _generateAB);
-	//DDX_Control(pDX, IDC_RS_EMPLID, _emplName);
-	//DDX_Control(pDX, IDC_RS_TITLE, _wndName);
-	//DDX_Control(pDX, IDC_LOOKG, _lookGr);
-	//DDX_Control(pDX, IDC_GROUP_Q, _lookGrQ);
+	DDX_Control(pDX, IDC_CF_EMPLID, _emplName);
+	DDX_Control(pDX, IDC_CF_TITLE, _wndName);
+
+	DDX_Control(pDX, IDC_CF_B_OPD, _rawDocs);
+	DDX_Control(pDX, IDC_CF_B_PS, _accPlan);
+	DDX_Control(pDX, IDC_CF_B_THO, _typOperations);
+	DDX_Control(pDX, IDC_CF_B_VA, _analitTypes);
+	DDX_Control(pDX, IDC_CF_B_KAY, _analitCodes);
 }
 
 BOOL CardfilesDlg::OnInitDialog()
@@ -52,46 +50,41 @@ BOOL CardfilesDlg::OnInitDialog()
 
 void CardfilesDlg::initControls()
 {
-	/*_lookRL.SetIcon(IDR_LOOK_BOOK, 40, 40);
-	_lookAB.SetIcon(IDR_LOOK_BOOK2, 40, 40);
-	_lookRLq.SetIcon(IDR_LOOK_BOOK, 40, 40);
-	_lookABq.SetIcon(IDR_LOOK_BOOK2, 40, 40);
-	_generateAB.SetIcon(IDI_CREATE, 40, 40);
-	_printAB.SetIcon(IDI_PRINT, 40, 40);*/
+	_rawDocs.SetIcon(IDI_DOCUMENT2, 40, 40);
+	_accPlan.SetIcon(IDI_PLAN, 40, 40);
+	_typOperations.SetIcon(IDI_OPERATION, 40, 40);
+	_analitTypes.SetIcon(IDI_ANALITIC, 40, 40);
+	_analitCodes.SetIcon(IDI_CODES, 40, 40);
 }
 
 void CardfilesDlg::buildLayout()
 {
-	/*CreateRoot(VERTICAL)
+	CreateRoot(VERTICAL)
 		<< (pane(HORIZONTAL, RELATIVE_VERT)
 			<< item(&_emplName, NORESIZE)
 			)
 		<< (pane(HORIZONTAL, GREEDY)
-			<< itemFixed(HORIZONTAL, getWindowCenterForLayout(5))
+			<< itemFixed(HORIZONTAL, getWindowCenterForLayout(3) + 25)
 			<< item(&_wndName, NORESIZE)
 			)
 		<< itemFixed(VERTICAL, 40)
 		<< (pane(HORIZONTAL)
 			<< itemFixed(HORIZONTAL, 20)
-			<< (paneCtrl(&_lookGr, VERTICAL, RELATIVE_VERT, 5, 7, 10)
-				<< item(&_lookRL, NORESIZE)
-				<< item(&_lookAB, NORESIZE)
+			<< (pane(VERTICAL)
+				<< item(&_rawDocs, NORESIZE)
+				<< itemFixed(VERTICAL, 5)
+				<< item(&_accPlan, NORESIZE)
+				<< itemFixed(VERTICAL, 5)
+				<< item(&_typOperations, NORESIZE)
 				)
-			<< itemFixed(HORIZONTAL, 20)
-			<< (paneCtrl(&_lookGrQ, VERTICAL, RELATIVE_VERT, 5, 7, 10)
-				<< item(&_lookRLq, NORESIZE)
-				<< item(&_lookABq, NORESIZE)
+			<< itemFixed(HORIZONTAL, 40)
+			<< (pane(VERTICAL)
+				<< item(&_analitTypes, NORESIZE)
+				<< itemFixed(VERTICAL, 5)
+				<< item(&_analitCodes, NORESIZE)
 				)
 			)
-		<< itemFixed(VERTICAL, 30)
-		<< (pane(HORIZONTAL)
-			<< itemFixed(HORIZONTAL, getWindowCenterForLayout(4))
-			<< item(&_generateAB, NORESIZE)
-			<< itemFixed(HORIZONTAL, 20)
-			<< item(&_printAB, NORESIZE)
-			)
-		
-		;*/
+		;
 
 	UpdateLayout();
 }

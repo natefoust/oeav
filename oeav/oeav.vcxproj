@@ -231,14 +231,24 @@
     <None Include="res\oeav.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\analytics.ico" />
     <Image Include="res\book.ico" />
     <Image Include="res\book2.ico" />
+    <Image Include="res\business-credit-report.ico" />
+    <Image Include="res\content-management-system.ico" />
     <Image Include="res\exit.ico" />
+    <Image Include="res\file.ico" />
+    <Image Include="res\folder.ico" />
     <Image Include="res\icon1.ico" />
+    <Image Include="res\input.ico" />
+    <Image Include="res\inventory.ico" />
     <Image Include="res\oeav.ico" />
     <Image Include="res\print.ico" />
     <Image Include="res\product.ico" />
+    <Image Include="res\report.ico" />
     <Image Include="res\settings.ico" />
+    <Image Include="res\task.ico" />
+    <Image Include="res\web-page.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
