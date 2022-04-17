@@ -5,7 +5,6 @@
 #include "documents_dlg.h"
 #include "afxdialogex.h"
 #include "../ext/Color.h"
-
 using namespace ETSLayout;
 
 #ifdef _DEBUG

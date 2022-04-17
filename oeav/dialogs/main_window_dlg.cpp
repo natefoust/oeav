@@ -9,6 +9,8 @@
 #include "cardfiles_dlg.h"
 #include "afxdialogex.h"
 #include "../ext/Color.h"
+#include <pqxx/pqxx>
+#include <iostream>
 
 using namespace ETSLayout;
 
@@ -139,6 +141,16 @@ void MainWindowDlg::buildLayout()
 
 void MainWindowDlg::OnBnClickedButtonSettings()
 {
+	try 
+	{
+		std::string connectionString = "host=localhost port=5432 dbname=os_db user=postgres password =123454321";
+		pqxx::connection C(connectionString.c_str());
+	}
+	catch (const std::exception &e)
+	{
+		std::string a = e.what();
+	}
+	
 }
 
 void MainWindowDlg::OnBnClickedButtonExit()
