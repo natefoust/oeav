@@ -11,7 +11,6 @@ BEGIN_MESSAGE_MAP(CoeavApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
-
 CoeavApp::CoeavApp()
 {
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
@@ -35,7 +34,7 @@ BOOL CoeavApp::InitInstance()
 
 	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
 
-	MainWindowDlg dlg;
+	oeav::ui::MainWindowDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 

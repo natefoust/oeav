@@ -6,7 +6,7 @@
 #include "afxdialogex.h"
 #include "../ext/Color.h"
 
-using namespace ETSLayout;
+using namespace oeav::ui;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -16,7 +16,6 @@ BEGIN_MESSAGE_MAP(BalanceReportDlg, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
-
 
 BalanceReportDlg::BalanceReportDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogX(IDD_REGIST_LIST, pParent)

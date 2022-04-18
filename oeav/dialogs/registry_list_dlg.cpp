@@ -6,7 +6,7 @@
 #include "afxdialogex.h"
 #include "../ext/Color.h"
 
-using namespace ETSLayout;
+using namespace oeav::ui;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

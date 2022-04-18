@@ -3,36 +3,43 @@
 #include "../controls/CStaticX.h"
 #include "../controls/CButtonX.h"
 
-class DocumentsDlg : public CDialogX
+namespace oeav
 {
+	namespace ui
+	{
+		class DocumentsDlg : public CDialogX
+		{
 
-public:
-	DocumentsDlg(CWnd* pParent = nullptr);
+		public:
+			DocumentsDlg(CWnd* pParent = nullptr);
 
-#ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_REGIST_LIST };
-#endif
+		#ifdef AFX_DESIGN_TIME
+			enum { IDD = IDD_REGIST_LIST };
+		#endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+		protected:
+			virtual void DoDataExchange(CDataExchange* pDX);
 
-protected:
-	DECLARE_MESSAGE_MAP()
+		protected:
+			DECLARE_MESSAGE_MAP()
 
-	HICON m_hIcon;
+			HICON m_hIcon;
 
-	virtual BOOL OnInitDialog();
+			virtual BOOL OnInitDialog();
 
-private:
+		private:
 
-	void initControls();
-	void buildLayout();
+			void initControls();
+			void buildLayout();
 
-private:
+		private:
 
-	CStaticX _emplName;
-	CStaticX _wndName;
-	
-	CButtonST _rawDocInput;
+			CStaticX _emplName;
+			CStaticX _wndName;
 
-};
+			CButtonST _rawDocInput;
+
+		};
+	}
+}
+

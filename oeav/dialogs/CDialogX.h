@@ -2,35 +2,42 @@
 #include "../ext/ETSLayout.h"
 #include "../controls/CStaticX.h"
 
-class CDialogX : public ETSLayoutDialog
+namespace oeav
 {
+	namespace ui
+	{
+		class CDialogX : public ETSLayoutDialog
+		{
 
-public:
-	CDialogX(UINT nID, CWnd* pParent = nullptr);
+		public:
+			CDialogX(UINT nID, CWnd* pParent = nullptr);
 
-#ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_OEAV_DIALOG };
-#endif
+		#ifdef AFX_DESIGN_TIME
+			enum { IDD = IDD_OEAV_DIALOG };
+		#endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
-	int getWindowCenterForLayout(int part);
+		protected:
+			virtual void DoDataExchange(CDataExchange* pDX);
+			int getWindowCenterForLayout(int part);
 
-protected:
-	DECLARE_MESSAGE_MAP()
+		protected:
+			DECLARE_MESSAGE_MAP()
 
-	HICON m_hIcon;
+			HICON m_hIcon;
 
-	virtual BOOL OnInitDialog();
-	afx_msg void onExitRequsted();
-	afx_msg BOOL OnEraseBkgnd(CDC* cdc);
+			virtual BOOL OnInitDialog();
+			afx_msg void onExitRequsted();
+			afx_msg BOOL OnEraseBkgnd(CDC* cdc);
 
-private:
-	void drawElegantDialog(CDC& dc);
+		private:
+			void drawElegantDialog(CDC& dc);
 
-private:
-	CStaticX _productName;
-	CStaticX _emplName;
-	CStaticX _wndId;
+		private:
+			CStaticX _productName;
+			CStaticX _emplName;
+			CStaticX _wndId;
 
-};
+		};
+	}
+}
+

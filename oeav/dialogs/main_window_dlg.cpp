@@ -10,9 +10,9 @@
 #include "afxdialogex.h"
 #include "../ext/Color.h"
 #include <pqxx/pqxx>
-#include <iostream>
+#include <sstream>
 
-using namespace ETSLayout;
+using namespace oeav::ui;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -143,8 +143,18 @@ void MainWindowDlg::OnBnClickedButtonSettings()
 {
 	try 
 	{
-		std::string connectionString = "host=localhost port=5432 dbname=os_db user=postgres password =123454321";
+		std::string connectionString = "host=localhost port=5432 dbname=os_db user=postgres password=123454321";
 		pqxx::connection C(connectionString.c_str());
+
+		pqxx::work W(C);
+
+		pqxx::result R = W.exec("SELECT * FROM chat");
+
+		int a = R.size();
+		std::stringstream ss;
+
+		for (auto row : R)
+			ss << row[0].c_str() << std::endl;
 	}
 	catch (const std::exception &e)
 	{

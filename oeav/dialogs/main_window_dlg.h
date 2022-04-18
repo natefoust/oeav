@@ -3,42 +3,49 @@
 #include "../controls/CStaticX.h"
 #include "../controls/CButtonX.h"
 
-class MainWindowDlg : public CDialogX
+namespace oeav
 {
+	namespace ui
+	{
+		class MainWindowDlg : public CDialogX
+		{
 
-public:
-	MainWindowDlg(CWnd* pParent = nullptr);	
+		public:
+			MainWindowDlg(CWnd* pParent = nullptr);
 
-#ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_OEAV_DIALOG };
-#endif
+		#ifdef AFX_DESIGN_TIME
+			enum { IDD = IDD_OEAV_DIALOG };
+		#endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);
+		protected:
+			virtual void DoDataExchange(CDataExchange* pDX);
 
-protected:
-	DECLARE_MESSAGE_MAP()
+		protected:
+			DECLARE_MESSAGE_MAP()
 
-	HICON m_hIcon;
+			HICON m_hIcon;
 
-	virtual BOOL OnInitDialog();
+			virtual BOOL OnInitDialog();
 
-private:
+		private:
 
-	void initControls();
-	void buildLayout();
-	void setTabPos(CDialogX*);
+			void initControls();
+			void buildLayout();
+			void setTabPos(CDialogX*);
 
-	afx_msg void OnBnClickedButtonSettings();
-	afx_msg void OnBnClickedButtonExit();
-	afx_msg void OnTcnSelchangeTabController(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnTcnSelchangingTabController(NMHDR *pNMHDR, LRESULT *pResult);
+			afx_msg void OnBnClickedButtonSettings();
+			afx_msg void OnBnClickedButtonExit();
+			afx_msg void OnTcnSelchangeTabController(NMHDR *pNMHDR, LRESULT *pResult);
+			afx_msg void OnTcnSelchangingTabController(NMHDR *pNMHDR, LRESULT *pResult);
 
-private:
-	CStaticX _emplName;
+		private:
+			CStaticX _emplName;
 
-	CTabCtrl _mainTab;
+			CTabCtrl _mainTab;
 
-	CButtonST _btnSettings;
-	CButtonST _btnExit;
-};
+			CButtonST _btnSettings;
+			CButtonST _btnExit;
+		};
+
+	}
+}

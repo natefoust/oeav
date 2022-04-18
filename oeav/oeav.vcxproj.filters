@@ -54,11 +54,11 @@
     <ClInclude Include="dialogs\balance_report_dlg.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="dialogs\cardfiles_dlg.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="dialogs\documents_dlg.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\cardfiles_dlg.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,11 +92,11 @@
     <ClCompile Include="dialogs\balance_report_dlg.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="dialogs\cardfiles_dlg.cpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClCompile>
     <ClCompile Include="dialogs\documents_dlg.cpp">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\cardfiles_dlg.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
