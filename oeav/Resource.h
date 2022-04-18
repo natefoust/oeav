@@ -7,6 +7,8 @@
 #define IDD_BALANCE_REP                 103
 #define IDD_CARDFILES                   104
 #define IDD_DOCUMENTS                   105
+#define IDD_LOOK_RL                     106
+#define IDD_LOOK_AB                     107
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -21,6 +23,10 @@
 #define IDI_CODES                       140
 #define IDI_ICON1                       141
 #define IDI_INPUT                       141
+#define IDI_NEXT                        142
+#define IDI_PREVIOUS                    143
+#define IDI_CANCEL                      144
+#define IDI_DELETE                      145
 #define IDC_STATIC_MAIN_MENU            1000
 #define IDC_STATIC_ID                   1001
 #define IDC_STATIC_NAME                 1002
@@ -56,16 +62,74 @@
 #define IDC_CF_B_PS                     1033
 #define IDC_DC_B_MINV                   1033
 #define IDC_CF_B_THO                    1034
+#define IDC_LRJ_EMPLID                  1034
 #define IDC_CF_B_VA                     1035
+#define IDC_LRJ_WNDID                   1035
 #define IDC_CF_B_KAY                    1036
+#define IDC_LRJ_WNDNAME                 1036
+#define IDC_LRJ_DATE                    1037
+#define IDC_LRJ_DOCUMENT                1038
+#define IDC_LRJ_OPERATION               1039
+#define IDC_LRJ_E_DATE_FROM             1040
+#define IDC_LRJ_E_DOC_NAME              1041
+#define IDC_LRJ_E_DOC_ID                1042
+#define IDC_LRJ_E_OPERATION             1043
+#define IDC_LRJ_DATE_FROM               1044
+#define IDC_LRJ_E_DATE                  1045
+#define IDC_LRJ_DEBET                   1046
+#define IDC_LRJ_E_DEBET_CASH            1047
+#define IDC_LRJ_E_DEBET_SOURCE          1048
+#define IDC_LRJ_CREDIT                  1049
+#define IDC_LRJ_E_CREDIT_CASH           1050
+#define IDC_LRJ_E_CREDIT_SOURCE         1051
+#define IDC_LRJ_SUM                     1052
+#define IDC_LRJ_E_SUM                   1053
+#define IDC_LRJ_E_CREDIT_SOURCE2        1054
+#define IDC_LRJ_DELETE                  1055
+#define IDC_LRJ_NEXT                    1056
+#define IDC_LRJ_EXIT                    1057
+#define IDC_LRJ_PREV                    1058
+#define IDC_LAB_EMPLID                  1060
+#define IDC_LAB_WNDID                   1061
+#define IDC_LAB_DATE                    1062
+#define IDC_LAB_WNDNAME                 1063
+#define IDC_LAB_DOCUMENT                1064
+#define IDC_LAB_OPERATION               1065
+#define IDC_LAB_E_DATE                  1066
+#define IDC_LAB_E_DOC_NAME              1067
+#define IDC_LAB_E_DOC_ID                1068
+#define IDC_LAB_E_OPERATION             1069
+#define IDC_LAB_DATE_FROM               1070
+#define IDC_LAB_E_DATE_FROM             1071
+#define IDC_LAB_DEBET                   1072
+#define IDC_LAB_E_DEBET_CASH            1073
+#define IDC_LAB_CREDIT                  1074
+#define IDC_LAB_E_CREDIT_CASH           1075
+#define IDC_LAB_E_ACC_ID                1076
+#define IDC_ACCOUNT                     1077
+#define IDC_LAB_E_ACC_NAME              1078
+#define IDC_LAB_SEP_1                   1079
+#define IDC_LAB_E_CORR_ID               1080
+#define IDC_LRJ_SEP_2                   1080
+#define IDC_LAB_E_CORR_NAME             1081
+#define IDC_LRJ_SEP_3                   1081
+#define IDC_LAB_SEP_2                   1082
+#define IDC_LAB_SEP_3                   1085
+#define IDC_CORR                        1086
+#define IDC_LAB_DELETE                  1087
+#define IDC_LAB_PREV                    1088
+#define IDC_LAB_NEXT                    1089
+#define IDC_LAB_EXIT                    1090
+#define IDC_LRL_SEP_1                   1091
+#define IDC_LRJ_SEP_1                   1091
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        142
+#define _APS_NEXT_RESOURCE_VALUE        146
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1092
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

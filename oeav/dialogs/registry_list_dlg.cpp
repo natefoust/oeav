@@ -1,10 +1,11 @@
 #include "../pch.h"
 
-#include "../framework.h"
-#include "../oeav.h"
+// it's own header
 #include "registry_list_dlg.h"
-#include "afxdialogex.h"
-#include "../ext/Color.h"
+
+// oeav
+#include "look_rl_dlg.h"
+#include "look_ab_dlg.h"
 
 using namespace oeav::ui;
 
@@ -14,6 +15,8 @@ using namespace oeav::ui;
 
 BEGIN_MESSAGE_MAP(RegistryListDlg, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
+	ON_BN_CLICKED(IDC_RL_B_LOOKRL, &onShowRegListRequested)
+	ON_BN_CLICKED(IDC_RL_B_LOOKAB, &onShowAccBookRequested)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
@@ -94,4 +97,14 @@ void RegistryListDlg::buildLayout()
 		;
 
 	UpdateLayout();
+}
+
+void RegistryListDlg::onShowRegListRequested()
+{
+	LookRlDlg(this).DoModal();
+}
+
+void RegistryListDlg::onShowAccBookRequested()
+{
+	LookAbDlg(this).DoModal();
 }

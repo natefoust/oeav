@@ -20,7 +20,8 @@ END_MESSAGE_MAP()
 
 
 CDialogX::CDialogX(UINT nID, CWnd* pParent /*=nullptr*/)
-	: ETSLayoutDialog(nID, pParent)
+	: ETSLayoutDialog(nID, pParent),
+	_drawButtonPanel(false)
 {
 }
 
@@ -40,9 +41,14 @@ BOOL CDialogX::OnInitDialog()
 
 void CDialogX::onExitRequsted()
 {
-	int result = MessageBoxA(GetSafeHwnd(), "Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);
-	if (result == IDOK)
-		DestroyWindow();
+	if (GetStyle() & WS_CHILD)
+	{
+		int result = MessageBoxA(GetSafeHwnd(), "Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);
+		if (result == IDOK)
+			DestroyWindow();
+	}
+	else
+		OnCancel();
 }
 
 BOOL CDialogX::OnEraseBkgnd(CDC* cdc)
@@ -81,6 +87,22 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		CBrush brush1;
 		brush1.CreateSolidBrush(navbarColor);
 
+		if (_drawButtonPanel)
+		{
+			CRect buttonPanelRect{ myRect };
+			buttonPanelRect.SetRect(myRect.left, myRect.Height() / 1.16, myRect.right, myRect.bottom);
+
+			CBrush brush2;
+			brush2.CreateSolidBrush(navbarColor);
+
+			dc.SelectObject(&brush2);
+			dc.Rectangle(buttonPanelRect);
+
+			dc.SelectObject(&nbLine);
+			dc.MoveTo(buttonPanelRect.left, buttonPanelRect.top + 1);
+			dc.LineTo(buttonPanelRect.right, buttonPanelRect.top + 1);
+		}
+
 		dc.SelectObject(&brush1);
 		dc.SelectObject(&borderPen);
 		dc.Rectangle(navbarRect);
@@ -88,6 +110,7 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		dc.SelectObject(&nbLine);
 		dc.MoveTo(navbarRect.left, navbarRect.bottom - 1);
 		dc.LineTo(navbarRect.right, navbarRect.bottom - 1);
+
 	}
 	else
 	{
@@ -132,4 +155,9 @@ int CDialogX::getWindowCenterForLayout(int part)
 	}
 
 	return result;
+}
+
+void CDialogX::drawButtonPanel(bool draw)
+{
+	_drawButtonPanel = draw;
 }

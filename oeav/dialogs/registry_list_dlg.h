@@ -31,6 +31,8 @@ namespace oeav
 
 			void initControls();
 			void buildLayout();
+			afx_msg void onShowRegListRequested();
+			afx_msg void onShowAccBookRequested();
 
 		private:
 

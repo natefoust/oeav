@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "../ext/ETSLayout.h"
-#include "../controls/CStaticX.h"
+#include "../oeav.h"
 
 namespace oeav
 {
@@ -28,15 +28,13 @@ namespace oeav
 			virtual BOOL OnInitDialog();
 			afx_msg void onExitRequsted();
 			afx_msg BOOL OnEraseBkgnd(CDC* cdc);
+			void drawButtonPanel(bool draw = true);
 
 		private:
 			void drawElegantDialog(CDC& dc);
 
-		private:
-			CStaticX _productName;
-			CStaticX _emplName;
-			CStaticX _wndId;
 
+			bool _drawButtonPanel;
 		};
 	}
 }
