@@ -18,7 +18,6 @@ BEGIN_MESSAGE_MAP(CDialogX, ETSLayoutDialog)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
-
 CDialogX::CDialogX(UINT nID, CWnd* pParent /*=nullptr*/)
 	: ETSLayoutDialog(nID, pParent),
 	_drawButtonPanel(false)
@@ -81,8 +80,13 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		COLORREF childBorder = CColor::lightslategray;
 		CPen nbLine(PS_SOLID, 2, childBorder);
 
+		int navbarCf;
+
 		CRect navbarRect{ myRect };
-		navbarRect.SetRect(myRect.left, myRect.top, myRect.right, myRect.bottom / 5);
+
+		myRect.Height() < 250 ? navbarCf = 4 : navbarCf = 5;
+
+		navbarRect.SetRect(myRect.left, myRect.top, myRect.right, myRect.bottom / navbarCf);
 
 		CBrush brush1;
 		brush1.CreateSolidBrush(navbarColor);

@@ -178,13 +178,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\Eugene\source\repos\oeavd\oeav\oeav\ext\pqxx\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Eugene\source\repos\boost_1_79_0;C:\Users\Eugene\source\repos\oeavd\oeav\oeav\ext\pqxx\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Program Files\PostgreSQL\12\lib;C:\Users\Eugene\source\repos\oeavd\oeav\oeav\ext\pqxx\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\PostgreSQL\12\lib;C:\Users\Eugene\source\repos\oeavd\oeav\oeav\ext\pqxx\lib;C:\Users\Eugene\source\repos\boost_1_79_0\stage\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>libpq.lib;pqxx.lib;ws2_32.lib;wsock32.lib;</AdditionalDependencies>
     </Link>
     <Midl>
@@ -200,34 +200,50 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="controls\CButtonX.h" />
+    <ClInclude Include="controls\ComboBoxExt.h" />
+    <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
     <ClInclude Include="dialogs\balance_report_dlg.h" />
     <ClInclude Include="dialogs\cardfiles_dlg.h" />
     <ClInclude Include="dialogs\CDialogX.h" />
+    <ClInclude Include="dialogs\define_report_forms_dlg.h" />
     <ClInclude Include="dialogs\documents_dlg.h" />
     <ClInclude Include="dialogs\look_ab_dlg.h" />
     <ClInclude Include="dialogs\look_rl_dlg.h" />
     <ClInclude Include="dialogs\main_window_dlg.h" />
     <ClInclude Include="dialogs\registry_list_dlg.h" />
+    <ClInclude Include="domain\analytical_accounting_code.h" />
     <ClInclude Include="ext\Color.h" />
     <ClInclude Include="ext\etslayout.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="oeav.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="repository\cardfiles_repository.h" />
+    <ClInclude Include="repository\icardfiles_repository.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="services\cardfiles_service.h" />
+    <ClInclude Include="services\icardfiles_service.h" />
+    <ClInclude Include="shared\connection.h" />
+    <ClInclude Include="shared\iconnection.h" />
+    <ClInclude Include="shared\instance_factory.h" />
+    <ClInclude Include="shared\instance_factory_impl.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="controls\CButtonX.cpp" />
+    <ClCompile Include="controls\ComboBoxExt.cpp" />
+    <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
     <ClCompile Include="dialogs\balance_report_dlg.cpp" />
     <ClCompile Include="dialogs\cardfiles_dlg.cpp" />
     <ClCompile Include="dialogs\CDialogX.cpp" />
+    <ClCompile Include="dialogs\define_report_forms_dlg.cpp" />
     <ClCompile Include="dialogs\documents_dlg.cpp" />
     <ClCompile Include="dialogs\look_ab_dlg.cpp" />
     <ClCompile Include="dialogs\look_rl_dlg.cpp" />
     <ClCompile Include="dialogs\main_window_dlg.cpp" />
     <ClCompile Include="dialogs\registry_list_dlg.cpp" />
+    <ClCompile Include="domain\analytical_accounting_code.cpp" />
     <ClCompile Include="ext\Color.cpp" />
     <ClCompile Include="ext\ETSLayout.cpp" />
     <ClCompile Include="oeav.cpp" />
@@ -237,6 +253,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="repository\cardfiles_repository.cpp" />
+    <ClCompile Include="services\cardfiles_service.cpp" />
+    <ClCompile Include="shared\connection.cpp" />
+    <ClCompile Include="shared\oeav_instance_config.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="oeav.rc" />

@@ -9,6 +9,7 @@
 #define IDD_DOCUMENTS                   105
 #define IDD_LOOK_RL                     106
 #define IDD_LOOK_AB                     107
+#define IDD_DEF_REP_FORM                108
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -120,8 +121,18 @@
 #define IDC_LAB_PREV                    1088
 #define IDC_LAB_NEXT                    1089
 #define IDC_LAB_EXIT                    1090
-#define IDC_LRL_SEP_1                   1091
 #define IDC_LRJ_SEP_1                   1091
+#define IDC_DRF_B_EXIT                  1092
+#define IDC_DRF_EMPLNAME                1093
+#define IDC_DRF_WNDID                   1094
+#define IDC_DRF_WNDNAME                 1095
+#define IDC_DRF_D_INTERVAL_FROM         1096
+#define IDC_DRF_INT_FROM                1097
+#define IDC_DRF_D_INTERVAL_TO           1098
+#define IDC_DRF_INT_TO                  1099
+#define IDC_DRF_ACCOUNT                 1100
+#define IDC_COMBO1                      1104
+#define IDC_DRF_C_ACC                   1104
 
 // Next default values for new objects
 // 
@@ -129,7 +140,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        146
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1092
+#define _APS_NEXT_CONTROL_VALUE         1107
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

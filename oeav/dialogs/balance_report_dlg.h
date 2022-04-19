@@ -32,6 +32,8 @@ namespace oeav
 			void initControls();
 			void buildLayout();
 
+			afx_msg void onDefineReportFormsRequested();
+
 		private:
 
 			CStaticX _emplName;
