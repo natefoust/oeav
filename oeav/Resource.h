@@ -10,6 +10,7 @@
 #define IDD_LOOK_RL                     106
 #define IDD_LOOK_AB                     107
 #define IDD_DEF_REP_FORM                108
+#define IDD_ANALYTICAL_CODES            109
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -28,6 +29,9 @@
 #define IDI_PREVIOUS                    143
 #define IDI_CANCEL                      144
 #define IDI_DELETE                      145
+#define IDI_CANCEL2                     146
+#define IDI_ADD                         147
+#define IDI_ACCEPT                      149
 #define IDC_STATIC_MAIN_MENU            1000
 #define IDC_STATIC_ID                   1001
 #define IDC_STATIC_NAME                 1002
@@ -131,16 +135,29 @@
 #define IDC_DRF_D_INTERVAL_TO           1098
 #define IDC_DRF_INT_TO                  1099
 #define IDC_DRF_ACCOUNT                 1100
-#define IDC_COMBO1                      1104
 #define IDC_DRF_C_ACC                   1104
+#define IDC_ACO_EMPLNAME                1107
+#define IDC_ACO_WNDID                   1108
+#define IDC_ACO_WNDNAME                 1109
+#define IDC_ACO_ANALYT_TYPE             1110
+#define IDC_ACO_E_ANALYT_CODE           1111
+#define IDC_ACO_E_ANALYT_CODE2          1112
+#define IDC_ACO_E_ANALYT_TYPE           1112
+#define IDC_ACO_C_ANALYT_TYPES          1113
+#define IDC_ACO_B_EXIT                  1114
+#define IDC_ACO_B_ADD                   1115
+#define IDC_ACO_B_PREV                  1116
+#define IDC_ACO_B_NEXT                  1117
+#define IDC_ACO_B_DELETE                1118
+#define IDC_ACO_ANALYT_CODE             1119
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        146
+#define _APS_NEXT_RESOURCE_VALUE        150
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1107
+#define _APS_NEXT_CONTROL_VALUE         1120
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

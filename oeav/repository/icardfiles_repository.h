@@ -12,6 +12,7 @@ namespace oeav
 		{
 		public:
 			virtual boost::shared_ptr<AnalyticalAccountingCodeList> getAnalyticalAccountingCodes() const = 0;
+			virtual void addAnalyticalAccountingCode(std::string analyticalCode, int typeId) const = 0;
 		};
 	}
 }

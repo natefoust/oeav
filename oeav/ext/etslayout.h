@@ -137,6 +137,8 @@ public:
 		ALIGN_FILL_HORZ		= 1 << 8,
 		ALIGN_FILL_VERT		= 1 << 9,
 		ALIGN_FILL			= ALIGN_FILL_HORZ | ALIGN_FILL_VERT,
+
+		ZERO_SPACE_IF_HIDDEN = 1 << 10,
 	
 /*		TRACKER_LEFT		= 1 << 10,	// not yet. May allow tracking of borders
 		TRACKER_RIGHT		= 1 << 11,  // between items in the future

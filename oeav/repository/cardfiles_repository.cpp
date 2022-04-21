@@ -23,3 +23,14 @@ boost::shared_ptr<AnalyticalAccountingCodeList> CardfilesRepository::getAnalytic
 		s << row[0].c_str() << '\n';
 
 }
+
+void CardfilesRepository::addAnalyticalAccountingCode(std::string analyticalCode, int typeId) const
+{
+	std::string sql{};
+	
+	sql += "INSERT INTO OEAV_ANALYTICAL_ACCOUNTING_CODES(oeav_analytical_code, oeav_analytical_type) VALUES('" + analyticalCode
+		+ "', " + std::to_string(typeId) + ")";
+
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute(sql);
+}

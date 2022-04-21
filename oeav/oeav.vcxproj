@@ -53,7 +53,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -203,6 +203,7 @@
     <ClInclude Include="controls\ComboBoxExt.h" />
     <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
+    <ClInclude Include="dialogs\analytical_codes_dlg.h" />
     <ClInclude Include="dialogs\balance_report_dlg.h" />
     <ClInclude Include="dialogs\cardfiles_dlg.h" />
     <ClInclude Include="dialogs\CDialogX.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="controls\ComboBoxExt.cpp" />
     <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
+    <ClCompile Include="dialogs\analytical_codes_dlg.cpp" />
     <ClCompile Include="dialogs\balance_report_dlg.cpp" />
     <ClCompile Include="dialogs\cardfiles_dlg.cpp" />
     <ClCompile Include="dialogs\CDialogX.cpp" />
@@ -270,16 +272,20 @@
     <Image Include="res\book2.ico" />
     <Image Include="res\business-credit-report.ico" />
     <Image Include="res\cancel.ico" />
+    <Image Include="res\cancel2.ico" />
     <Image Include="res\content-management-system.ico" />
+    <Image Include="res\correct.ico" />
     <Image Include="res\delete.ico" />
     <Image Include="res\exit.ico" />
     <Image Include="res\file.ico" />
     <Image Include="res\folder.ico" />
     <Image Include="res\icon1.ico" />
+    <Image Include="res\icon2.ico" />
     <Image Include="res\input.ico" />
     <Image Include="res\inventory.ico" />
     <Image Include="res\left-arrow.ico" />
     <Image Include="res\oeav.ico" />
+    <Image Include="res\plus.ico" />
     <Image Include="res\print.ico" />
     <Image Include="res\product.ico" />
     <Image Include="res\report.ico" />

@@ -42,7 +42,8 @@ void CDialogX::onExitRequsted()
 {
 	if (GetStyle() & WS_CHILD)
 	{
-		int result = MessageBoxA(GetSafeHwnd(), "Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);
+		/*int result = MessageBoxA(nullptr, "Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);*/
+		int result = MessageBoxA("Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);
 		if (result == IDOK)
 			DestroyWindow();
 	}
@@ -154,7 +155,8 @@ int CDialogX::getWindowCenterForLayout(int part)
 	}
 	catch (...)
 	{
-		MessageBoxA(nullptr, "Trying to access released view", "Error", MB_ICONQUESTION | MB_OKCANCEL);
+		//MessageBoxA(GetSafeHwnd(), "Trying to access released view", "Error", MB_ICONQUESTION | MB_OKCANCEL);
+		MessageBoxA("Trying to access released view", "Error", MB_ICONQUESTION | MB_OKCANCEL);
 		exit(0);
 	}
 

@@ -172,6 +172,22 @@ const int ERASE_GROUP_BORDER	= 10;
 const int FIXUP_CUTOFF	= 5;
 const int TAB_SPACE = 5;
 
+namespace
+{
+	bool isWindowHasVisibleStyle(HWND window)
+	{
+		if (!window)
+			return false;
+
+		DWORD dwStyle = (DWORD)GetWindowLong(window, GWL_STYLE);
+
+		if (dwStyle & WS_VISIBLE)
+			return true;
+
+		return false;
+	}
+}
+
 // the _NULL-Pane
 CWnd* ETSLayoutMgr::paneNull = 0;
 
@@ -672,6 +688,9 @@ ETSLayoutMgr::PaneItem::PaneItem( UINT nID, ETSLayoutMgr* pMgr, ETSLayoutMgr::la
 
 int ETSLayoutMgr::PaneItem::getConstrainHorz(int sizeParent) 
 {
+	if ((m_modeResize & ZERO_SPACE_IF_HIDDEN) && !isWindowHasVisibleStyle(m_hwndCtrl))
+		return 0;
+
 	if( m_modeResize & ABSOLUTE_HORZ) {
 		return m_sizeX;	
 	}
@@ -683,6 +702,9 @@ int ETSLayoutMgr::PaneItem::getConstrainHorz(int sizeParent)
 
 int ETSLayoutMgr::PaneItem::getConstrainVert(int sizeParent) 
 {
+	if ((m_modeResize & ZERO_SPACE_IF_HIDDEN) && !isWindowHasVisibleStyle(m_hwndCtrl))
+		return 0;
+
 	if(m_modeResize & ABSOLUTE_VERT) {
 		return m_sizeY;	
 	}
@@ -694,6 +716,9 @@ int ETSLayoutMgr::PaneItem::getConstrainVert(int sizeParent)
 
 int ETSLayoutMgr::PaneItem::getMinConstrainHorz() 
 {
+	if ((m_modeResize & ZERO_SPACE_IF_HIDDEN) && !isWindowHasVisibleStyle(m_hwndCtrl))
+		return 0;
+
 	if(m_modeResize & ABSOLUTE_HORZ) {
 		return m_sizeX;	
 	}
@@ -702,6 +727,9 @@ int ETSLayoutMgr::PaneItem::getMinConstrainHorz()
 
 int ETSLayoutMgr::PaneItem::getMinConstrainVert() 
 {
+	if ((m_modeResize & ZERO_SPACE_IF_HIDDEN) && !isWindowHasVisibleStyle(m_hwndCtrl))
+		return 0;
+
 	if(m_modeResize & ABSOLUTE_VERT) {
 		return m_sizeY;	
 	}
@@ -710,6 +738,9 @@ int ETSLayoutMgr::PaneItem::getMinConstrainVert()
 
 int ETSLayoutMgr::PaneItem::getMaxConstrainHorz() 
 {
+	if ((m_modeResize & ZERO_SPACE_IF_HIDDEN) && !isWindowHasVisibleStyle(m_hwndCtrl))
+		return 0;
+
 	if(m_modeResize & ABSOLUTE_HORZ) {
 		return m_sizeX;	
 	}
@@ -718,6 +749,9 @@ int ETSLayoutMgr::PaneItem::getMaxConstrainHorz()
 
 int ETSLayoutMgr::PaneItem::getMaxConstrainVert() 
 {
+	if ((m_modeResize & ZERO_SPACE_IF_HIDDEN) && !isWindowHasVisibleStyle(m_hwndCtrl))
+		return 0;
+
 	if(m_modeResize & ABSOLUTE_VERT) {
 		return m_sizeY;	
 	}

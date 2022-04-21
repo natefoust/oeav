@@ -32,6 +32,8 @@ namespace oeav
 			void initControls();
 			void buildLayout();
 
+			afx_msg void onAnalyticalCodesRequested();
+
 		private:
 
 			CStaticX _emplName;

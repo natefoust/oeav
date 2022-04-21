@@ -5,6 +5,7 @@
 #include "cardfiles_dlg.h"
 #include "afxdialogex.h"
 #include "../ext/Color.h"
+#include "analytical_codes_dlg.h"
 
 using namespace oeav::ui;
 
@@ -14,6 +15,7 @@ using namespace oeav::ui;
 
 BEGIN_MESSAGE_MAP(CardfilesDlg, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
+	ON_BN_CLICKED(IDC_CF_B_KAY, &onAnalyticalCodesRequested)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
@@ -87,4 +89,10 @@ void CardfilesDlg::buildLayout()
 		;
 
 	UpdateLayout();
+}
+
+void CardfilesDlg::onAnalyticalCodesRequested()
+{
+	AnalyticalCodesDlg dlg;
+	dlg.DoModal();
 }
