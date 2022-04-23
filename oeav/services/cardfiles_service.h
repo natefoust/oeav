@@ -11,7 +11,13 @@ namespace oeav
 		{
 		public:
 			boost::shared_ptr<domain::AnalyticalAccountingCodeList> getAnalyticalAccountingCodes() const override;
-			void addAnalyticalAccountingCode(std::string analyticalCode, int typeId) const override;
+			void addAnalyticalAccountingCode(const std::string &analyticalCode, int typeId) const override;
+
+			void addAnalyticalType(const std::string &analyticalCode, const std::string &analyticalName) const override;
+			boost::shared_ptr<domain::AnalyticalTypeList> getAnalyticalTypes() const override;
+			void deleteAnalyticalType(const std::string &analyticalCode, const std::string &analyticalName) const override;
+		    void updateAnalyticalType(const std::string &analyticalCode, const std::string &analyticalName,
+				const std::string &analyticalCodeP, const std::string &analyticalNameP) const override;
 		};
 	}
 }

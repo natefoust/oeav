@@ -34,6 +34,7 @@ namespace oeav
 			void buildLayout();
 
 			afx_msg void onAddRequested();
+			afx_msg void onDeleteRequested();
 		private:
 			CStaticX _emplName;
 			CStaticX _wndId;

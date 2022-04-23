@@ -23,6 +23,7 @@ using namespace oeav::ui;
 BEGIN_MESSAGE_MAP(AnalyticalCodesDlg, CDialogX)
 	ON_WM_ERASEBKGND()
 	ON_BN_CLICKED(IDC_ACO_B_ADD, &onAddRequested)
+	ON_BN_CLICKED(IDC_ACO_B_DELETE, &onDeleteRequested)
 END_MESSAGE_MAP()
 
 
@@ -176,17 +177,8 @@ void AnalyticalCodesDlg::onAddRequested()
 			return;
 		}
 
-		/*const wchar_t * wstr = analyticalCodeStr.GetString();
-		std::wstring a(wstr);
-
-		std::string utf8 = boost::locale::conv::utf_to_utf<char, short>(
-			(short*)a.c_str(),
-			(short*)(a.c_str() + a.length()));
-		std::string ci = boost::locale::conv::from_utf(utf8, "ISO-8859-5");
-*/
-		std::string s = "Пидорас";
 		InstanceFactory<service::ICardfilesService>::getInstance()->
-			addAnalyticalAccountingCode(s, comboSelection);
+			addAnalyticalAccountingCode(analyticalCodeStr.GetString(), comboSelection);
 
 		_analytCodeEdit.EnableWindow(false);
 
@@ -197,4 +189,9 @@ void AnalyticalCodesDlg::onAddRequested()
 
 		UpdateLayout();
 	}
+}
+
+void AnalyticalCodesDlg::onDeleteRequested()
+{
+
 }

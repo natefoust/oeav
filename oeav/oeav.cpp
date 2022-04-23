@@ -2,6 +2,7 @@
 #include "framework.h"
 #include "oeav.h"
 #include "dialogs/main_window_dlg.h"
+#include <clocale>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -20,6 +21,8 @@ CoeavApp theApp;
 
 BOOL CoeavApp::InitInstance()
 {
+	//std:setlocale(LC_ALL, "ru-RU");
+
 	// Windows XP maintaince
 	INITCOMMONCONTROLSEX InitCtrls;
 	InitCtrls.dwSize = sizeof(InitCtrls);

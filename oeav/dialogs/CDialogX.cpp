@@ -42,7 +42,7 @@ void CDialogX::onExitRequsted()
 {
 	if (GetStyle() & WS_CHILD)
 	{
-		/*int result = MessageBoxA(nullptr, "Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);*/
+		//int result = MessageBoxA(nullptr, "Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);
 		int result = MessageBoxA("Вы действительно хотите завершить работу?", "Внимание", MB_ICONQUESTION | MB_OKCANCEL);
 		if (result == IDOK)
 			DestroyWindow();

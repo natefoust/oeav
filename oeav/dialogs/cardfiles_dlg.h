@@ -33,6 +33,7 @@ namespace oeav
 			void buildLayout();
 
 			afx_msg void onAnalyticalCodesRequested();
+			afx_msg void onAnalyticalTypesRequested();
 
 		private:
 

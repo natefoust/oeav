@@ -53,7 +53,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -204,6 +204,7 @@
     <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
     <ClInclude Include="dialogs\analytical_codes_dlg.h" />
+    <ClInclude Include="dialogs\analytical_types_dlg.h" />
     <ClInclude Include="dialogs\balance_report_dlg.h" />
     <ClInclude Include="dialogs\cardfiles_dlg.h" />
     <ClInclude Include="dialogs\CDialogX.h" />
@@ -214,6 +215,7 @@
     <ClInclude Include="dialogs\main_window_dlg.h" />
     <ClInclude Include="dialogs\registry_list_dlg.h" />
     <ClInclude Include="domain\analytical_accounting_code.h" />
+    <ClInclude Include="domain\analytical_type.h" />
     <ClInclude Include="ext\Color.h" />
     <ClInclude Include="ext\etslayout.h" />
     <ClInclude Include="framework.h" />
@@ -236,6 +238,7 @@
     <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
     <ClCompile Include="dialogs\analytical_codes_dlg.cpp" />
+    <ClCompile Include="dialogs\analytical_types_dlg.cpp" />
     <ClCompile Include="dialogs\balance_report_dlg.cpp" />
     <ClCompile Include="dialogs\cardfiles_dlg.cpp" />
     <ClCompile Include="dialogs\CDialogX.cpp" />
@@ -246,6 +249,7 @@
     <ClCompile Include="dialogs\main_window_dlg.cpp" />
     <ClCompile Include="dialogs\registry_list_dlg.cpp" />
     <ClCompile Include="domain\analytical_accounting_code.cpp" />
+    <ClCompile Include="domain\analytical_type.cpp" />
     <ClCompile Include="ext\Color.cpp" />
     <ClCompile Include="ext\ETSLayout.cpp" />
     <ClCompile Include="oeav.cpp" />
@@ -276,6 +280,7 @@
     <Image Include="res\content-management-system.ico" />
     <Image Include="res\correct.ico" />
     <Image Include="res\delete.ico" />
+    <Image Include="res\edit.ico" />
     <Image Include="res\exit.ico" />
     <Image Include="res\file.ico" />
     <Image Include="res\folder.ico" />

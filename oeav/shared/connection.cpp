@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include "connection.h"
 
 #include <boost/make_shared.hpp>
@@ -11,7 +11,7 @@ boost::shared_ptr<pqxx::result> Connection::execute(const std::string &sql) cons
 {
 	try
 	{
-		pqxx::connection connection("host=localhost port=5432 dbname=oeav user=postgres password=123");
+		pqxx::connection connection("host=localhost port=5432 dbname=oeav user=postgres password=123 client_encoding=WIN1251");
 		pqxx::work worker(connection);
 
 		pqxx::result result = worker.exec(sql);
@@ -21,8 +21,9 @@ boost::shared_ptr<pqxx::result> Connection::execute(const std::string &sql) cons
 
 		return resultPtr;
 	}
-	catch (...)
+	catch (pqxx::sql_error const &e)
 	{
-		// это плохо :(
+		std::string a{ e.what() };
+		std::string b{ e.query() };
 	}
 }
