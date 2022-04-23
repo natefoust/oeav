@@ -5,11 +5,13 @@
 using namespace oeav::domain;
 
 AnalyticalType::AnalyticalType() :
+	_id(0),
 	_analyticalCode(""),
 	_analyticalName("")
 {};
 
 AnalyticalType::AnalyticalType(int id, const std::string &analyticalCode, const std::string &analyticalName) :
+	_id(id),
 	_analyticalCode(analyticalCode),
 	_analyticalName(analyticalName)
 {};

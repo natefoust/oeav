@@ -11,10 +11,8 @@ using namespace oeav::domain;
 
 boost::shared_ptr<AnalyticalAccountingCodeList> CardfilesService::getAnalyticalAccountingCodes() const
 {
-	InstanceFactory<domain::ICardfilesRepository>::getInstance()->
+	return InstanceFactory<domain::ICardfilesRepository>::getInstance()->
 		getAnalyticalAccountingCodes();
-
-	return boost::shared_ptr<AnalyticalAccountingCodeList>();
 }
 
 void CardfilesService::addAnalyticalAccountingCode(const std::string &analyticalCode, int typeId) const
@@ -45,4 +43,14 @@ void CardfilesService::updateAnalyticalType(const std::string &analyticalCode, c
 	const std::string &analyticalCodeP, const std::string &analyticalNameP) const
 {
 	InstanceFactory<domain::ICardfilesRepository>::getInstance()->updateAnalyticalType(analyticalCode, analyticalName, analyticalCodeP, analyticalNameP);
+}
+
+void CardfilesService::deleteAnalyticalAccountCode(int typeId) const
+{
+	InstanceFactory<domain::ICardfilesRepository>::getInstance()->deleteAnalyticalAccountCode(typeId);
+}
+
+void CardfilesService::updateAnalyticalAccountCode(int itemId, int typeId, const std::string &analyticalCode) const
+{
+	InstanceFactory<domain::ICardfilesRepository>::getInstance()->updateAnalyticalAccountCode(itemId, typeId, analyticalCode);
 }

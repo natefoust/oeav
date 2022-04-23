@@ -5,12 +5,14 @@
 using namespace oeav::domain;
 
 AnalyticalAccountingCode::AnalyticalAccountingCode() :
+	_id(0),
 	_version(0),
 	_analyticalType(""),
 	_analyticalCode("")
 {};
 
-AnalyticalAccountingCode::AnalyticalAccountingCode(int version, std::string analyticalType, std::string analyticalCode) :
+AnalyticalAccountingCode::AnalyticalAccountingCode(int id, int version, const std::string &analyticalType, const std::string &analyticalCode) :
+	_id(id),
 	_version(version),
 	_analyticalType(analyticalType),
 	_analyticalCode(analyticalCode)
@@ -34,4 +36,9 @@ void AnalyticalAccountingCode::setAnalyticalCode(std::string analyticalCode)
 void AnalyticalAccountingCode::setAnalyticalType(std::string analyticalType)
 {
 	_analyticalType = analyticalType;
+}
+
+int AnalyticalAccountingCode::getID()
+{
+	return _id;
 }

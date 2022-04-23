@@ -154,6 +154,7 @@
 #define IDC_ACO_B_DELETE                1118
 #define IDC_ACO_ANALYT_CODE             1119
 #define IDC_ATY_WNDNAME                 1120
+#define IDC_ACO_B_EDIT                  1120
 #define IDC_ATY_EMPLNAME                1121
 #define IDC_ATY_WNDID                   1122
 #define IDC_ATY_ANALYT_TYPE             1123
@@ -161,10 +162,11 @@
 #define IDC_ATY_E_ANALYT_NAME           1125
 #define IDC_ATY_B_ADD                   1126
 #define IDC_ATY_B_DELETE                1127
-#define IDC_ATY_B_DELETE2               1128
 #define IDC_ATY_B_EDIT                  1128
 #define IDC_ATY_B_EXIT                  1130
 #define IDC_ATY_LIST                    1131
+#define IDC_LIST1                       1135
+#define IDC_ACO_LIST                    1135
 
 // Next default values for new objects
 // 
@@ -172,7 +174,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1132
+#define _APS_NEXT_CONTROL_VALUE         1136
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

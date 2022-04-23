@@ -126,14 +126,13 @@ void AnalyticalTypesDlg::buildLayout()
 			<< (pane(VERTICAL)
 				<< (pane(HORIZONTAL)
 					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analytList, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
 					<< item(&_analyticalType, NORESIZE | ZERO_SPACE_IF_HIDDEN)
 					<< item(&_analytCodeEdit, NORESIZE | ZERO_SPACE_IF_HIDDEN)
 					)
-				<< itemFixed(VERTICAL, 5)
+				<< (pane(HORIZONTAL)
+					<< itemFixed(HORIZONTAL, 20)
+					<< item(&_analytList, NORESIZE | ZERO_SPACE_IF_HIDDEN)
+					)
 				<< (pane(HORIZONTAL)
 					<< itemFixed(HORIZONTAL, 20)
 					<< item(&_analyticalCode, NORESIZE | ZERO_SPACE_IF_HIDDEN)
@@ -220,7 +219,7 @@ void AnalyticalTypesDlg::onAddRequested()
 
 void AnalyticalTypesDlg::onDeleteRequested()
 {
-	if (!_newItemMode)
+	if (!_newItemMode && !_editMode)
 	{
 		int curSel = _analytList.GetSelectionMark();
 		if (curSel < 0 || curSel > _analytList.GetItemCount())
@@ -239,13 +238,14 @@ void AnalyticalTypesDlg::onDeleteRequested()
 	else
 	{
 		_newItemMode = false;
+		_editMode = false;
 
 		_bAdd.SetIcon(IDI_ADD, 25, 25);
 		_bDelete.SetIcon(IDI_DELETE, 25, 25);
 
 		changeControlAccessibility(_newItemMode);
-
 		UpdateLayout();
+
 	}
 
 	fillTable();
@@ -261,7 +261,6 @@ void AnalyticalTypesDlg::onEditRequested()
 	}
 
 	_editMode = true;
-
 	changeControlAccessibility(_editMode);
 
 	_pCode = _analytList.GetItemText(curSel, 0);

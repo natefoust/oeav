@@ -2,7 +2,7 @@
 
 // std
 #include <string>
-#include <list>
+#include <vector>
 
 namespace oeav
 {
@@ -12,25 +12,28 @@ namespace oeav
 		{
 		public:
 			AnalyticalAccountingCode();
-			AnalyticalAccountingCode(int version, std::string analyticalType, std::string analyticalCode);
+			AnalyticalAccountingCode(int id, int version, const std::string &analyticalType, const std::string &analyticalCode);
 
 			void setAnalyticalType(std::string analyticalType);
 			std::string getAnalyticalType();
 			void setAnalyticalCode(std::string analyticalCode);
 			std::string getAnalyticalCode();
+			
+			int getID();
 
 		private:
+			int _id;
 			int _version;
 			std::string _analyticalType;
 			std::string _analyticalCode;
 		};
 		
-		class AnalyticalAccountingCodeList : public std::list<AnalyticalAccountingCode>
+		class AnalyticalAccountingCodeList : public std::vector<AnalyticalAccountingCode>
 		{
 		public:
 			AnalyticalAccountingCodeList() {};
 			AnalyticalAccountingCodeList(int size) 
-				: std::list<AnalyticalAccountingCode>(size) {};
+				: std::vector<AnalyticalAccountingCode>(size) {};
 		};
 	}
 }

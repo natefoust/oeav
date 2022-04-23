@@ -21,6 +21,8 @@ namespace oeav
 		public:
 			virtual boost::shared_ptr<domain::AnalyticalAccountingCodeList> getAnalyticalAccountingCodes() const = 0;
 			virtual void addAnalyticalAccountingCode(const std::string &analyticalCode, int typeId) const = 0;
+			virtual void deleteAnalyticalAccountCode(int typeId) const = 0;
+			virtual void updateAnalyticalAccountCode(int itemId, int typeId, const std::string &analyticalCode) const = 0;
 
 			// Виды аналитики
 			virtual boost::shared_ptr<domain::AnalyticalTypeList> getAnalyticalTypes() const = 0;
