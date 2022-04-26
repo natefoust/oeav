@@ -20,6 +20,8 @@ namespace oeav
 			std::string getAnalyticalCode();
 			int getID();
 
+			std::string getFullName();
+
 		private:
 			int _id;
 			std::string _analyticalCode;

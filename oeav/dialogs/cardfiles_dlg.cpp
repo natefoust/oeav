@@ -7,6 +7,8 @@
 #include "../ext/Color.h"
 #include "analytical_codes_dlg.h"
 #include "analytical_types_dlg.h"
+#include "account_plan_dlg.h"
+#include "primary_documents_defenition_dlg.h"
 
 using namespace oeav::ui;
 
@@ -18,6 +20,8 @@ BEGIN_MESSAGE_MAP(CardfilesDlg, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
 	ON_BN_CLICKED(IDC_CF_B_KAY, &onAnalyticalCodesRequested)
 	ON_BN_CLICKED(IDC_CF_B_VA, &onAnalyticalTypesRequested)
+	ON_BN_CLICKED(IDC_CF_B_PS, &onAccountPlansRequested)
+	ON_BN_CLICKED(IDC_CF_B_OPD, &onPrimaryDocumentsDefenitionRequested)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
@@ -102,4 +106,14 @@ void CardfilesDlg::onAnalyticalCodesRequested()
 void CardfilesDlg::onAnalyticalTypesRequested()
 {
 	AnalyticalTypesDlg().DoModal();
+}
+
+void CardfilesDlg::onAccountPlansRequested()
+{
+	AccountPlanDlg().DoModal();
+}
+
+void CardfilesDlg::onPrimaryDocumentsDefenitionRequested()
+{
+	PrimaryDocumentsDefenitionDlg().DoModal();
 }

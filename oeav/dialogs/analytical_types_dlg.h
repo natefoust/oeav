@@ -39,38 +39,49 @@ namespace oeav
 			void buildLayout();
 
 			void fillTable();
-
-			void changeControlAccessibility(const bool mode);
+			void setSelection(int itemNum);
+			void updateContext();
 
 			afx_msg void onAddRequested();
 			afx_msg void onDeleteRequested();
-			afx_msg void onEditRequested();
 			afx_msg void onExitRequested();
+			afx_msg void onChooseRequested();
+			afx_msg void onPreviousRequested();
+			afx_msg void onNextRequested();
+			afx_msg void changeDisplayedItem(NMHDR *pNMHDR, LRESULT *pResult);
 
 		private:
 			CStaticX _emplName;
 			CStaticX _wndId;
 			CStaticX _wndName;
 
+			CStatic _g1;
+			CStatic _g2;
+			CStatic _g3;
+
 			CStaticX _analyticalType;
 			CStaticX _analyticalCode;
-			
+
 			CEdit _analytNameEdit;
 			CEdit _analytCodeEdit;
 
 			CButtonST _bExit;
 			CButtonST _bAdd;
-			CButtonST _bEdit;
+			CButtonST _bChoose;
 			CButtonST _bDelete;
+			CButtonST _bPrev;
+			CButtonST _bNext;
 
 			CListCtrl _analytList;
 
 			bool _newItemMode;
 			bool _editMode;
+			bool _chooseMode;
 
 			CString _pCode, _pName;
 
 			boost::shared_ptr<domain::AnalyticalTypeList> _analyticalTypes = boost::make_shared<domain::AnalyticalTypeList>();
+			int _current;
 		};
 
 	}

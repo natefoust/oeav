@@ -8,6 +8,7 @@
 #include "../ext/Color.h"
 #include "../shared/instance_factory.h"
 #include "../services/icardfiles_service.h"
+#include "../domain/analytical_type.h"
 
 #include <sstream>
 #include <boost/lexical_cast.hpp>
@@ -18,8 +19,9 @@ using namespace oeav::ui;
 
 namespace
 {
-	constexpr const int VA_CODE = 0;
-	constexpr const int VA_NAME = 1;
+	constexpr const int VA_NUM = 0;
+	constexpr const int VA_CODE = 1;
+	constexpr const int VA_NAME = 2;
 }
 
 #ifdef _DEBUG
@@ -30,17 +32,22 @@ BEGIN_MESSAGE_MAP(AnalyticalTypesDlg, CDialogX)
 	ON_WM_ERASEBKGND()
 	ON_BN_CLICKED(IDC_ATY_B_ADD, &onAddRequested)
 	ON_BN_CLICKED(IDC_ATY_B_DELETE, &onDeleteRequested)
-	ON_BN_CLICKED(IDC_ATY_B_EDIT, &onEditRequested)
+	ON_BN_CLICKED(IDC_ATY_B_CHOOSE, &onChooseRequested)
 	ON_BN_CLICKED(IDC_ATY_B_EXIT, &onExitRequsted)
+	ON_BN_CLICKED(IDC_ATY_B_NEXT, &onNextRequested)
+	ON_BN_CLICKED(IDC_ATY_B_PREV, &onPreviousRequested)
+	ON_NOTIFY(NM_CLICK, IDC_ATY_LIST, &changeDisplayedItem)
 END_MESSAGE_MAP()
 
 
 AnalyticalTypesDlg::AnalyticalTypesDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogX(IDD_ANALYTICAL_TYPES, pParent),
 	_newItemMode(false),
-	_editMode(false)
+	_editMode(false),
+	_chooseMode(false)
 {
-	
+	_analyticalTypes = InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalTypes();
+	_current = _analyticalTypes->size() - 1;
 }
 
 void AnalyticalTypesDlg::DoDataExchange(CDataExchange* pDX)
@@ -56,9 +63,14 @@ void AnalyticalTypesDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_ATY_E_ANALYT_CODE, _analytCodeEdit);
 	DDX_Control(pDX, IDC_ATY_B_EXIT, _bExit);
 	DDX_Control(pDX, IDC_ATY_B_ADD, _bAdd);
-	DDX_Control(pDX, IDC_ATY_B_EDIT, _bEdit);
+	DDX_Control(pDX, IDC_ATY_B_CHOOSE, _bChoose);
 	DDX_Control(pDX, IDC_ATY_B_DELETE, _bDelete);
+	DDX_Control(pDX, IDC_ATY_B_NEXT, _bNext);
+	DDX_Control(pDX, IDC_ATY_B_PREV, _bPrev);
 	DDX_Control(pDX, IDC_ATY_LIST, _analytList);
+	DDX_Control(pDX, IDC_ATY_G_1, _g1);
+	DDX_Control(pDX, IDC_ATY_G_2, _g2);
+	DDX_Control(pDX, IDC_ATY_G_3, _g3);
 }
 
 BOOL AnalyticalTypesDlg::OnInitDialog()
@@ -69,6 +81,8 @@ BOOL AnalyticalTypesDlg::OnInitDialog()
 
 	initControls();
 	buildLayout();
+	
+	setSelection(_current);
 
 	fillTable();
 
@@ -79,225 +93,125 @@ void AnalyticalTypesDlg::initControls()
 {
 	DWORD afxCmd = SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER;
 
-	_analyticalCode.SetWindowPos(NULL, 0, 0, 200, 22, afxCmd);
-	_analyticalType.SetWindowPos(NULL, 0, 0, 200, 22, afxCmd);
+	_analyticalCode.SetWindowPos(NULL, 0, 0, 220, 22, afxCmd);
+	_analyticalType.SetWindowPos(NULL, 0, 0, 180, 22, afxCmd);
 
 	_analytNameEdit.SetWindowPos(NULL, 0, 0, 150, 22, afxCmd);
-	_analytCodeEdit.SetWindowPos(NULL, 0, 0, 150, 22, afxCmd);
+	_analytNameEdit.SetLimitText(10);
+	_analytCodeEdit.SetWindowPos(NULL, 0, 0, 50, 22, afxCmd);
+	_analytCodeEdit.SetLimitText(3);
 
-	_bExit.SetIcon(IDI_CANCEL, 25, 25);
-	_bExit.SetWindowPos(NULL, 0, 0, 100, 30, afxCmd);
+	_bExit.SetIcon(IDI_CANCEL, 20, 20);
+	_bExit.SetWindowPos(NULL, 0, 0, 80, 20, afxCmd);
 
-	_bAdd.SetIcon(IDI_ADD, 25, 25);
-	_bAdd.SetWindowPos(NULL, 0, 0, 30, 30, afxCmd);
+	_bAdd.SetIcon(IDI_ADD, 20, 20);
+	_bAdd.SetWindowPos(NULL, 0, 0, 95, 20, afxCmd);
 
-	_bEdit.SetIcon(IDI_EDIT, 20, 20);
-	_bEdit.SetWindowPos(NULL, 0, 0, 30, 30, afxCmd);
+	_bChoose.SetIcon(IDI_EDIT, 20, 20);
+	_bChoose.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
 
-	_bDelete.SetIcon(IDI_DELETE, 25, 25);
-	_bDelete.SetWindowPos(NULL, 0, 0, 30, 30, afxCmd);
+	_bDelete.SetIcon(IDI_DELETE, 22, 22);
+	_bDelete.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
+
+	_bPrev.SetWindowPos(NULL, 0, 0, 80, 20, afxCmd);
+	_bPrev.SetIcon(IDI_PREVIOUS, 20, 20);
+	_bNext.SetWindowPos(NULL, 0, 0, 80, 20, afxCmd);
+	_bNext.SetIcon(IDI_NEXT, 20, 20);
+	_bNext.SetAlign(CButtonST::ST_ALIGN_HORIZ_RIGHT);
 
 	_analytList.SetWindowPos(NULL, 0, 0, 350, 150, afxCmd);
 
 	CRect listRect;
 	_analytList.GetClientRect(&listRect);
-	_analytList.InsertColumn(0, ""); // only C++ oracles know about this move
-	_analytList.InsertColumn(VA_CODE+1, "Код аналитики", LVCFMT_CENTER, listRect.Width() / 2);
+	_analytList.InsertColumn(0, "");
+	_analytList.InsertColumn(VA_NUM+1, "№", LVCFMT_CENTER, 30);
+	_analytList.InsertColumn(VA_CODE+1, "Код аналитики", LVCFMT_CENTER, listRect.Width() / 2 - 30);
 	_analytList.InsertColumn(VA_NAME+1, "Название аналитики", LVCFMT_CENTER, listRect.Width() / 2);
 	_analytList.DeleteColumn(0);
 	_analytList.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
-
-	changeControlAccessibility(_newItemMode);
+	_analytList.ShowWindow(SW_HIDE);
 
 	UpdateWindow();
 }
 
 void AnalyticalTypesDlg::buildLayout()
 {
-	CreateRoot(VERTICAL)
-		<< (pane(HORIZONTAL)
-			<< item(&_emplName, NORESIZE | ALIGN_LEFT)
-			<< itemGrowing(HORIZONTAL)
-			<< item(&_wndId, NORESIZE | ALIGN_RIGHT)
-			)
-		<< item(&_wndName, NORESIZE | ALIGN_CENTER)
-		<< itemFixed(VERTICAL, 20)
-		<< (pane(HORIZONTAL)
-			<< (pane(VERTICAL)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analyticalType, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					<< item(&_analytCodeEdit, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analytList, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analyticalCode, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					<< item(&_analytNameEdit, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				)
-			<< itemGrowing(HORIZONTAL)
-			<< (pane(VERTICAL)
-				<< item(&_bAdd, NORESIZE)
-				<< item(&_bDelete, NORESIZE)
-				<< item(&_bEdit, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-				)
-			<< itemFixed(HORIZONTAL, 20)
-			)
-		<< (pane(HORIZONTAL)
-			<< itemGrowing(HORIZONTAL)
-			<< item(&_bExit, NORESIZE)
-			)
-		;
-
 	UpdateLayout();
 }
 
 void AnalyticalTypesDlg::onAddRequested()
 {
-	if (!_newItemMode && !_editMode)
+	updateContext();
+
+	if (_analyticalTypes->empty())
 	{
-		_newItemMode = true;
-
-		changeControlAccessibility(_newItemMode);
-
-		_bAdd.SetIcon(IDI_ACCEPT, 20, 20);
-		_bDelete.SetIcon(IDI_CANCEL2, 25, 25);
-
-		UpdateLayout();
+		InstanceFactory<service::ICardfilesService>::getInstance()->addAnalyticalType({}, {});
+		fillTable();
+		setSelection(_analyticalTypes->size() - 1);
 	}
-	else
+		
+	int last = _analyticalTypes->size() - 1;
+	if (!_analyticalTypes->at(last).getAnalyticalCode().empty() &&
+		!_analyticalTypes->at(last).getAnalyticalName().empty())
 	{
-		CString analyticalCodeStr;
-		CString analyticalNameStr;
-
-		_analytCodeEdit.GetWindowText(analyticalCodeStr);
-		_analytNameEdit.GetWindowText(analyticalNameStr);
-
-		std::string error{};
-		if (analyticalCodeStr.IsEmpty())
-			error += "Не указан код аналитики\n";
-		if (analyticalNameStr.IsEmpty())
-			error += "Не указано имя аналитики";
-
-		if (!error.empty())
-		{
-			MessageBoxA(error.c_str(), "Ошибка", MB_ICONHAND | MB_OK);
-			return;
-		}
-
-		if (_editMode)
-		{
-			InstanceFactory<service::ICardfilesService>::getInstance()->
-				updateAnalyticalType(analyticalCodeStr.GetString(), analyticalNameStr.GetString(), _pCode.GetString(), _pName.GetString());
-
-			_editMode = false;
-
-			changeControlAccessibility(_editMode);
-		}
-		else
-		{
-			InstanceFactory<service::ICardfilesService>::getInstance()->
-				addAnalyticalType(analyticalCodeStr.GetString(), analyticalNameStr.GetString());
-
-			_newItemMode = false;
-
-			changeControlAccessibility(_newItemMode);
-		}
-
-		_bAdd.SetIcon(IDI_ADD, 25, 25);
-		_bDelete.SetIcon(IDI_DELETE, 25, 25);
-
-		UpdateLayout();
+		InstanceFactory<service::ICardfilesService>::getInstance()->addAnalyticalType({}, {});
+		
+		fillTable();
+		setSelection(_analyticalTypes->size() - 1);
 	}
 
-	fillTable();
 }
 
 void AnalyticalTypesDlg::onDeleteRequested()
 {
-	if (!_newItemMode && !_editMode)
+	updateContext();
+
+	if (_analyticalTypes->empty())
+		return;
+
+	InstanceFactory<service::ICardfilesService>::getInstance()->deleteAnalyticalType(_analyticalTypes->at(_current).getID());
+
+	updateContext();
+
+	setSelection(0);
+}
+
+void AnalyticalTypesDlg::onChooseRequested()
+{
+	updateContext();
+
+	DWORD afxCmd = _chooseMode ? SW_SHOW : SW_HIDE;
+
+	_analytNameEdit.ShowWindow(afxCmd);
+	_analyticalCode.ShowWindow(afxCmd);
+	_analytCodeEdit.ShowWindow(afxCmd);
+	_analyticalType.ShowWindow(afxCmd);
+	_bAdd.ShowWindow(afxCmd);
+	_bPrev.ShowWindow(afxCmd);
+	_bNext.ShowWindow(afxCmd);
+	_bDelete.ShowWindow(afxCmd);
+	_g1.ShowWindow(afxCmd);
+	_g2.ShowWindow(afxCmd);
+	_g3.ShowWindow(afxCmd);
+
+	if (!_chooseMode)
 	{
-		int curSel = _analytList.GetSelectionMark();
-		if (curSel < 0 || curSel > _analytList.GetItemCount())
-		{
-			MessageBoxA("Не выбран элемент из списка.", "Ошибка", MB_ICONHAND | MB_OK);
-			return;
-		}
-
-		CString code, name;
-		code = _analytList.GetItemText(curSel, 0);
-		name = _analytList.GetItemText(curSel, 1);
-
-		InstanceFactory<service::ICardfilesService>::getInstance()->
-			deleteAnalyticalType(code.GetString(), name.GetString());
+		_bChoose.SetWindowTextA("Отмена");
+		_bChoose.SetIcon(IDI_CANCEL2, 25, 25);
 	}
 	else
 	{
-		_newItemMode = false;
-		_editMode = false;
-
-		_bAdd.SetIcon(IDI_ADD, 25, 25);
-		_bDelete.SetIcon(IDI_DELETE, 25, 25);
-
-		changeControlAccessibility(_newItemMode);
-		UpdateLayout();
-
+		_bChoose.SetWindowTextA("Выбрать");
+		_bChoose.SetIcon(IDI_EDIT, 25, 25);
 	}
 
-	fillTable();
-}
+	_analytList.ShowWindow(!afxCmd);
 
-void AnalyticalTypesDlg::onEditRequested()
-{
-	int curSel = _analytList.GetSelectionMark();
-	if (curSel < 0 || curSel > _analytList.GetItemCount())
-	{
-		MessageBoxA("Не выбран элемент из списка.", "Ошибка", MB_ICONHAND | MB_OK);
-		return;
-	}
-
-	_editMode = true;
-	changeControlAccessibility(_editMode);
-
-	_pCode = _analytList.GetItemText(curSel, 0);
-	_pName = _analytList.GetItemText(curSel, 1);
-
-	_analytCodeEdit.SetWindowText(_pCode);
-	_analytNameEdit.SetWindowText(_pName);
-
-	_bAdd.SetIcon(IDI_ACCEPT, 20, 20);
-	_bDelete.SetIcon(IDI_CANCEL2, 25, 25);
+	_chooseMode = _chooseMode ? false : true;
 
 	UpdateLayout();
 }
 
-void AnalyticalTypesDlg::changeControlAccessibility(const bool mode)
-{
-	if (mode)
-	{
-		_analytNameEdit.ShowWindow(SW_SHOW);
-		_analyticalCode.ShowWindow(SW_SHOW);
-		_analytCodeEdit.ShowWindow(SW_SHOW);
-		_analyticalType.ShowWindow(SW_SHOW);
-
-		_analytList.ShowWindow(SW_HIDE);
-		_bEdit.ShowWindow(SW_HIDE);
-	}
-	else
-	{
-		_analytNameEdit.ShowWindow(SW_HIDE);
-		_analyticalCode.ShowWindow(SW_HIDE);
-		_analytCodeEdit.ShowWindow(SW_HIDE);
-		_analyticalType.ShowWindow(SW_HIDE);
-
-		_analytList.ShowWindow(SW_SHOW);
-		_bEdit.ShowWindow(SW_SHOW);
-	}
-}
 
 void AnalyticalTypesDlg::fillTable()
 {
@@ -308,12 +222,82 @@ void AnalyticalTypesDlg::fillTable()
 	for (UINT i = 0; i < _analyticalTypes->size(); i++)
 	{
 		_analytList.InsertItem(i, "");
-		_analytList.SetItemText(i, 0, _analyticalTypes->at(i).getAnalyticalCode().c_str());
-		_analytList.SetItemText(i, 1, _analyticalTypes->at(i).getAnalyticalName().c_str());
+		_analytList.SetItemText(i, VA_NUM, std::to_string(i).c_str());
+		_analytList.SetItemText(i, VA_CODE, _analyticalTypes->at(i).getAnalyticalCode().c_str());
+		_analytList.SetItemText(i, VA_NAME, _analyticalTypes->at(i).getAnalyticalName().c_str());
 	}
 }
 
 void AnalyticalTypesDlg::onExitRequested()
 {
+	updateContext();
+
 	OnCancel();
+}
+
+void AnalyticalTypesDlg::setSelection(int itemNum)
+{
+	if (itemNum < _analyticalTypes->size() && itemNum >= 0)
+	{
+		_current = itemNum;
+		_analytCodeEdit.SetWindowText(_analyticalTypes->at(itemNum).getAnalyticalCode().c_str());
+		_analytNameEdit.SetWindowText(_analyticalTypes->at(itemNum).getAnalyticalName().c_str());
+	}
+}
+
+void AnalyticalTypesDlg::onNextRequested()
+{
+	updateContext();
+
+	++_current;
+	if (_current < _analyticalTypes->size() && _current >= 0)
+		setSelection(_current);
+	else
+		--_current;
+}
+
+void AnalyticalTypesDlg::onPreviousRequested()
+{
+	updateContext();
+
+	--_current;
+	if (_current < _analyticalTypes->size() && _current >= 0)
+		setSelection(_current);
+	else
+		++_current;
+}
+
+void AnalyticalTypesDlg::changeDisplayedItem(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	int selection = _analytList.GetSelectionMark();
+	
+	if (selection >= 0 && selection < _analytList.GetItemCount())
+	{
+		_current = _analytList.GetSelectionMark();
+		setSelection(_current);
+
+		onChooseRequested();
+	}
+}
+
+void AnalyticalTypesDlg::updateContext()
+{
+	if (_analyticalTypes->empty())
+	{
+		_analytCodeEdit.SetWindowText("");
+		_analytNameEdit.SetWindowText("");
+		return;
+	}
+
+	CString code, name;
+	_analytCodeEdit.GetWindowTextA(code);
+	_analytNameEdit.GetWindowTextA(name);
+
+	InstanceFactory<service::ICardfilesService>::getInstance()->updateAnalyticalType(_analyticalTypes->at(_current).getID(),
+		code.GetString(), name.GetString());
+
+	_analyticalTypes->clear();
+	_analyticalTypes = InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalTypes();
+
+	fillTable();
 }

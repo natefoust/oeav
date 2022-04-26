@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "analytical_type.h"
+
 namespace oeav
 {
 	namespace domain
@@ -12,10 +14,11 @@ namespace oeav
 		{
 		public:
 			AnalyticalAccountingCode();
-			AnalyticalAccountingCode(int id, int version, const std::string &analyticalType, const std::string &analyticalCode);
+			AnalyticalAccountingCode(int id, int version, AnalyticalType analyticalType, const std::string &analyticalCode);
 
-			void setAnalyticalType(std::string analyticalType);
-			std::string getAnalyticalType();
+			void setAnalyticalType(AnalyticalType analyticalType);
+			AnalyticalType getAnalyticalType();
+
 			void setAnalyticalCode(std::string analyticalCode);
 			std::string getAnalyticalCode();
 			
@@ -24,7 +27,7 @@ namespace oeav
 		private:
 			int _id;
 			int _version;
-			std::string _analyticalType;
+			AnalyticalType _analyticalType;
 			std::string _analyticalCode;
 		};
 		

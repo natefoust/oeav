@@ -22,24 +22,29 @@ using namespace oeav::ui;
 
 namespace
 {
-	constexpr const int KAU_TYPE = 0;
-	constexpr const int KAU_CODE = 1;
+	constexpr const int KAU_NUM = 0;
+	constexpr const int KAU_TYPE = 1;
+	constexpr const int KAU_CODE = 2;
 }
 
 BEGIN_MESSAGE_MAP(AnalyticalCodesDlg, CDialogX)
 	ON_WM_ERASEBKGND()
 	ON_BN_CLICKED(IDC_ACO_B_ADD, &onAddRequested)
 	ON_BN_CLICKED(IDC_ACO_B_DELETE, &onDeleteRequested)
-	ON_BN_CLICKED(IDC_ACO_B_EDIT, &onEditRequested)
 	ON_BN_CLICKED(IDC_ACO_B_EXIT, &onExitRequested)
+	ON_BN_CLICKED(IDC_ACO_B_CHOOSE2, &onChooseRequested)
+	ON_BN_CLICKED(IDC_ACO_B_NEXT, &onNextRequested)
+	ON_BN_CLICKED(IDC_ACO_B_PREV, &onPrevRequested)
+	ON_NOTIFY(NM_CLICK, IDC_ACO_LIST, &changeDisplayedItem)
 END_MESSAGE_MAP()
 
 
 AnalyticalCodesDlg::AnalyticalCodesDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogX(IDD_ANALYTICAL_CODES, pParent),
-	_newItemMode(false)
+	_chooseMode(false)
 {
-	InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalAccountingCodes();
+	_analytCodeList = InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalAccountingCodes();
+	_current = _analytCodeList->size() - 1;
 }
 
 void AnalyticalCodesDlg::DoDataExchange(CDataExchange* pDX)
@@ -51,13 +56,17 @@ void AnalyticalCodesDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_ACO_EMPLNAME, _emplName);
 	DDX_Control(pDX, IDC_ACO_ANALYT_TYPE, _analyticalType);
 	DDX_Control(pDX, IDC_ACO_ANALYT_CODE, _analyticalCode);
-	DDX_Control(pDX, IDC_ACO_C_ANALYT_TYPES, _analytTypeCombo);
 	DDX_Control(pDX, IDC_ACO_E_ANALYT_CODE, _analytCodeEdit);
 	DDX_Control(pDX, IDC_ACO_B_EXIT, _bExit);
 	DDX_Control(pDX, IDC_ACO_B_ADD, _bAdd);
-	DDX_Control(pDX, IDC_ACO_B_EDIT, _bEdit);
+	DDX_Control(pDX, IDC_ACO_B_CHOOSE2, _bChoose);
 	DDX_Control(pDX, IDC_ACO_B_DELETE, _bDelete);
 	DDX_Control(pDX, IDC_ACO_LIST, _analytCodes);
+	DDX_Control(pDX, IDC_ACO_C_ANALYT_TYPE, _cChooseCode);
+	DDX_Control(pDX, IDC_ACO_G_1, _g1);
+	DDX_Control(pDX, IDC_ACO_G_2, _g2);
+	DDX_Control(pDX, IDC_ACO_B_NEXT, _bNext);
+	DDX_Control(pDX, IDC_ACO_B_PREV, _bPrev);
 }
 
 BOOL AnalyticalCodesDlg::OnInitDialog()
@@ -72,6 +81,8 @@ BOOL AnalyticalCodesDlg::OnInitDialog()
 	fillTable();
 	fillCombo();
 
+	setSelection(0);
+
 	return TRUE;
 }
 
@@ -79,228 +90,101 @@ void AnalyticalCodesDlg::initControls()
 {
 	DWORD afxCmd = SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER;
 
-	_analyticalCode.SetWindowPos(NULL, 0, 0, 110, 22, afxCmd);
-	_analyticalType.SetWindowPos(NULL, 0, 0, 110, 22, afxCmd);
+	_analyticalCode.SetWindowPos(NULL, 0, 0, 140, 22, afxCmd);
+	_analyticalType.SetWindowPos(NULL, 0, 0, 140, 22, afxCmd);
 
-	_analytTypeCombo.SetWindowPos(NULL, 0, 0, 150, 22, afxCmd);
+	_analytTypeCombo.SetWindowPos(NULL, 0, 0, 120, 22, afxCmd);
 	_analytTypeCombo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
 
-	_analytCodeEdit.SetWindowPos(NULL, 0, 0, 150, 22, afxCmd);
+	_analytCodeEdit.SetWindowPos(NULL, 0, 0, 120, 22, afxCmd);
+	_analytCodeEdit.SetLimitText(10);
 
-	_bExit.SetIcon(IDI_CANCEL, 25, 25);
-	_bExit.SetWindowPos(NULL, 0, 0, 100, 30, afxCmd);
+	_bExit.SetIcon(IDI_CANCEL, 22, 22);
+	_bExit.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
 
-	_bAdd.SetIcon(IDI_ADD, 25, 25);
-	_bAdd.SetWindowPos(NULL, 0, 0, 30, 30, afxCmd);
+	_bAdd.SetIcon(IDI_ADD, 22, 22);
+	_bAdd.SetWindowPos(NULL, 0, 0, 95, 20, afxCmd);
 
-	_bEdit.SetIcon(IDI_EDIT, 20, 20);
-	_bEdit.SetWindowPos(NULL, 0, 0, 30, 30, afxCmd);
+	_bChoose.SetIcon(IDI_EDIT, 22, 22);
+	_bChoose.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
 
-	_bDelete.SetIcon(IDI_DELETE, 25, 25);
-	_bDelete.SetWindowPos(NULL, 0, 0, 30, 30, afxCmd);
+	_bDelete.SetIcon(IDI_DELETE, 22, 22);
+	_bDelete.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
+
+	_bPrev.SetIcon(IDI_PREVIOUS, 22, 22);
+	_bPrev.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
+
+	_bNext.SetIcon(IDI_NEXT, 22, 22);
+	_bNext.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
+	_bNext.SetAlign(CButtonST::ST_ALIGN_HORIZ_RIGHT);
 
 	_analytCodes.SetWindowPos(NULL, 0, 0, 350, 150, afxCmd);
 
 	CRect listRect;
 	_analytCodes.GetClientRect(&listRect);
 	_analytCodes.InsertColumn(0, "");
-	_analytCodes.InsertColumn(KAU_TYPE + 1, "Вид аналитики", LVCFMT_CENTER, listRect.Width() / 2);
+	_analytCodes.InsertColumn(KAU_NUM + 1, "№", LVCFMT_CENTER, 30);
+	_analytCodes.InsertColumn(KAU_TYPE + 1, "Вид аналитики", LVCFMT_CENTER, listRect.Width() / 2 - 30);
 	_analytCodes.InsertColumn(KAU_CODE + 1, "Код аналитики", LVCFMT_CENTER, listRect.Width() / 2);
 	_analytCodes.DeleteColumn(0);
 	_analytCodes.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+	_analytCodes.ShowWindow(SW_HIDE);
 
-	changeControlAccessibility(_newItemMode);
 
 	UpdateWindow();
 }
 
 void AnalyticalCodesDlg::buildLayout()
 {
-	CreateRoot(VERTICAL)
-		<< (pane(HORIZONTAL)
-			<< item(&_emplName, NORESIZE | ALIGN_LEFT)
-			<< itemGrowing(HORIZONTAL)
-			<< item(&_wndId, NORESIZE | ALIGN_RIGHT)
-			)
-		<< item(&_wndName, NORESIZE | ALIGN_CENTER)
-		<< itemFixed(VERTICAL, 20)
-		<< (pane(HORIZONTAL)
-			<< (pane(VERTICAL)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analyticalType, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					<< item(&_analytTypeCombo, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analytCodes, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				<< (pane(HORIZONTAL)
-					<< itemFixed(HORIZONTAL, 20)
-					<< item(&_analyticalCode, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					<< item(&_analytCodeEdit, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-					)
-				)
-			<< itemGrowing(HORIZONTAL)
-			<< (pane(VERTICAL)
-				<< item(&_bAdd, NORESIZE)
-				<< item(&_bDelete, NORESIZE)
-				<< item(&_bEdit, NORESIZE | ZERO_SPACE_IF_HIDDEN)
-				)
-			<< itemFixed(HORIZONTAL, 20)
-			)
-		<< itemFixed(VERTICAL, 10)
-		<< (pane(HORIZONTAL)
-			<< itemGrowing(HORIZONTAL)
-			<< item(&_bExit, NORESIZE)
-			)
-		;
-
 	UpdateLayout();
 }
 
 void AnalyticalCodesDlg::onAddRequested()
 {
-	if (!_newItemMode && !_editMode)
+	updateContext();
+
+	if (_analytCodeList->empty())
 	{
-		_newItemMode = true;
-		changeControlAccessibility(_newItemMode);
-
-		fillCombo();
-		_analytTypeCombo.SetCurSel(1);
-		_analytCodeEdit.SetWindowText("");
-
-		_bAdd.SetIcon(IDI_ACCEPT, 20, 20);
-		_bDelete.SetIcon(IDI_CANCEL2, 25, 25);
-		
-		UpdateLayout();
-	}
-	else
-	{
-		CString analyticalCodeStr;
-
-		_analytCodeEdit.GetWindowText(analyticalCodeStr);
-
-		std::string error{};
-		if (analyticalCodeStr.IsEmpty())
-			error += "Код аналитики не может быть пустым\n";
-		int comboSelection = _analytTypeCombo.GetCurSel();
-		if (comboSelection < 0)
-			error += "Не выбран вид аналитики";
-
-		if (!error.empty())
-		{
-			MessageBoxA(error.c_str(), "Ошибка", MB_ICONHAND | MB_OK);
-			return;
-		}
-
-		CString selectedType;
-		_analytTypeCombo.GetWindowTextA(selectedType);
-		int typeId = _analyticalTypes.at(std::string(selectedType));
-
-		if (_editMode)
-		{
-			int itemId = _analyticalListMap.at(_analytCodes.GetSelectionMark()).getID();
-
-			InstanceFactory<service::ICardfilesService>::getInstance()->
-				updateAnalyticalAccountCode(itemId, typeId, analyticalCodeStr.GetString());
-
-			_editMode = false;
-			changeControlAccessibility(_editMode);
-		}
-		else
-		{
-			InstanceFactory<service::ICardfilesService>::getInstance()->
-				addAnalyticalAccountingCode(analyticalCodeStr.GetString(), typeId);
-
-			_newItemMode = false;
-			changeControlAccessibility(_newItemMode);
-		}
-
-		_bAdd.SetIcon(IDI_ADD, 25, 25);
-		_bDelete.SetIcon(IDI_DELETE, 25, 25);
-
-		UpdateLayout();
+		InstanceFactory<service::ICardfilesService>::getInstance()->addAnalyticalAccountingCode({}, {});
+		fillTable();
+		setSelection(_analytCodeList->size() - 1);
 	}
 
-	fillTable();
+	int last = _analytCodeList->size() - 1;
+	if (!_analytCodeList->at(last).getAnalyticalType().getAnalyticalCode().empty() &&
+		!_analytCodeList->at(last).getAnalyticalCode().empty())
+	{
+		InstanceFactory<service::ICardfilesService>::getInstance()->addAnalyticalAccountingCode({}, {});
+		fillTable();
+		setSelection(_analytCodeList->size() - 1);
+	}
 }
 
 void AnalyticalCodesDlg::onDeleteRequested()
 {
-	if (!_newItemMode && !_editMode)
-	{
-		int curSel = _analytCodes.GetSelectionMark();
-		if (curSel < 0 || curSel > _analytCodes.GetItemCount())
-		{
-			MessageBoxA("Не выбран элемент из списка.", "Ошибка", MB_ICONHAND | MB_OK);
-			return;
-		}
+	updateContext();
 
-		InstanceFactory<service::ICardfilesService>::getInstance()->deleteAnalyticalAccountCode(_analyticalListMap.at(curSel).getID());
-	}
-	else
-	{
-		_newItemMode = false;
-		_editMode = false;
-
-		_bAdd.SetIcon(IDI_ADD, 25, 25);
-		_bDelete.SetIcon(IDI_DELETE, 25, 25);
-
-		changeControlAccessibility(_newItemMode);
-		UpdateLayout();
-	}
-
-	fillTable();
-}
-
-void AnalyticalCodesDlg::onEditRequested()
-{
-	int curSel = _analytCodes.GetSelectionMark();
-	if (curSel < 0 || curSel > _analytCodes.GetItemCount())
-	{
-		MessageBoxA("Не выбран элемент из списка.", "Ошибка", MB_ICONHAND | MB_OK);
+	if (_analytCodeList->empty())
 		return;
-	}
 
-	_editMode = true;
-	changeControlAccessibility(_editMode);
-
-	fillCombo();
-
-	int typeComboId{ _analyticalTypes.at(std::string(_analytCodes.GetItemText(curSel, 0))) };
-	typeComboId = _listToCombo.at(typeComboId);
-
-	_analytTypeCombo.SetCurSel(typeComboId);
-	_analytCodeEdit.SetWindowText(_analytCodes.GetItemText(curSel, 1));
+	InstanceFactory<service::ICardfilesService>::getInstance()->deleteAnalyticalAccountCode(_analytCodeList->at(_current).getID());
 	
-	_bAdd.SetIcon(IDI_ACCEPT, 20, 20);
-	_bDelete.SetIcon(IDI_CANCEL2, 25, 25);
+	updateContext();
 
-	UpdateLayout();
+	setSelection(0);
 }
 
-void AnalyticalCodesDlg::changeControlAccessibility(bool mode)
+void AnalyticalCodesDlg::setSelection(int itemNum)
 {
-	if (mode)
+	if (itemNum < _analytCodeList->size() && itemNum >= 0)
 	{
-		_analytTypeCombo.ShowWindow(SW_SHOW);
-		_analyticalCode.ShowWindow(SW_SHOW);
-		_analytCodeEdit.ShowWindow(SW_SHOW);
-		_analyticalType.ShowWindow(SW_SHOW);
+		std::string type{};
+		type = _analytCodeList->at(itemNum).getAnalyticalType().getAnalyticalCode() + " - "
+			+ _analytCodeList->at(itemNum).getAnalyticalType().getAnalyticalName();
 
-		_analytCodes.ShowWindow(SW_HIDE);
-		_bEdit.ShowWindow(SW_HIDE);
-	}
-	else
-	{
-		_analytTypeCombo.ShowWindow(SW_HIDE);
-		_analyticalCode.ShowWindow(SW_HIDE);
-		_analytCodeEdit.ShowWindow(SW_HIDE);
-		_analyticalType.ShowWindow(SW_HIDE);
-
-		_analytCodes.ShowWindow(SW_SHOW);
-		_bEdit.ShowWindow(SW_SHOW);
+		_current = itemNum;
+		_analytCodeEdit.SetWindowText(_analytCodeList->at(itemNum).getAnalyticalCode().c_str());
+		_cChooseCode.SelectString(0, type.c_str());
 	}
 }
 
@@ -310,13 +194,13 @@ void AnalyticalCodesDlg::fillTable()
 	_analytCodeList = InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalAccountingCodes();
 
 	_analytCodes.DeleteAllItems();
-	_analyticalListMap.clear();
 	for (UINT i = 0; i < _analytCodeList->size(); i++)
 	{
-		_analyticalListMap.insert(std::make_pair(i, _analytCodeList->at(i)));
 		_analytCodes.InsertItem(i, "");
-		_analytCodes.SetItemText(i, 0, _analytCodeList->at(i).getAnalyticalType().c_str());
-		_analytCodes.SetItemText(i, 1, _analytCodeList->at(i).getAnalyticalCode().c_str());
+
+		_analytCodes.SetItemText(i, KAU_NUM, std::to_string(i).c_str());
+		_analytCodes.SetItemText(i, KAU_TYPE, _analytCodeList->at(i).getAnalyticalType().getAnalyticalCode().c_str());
+		_analytCodes.SetItemText(i, KAU_CODE, _analytCodeList->at(i).getAnalyticalCode().c_str());
 	}
 }
 
@@ -325,21 +209,127 @@ void AnalyticalCodesDlg::fillCombo()
 	boost::shared_ptr<domain::AnalyticalTypeList> analytList =
 		InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalTypes();
 
-	_analytTypeCombo.ResetContent();
-	_analyticalTypes.clear();
-	_listToCombo.clear();
-	
-	// combo fills in the reverse order so we have conflict with ids
-	int reverseCode = analytList->size() - 1;
-	for (UINT i = 0; i < analytList->size(); i++, reverseCode--)
+	_cChooseCode.ResetContent();
+
+	std::string type;
+	for (auto item : *analytList)
 	{
-		_listToCombo.insert(std::make_pair(analytList->at(i).getID(), reverseCode));
-		_analyticalTypes.insert(std::make_pair(analytList->at(i).getAnalyticalCode(), analytList->at(i).getID()));
-		_analytTypeCombo.AddString(analytList->at(i).getAnalyticalCode().c_str());
+		type = item.getAnalyticalCode() + " - " + item.getAnalyticalName().c_str();
+		_cChooseCode.AddString(type.c_str());
 	}
+
+	if (!_analytCodeList->empty() && _current >= 0 && _current < _analytCodeList->size())
+		_cChooseCode.SelectString(0, _analytCodeList->at(_current).getAnalyticalType().getFullName().c_str());
 }
 
 void AnalyticalCodesDlg::onExitRequested()
 {
+	updateContext();
+
 	OnCancel();
+}
+
+void AnalyticalCodesDlg::onChooseRequested()
+{
+	updateContext();
+
+	DWORD afxCmd = _chooseMode ? SW_SHOW : SW_HIDE;
+
+	_cChooseCode.ShowWindow(afxCmd);
+	if (!_analytCodeList->empty())
+		_cChooseCode.SelectString(0, _analytCodeList->at(_current).getAnalyticalType().getFullName().c_str());
+	_analyticalCode.ShowWindow(afxCmd);
+	_analytCodeEdit.ShowWindow(afxCmd);
+	_analyticalType.ShowWindow(afxCmd);
+	_g1.ShowWindow(afxCmd);
+	_g2.ShowWindow(afxCmd);
+	_bAdd.ShowWindow(afxCmd);
+	_bPrev.ShowWindow(afxCmd);
+	_bNext.ShowWindow(afxCmd);
+	_bDelete.ShowWindow(afxCmd);
+
+	if (!_chooseMode)
+	{
+		_bChoose.SetWindowTextA("Отмена");
+		_bChoose.SetIcon(IDI_CANCEL2, 25, 25);
+	}
+	else
+	{
+		_bChoose.SetWindowTextA("Выбрать");
+		_bChoose.SetIcon(IDI_EDIT, 25, 25);
+	}
+
+	_analytCodes.ShowWindow(!afxCmd);
+
+	_chooseMode = _chooseMode ? false : true;
+
+	UpdateLayout();
+}
+
+void AnalyticalCodesDlg::onNextRequested()
+{
+	updateContext();
+
+	++_current;
+	if (_current < _analytCodeList->size() && _current >= 0)
+		setSelection(_current);
+	else
+		--_current;
+}
+
+void AnalyticalCodesDlg::onPrevRequested()
+{
+	updateContext();
+
+	--_current;
+	if (_current < _analytCodeList->size() && _current >= 0)
+		setSelection(_current);
+	else
+		++_current;
+}
+
+void AnalyticalCodesDlg::changeDisplayedItem(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	int selection = _analytCodes.GetSelectionMark();
+
+	if (selection >= 0 && selection < _analytCodes.GetItemCount())
+	{
+		_current = _analytCodes.GetSelectionMark();
+		setSelection(_current);
+
+		onChooseRequested();
+	}
+}
+
+void AnalyticalCodesDlg::updateContext()
+{
+	if (_analytCodeList->empty())
+	{
+		_analytCodeEdit.SetWindowText("");
+		
+		if (_cChooseCode.GetCount() >= 0)
+			_cChooseCode.SetCurSel(0);
+		else 
+			_cChooseCode.SetCurSel(-1);
+		
+		return;
+	}
+
+	CString code, type;
+	_analytCodeEdit.GetWindowTextA(code);
+	_cChooseCode.GetWindowTextA(type);
+
+	int id = InstanceFactory<service::ICardfilesService>::getInstance()->findIdByContent(type.GetString());
+
+	if (id && _current >= 0 && _current < _analytCodeList->size())
+	{
+		InstanceFactory<service::ICardfilesService>::getInstance()->
+			updateAnalyticalAccountCode(_analytCodeList->at(_current).getID(), id, code.GetString());
+	}
+	
+	_analytCodeList->clear();
+	_analytCodeList = InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalAccountingCodes();
+
+	fillTable();
+	fillCombo();
 }

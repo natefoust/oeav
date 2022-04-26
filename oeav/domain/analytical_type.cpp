@@ -40,3 +40,8 @@ void AnalyticalType::setAnalyticalName(const std::string &analyticalName)
 {
 	_analyticalName = analyticalName;
 }
+
+std::string AnalyticalType::getFullName()
+{
+	return _analyticalCode + " - " + _analyticalName;
+}
