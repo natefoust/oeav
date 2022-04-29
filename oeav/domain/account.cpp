@@ -56,6 +56,14 @@ AnalyticalType Account::getAnalyt2()
 	return _analyt2;
 }
 
+std::string oeav::domain::Account::getFullName()
+{
+	if (!_code.empty() && !_name.empty())
+		return _code + " - " + _name;
+
+	return {};
+}
+
 void Account::setName(const std::string & name)
 {
 	_name = name;

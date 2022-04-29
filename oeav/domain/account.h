@@ -24,6 +24,7 @@ namespace oeav
 			AccountTypes getType();
 			AnalyticalType getAnalyt1();
 			AnalyticalType getAnalyt2();
+			std::string getFullName();
 
 			void setName(const std::string &name);
 			void setCode(const std::string &code);

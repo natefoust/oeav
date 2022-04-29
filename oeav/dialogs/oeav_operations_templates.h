@@ -3,8 +3,9 @@
 #include "../controls/CStaticX.h"
 #include "../controls/CButtonX.h"
 #include "../controls/ComboBoxExt.h"
-#include "../domain/oeav_primary_document.h"
+#include "../domain/account.h"
 #include "../domain/account_types.h"
+#include "../domain/typical_operation.h"
 
 #include <map>
 #include <boost/shared_ptr.hpp>
@@ -14,11 +15,11 @@ namespace oeav
 {
 	namespace ui
 	{
-		class PrimaryDocumentsDefenitionDlg : public CDialogX
+		class OperationsTemplatesDlg : public CDialogX
 		{
 
 		public:
-			PrimaryDocumentsDefenitionDlg(CWnd* pParent = nullptr);
+			OperationsTemplatesDlg(CWnd* pParent = nullptr);
 
 		#ifdef AFX_DESIGN_TIME
 			enum { IDD = IDD_OEAV_DIALOG };
@@ -57,31 +58,21 @@ namespace oeav
 			CStaticX _wndId;
 			CStaticX _wndName;
 			CStaticX _docCode;
-			CStaticX _docName;
-			CStaticX _analytType1;
-			CStaticX _analytType2;
-			CStaticX _analytType3;
+			CStaticX _opName;
+			CStaticX _debet;
+			CStaticX _credit;
 
 			CStatic _g1;
 			CStatic _g2;
 			CStatic _g3;
 
-			CStaticX _po1;
-			CStaticX _po2;
-			CStaticX _po3;
-
-			CListCtrl _docTable;
+			CListCtrl _operationsTable;
 			
-			CEdit _docCodeEdit;
-			CEdit _docNameEdit;
+			CEdit _opNameEdit;
 			
-			CComboBoxExt _analyt1Combo;
-			CComboBoxExt _analyt2Combo;
-			CComboBoxExt _analyt3Combo;
-
-			CComboBoxExt _type1Combo;
-			CComboBoxExt _type2Combo;
-			CComboBoxExt _type3Combo;
+			CComboBoxExt _docCodeCombo;
+			CComboBoxExt _debetCombo;
+			CComboBoxExt _creditCombo;
 
 			CButtonST _bAdd;
 			CButtonST _bDelete;
@@ -90,10 +81,11 @@ namespace oeav
 			CButtonST _bNext;
 			CButtonST _bPrev;
 
+			bool _updateData;
 			bool _chooseMode;
 			int _current;
 
-			boost::shared_ptr<domain::PrimaryDocumentList> _documents = boost::make_shared<domain::PrimaryDocumentList>();
+			boost::shared_ptr<domain::TypicalOperationList> _operations = boost::make_shared<domain::TypicalOperationList>();
 
 		};
 	}

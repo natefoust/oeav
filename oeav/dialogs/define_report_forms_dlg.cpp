@@ -65,7 +65,6 @@ void DefineReportFormsDlg::initControls()
 
 	_accountCombo.SetWindowPos(NULL, 0, 0, 150, 22, afxCmd);
 	_accountCombo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
-	_accountCombo.AddString("123");
 
 	UpdateWindow();
 }

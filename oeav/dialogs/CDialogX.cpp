@@ -86,6 +86,8 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		CRect navbarRect{ myRect };
 
 		myRect.Height() < 250 ? navbarCf = 4 : navbarCf = 5;
+		if (_drawShortHeader)
+			navbarCf = 7;
 
 		navbarRect.SetRect(myRect.left, myRect.top, myRect.right, myRect.bottom / navbarCf);
 
@@ -166,4 +168,9 @@ int CDialogX::getWindowCenterForLayout(int part)
 void CDialogX::drawButtonPanel(bool draw)
 {
 	_drawButtonPanel = draw;
+}
+
+void CDialogX::drawShortHeader(bool mode)
+{
+	_drawShortHeader = mode;
 }

@@ -5,6 +5,7 @@
 #include "documents_dlg.h"
 #include "afxdialogex.h"
 #include "../ext/Color.h"
+#include "oeav_document_registration_dlg.h"
 
 using namespace oeav::ui;
 
@@ -14,6 +15,7 @@ using namespace oeav::ui;
 
 BEGIN_MESSAGE_MAP(DocumentsDlg, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
+	ON_BN_CLICKED(IDC_DC_B_MINV, &onRegisterDocumentRequested)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
@@ -68,4 +70,9 @@ void DocumentsDlg::buildLayout()
 		;
 
 	UpdateLayout();
+}
+
+void DocumentsDlg::onRegisterDocumentRequested()
+{
+	DocumentRegistrationDlg().DoModal();
 }

@@ -51,8 +51,7 @@ AccountPlanDlg::AccountPlanDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogX(IDD_ACCOUNT_PLAN, pParent),
 	_chooseMode(false)
 {
-	_accounts = InstanceFactory<service::ICardfilesService>::getInstance()->getAccounts();
-	_current = _accounts->size() - 1;
+
 }
 
 void AccountPlanDlg::DoDataExchange(CDataExchange* pDX)
@@ -94,6 +93,7 @@ BOOL AccountPlanDlg::OnInitDialog()
 	buildLayout();
 
 	fillTable();
+	_current = _accounts->size() - 1;
 
 	fillComboboxes();
 
@@ -109,10 +109,12 @@ void AccountPlanDlg::initControls()
 	_accountsTable.SetWindowPos(NULL, 0, 0, 550, 200, afxCmd);
 
 	_accCode.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
-	_accCodeEdit.SetWindowPos(NULL, 0, 0, 75, 22, afxCmd);
+	_accCodeEdit.SetWindowPos(NULL, 0, 0, 35, 22, afxCmd);
+	_accCodeEdit.SetLimitText(2);
 
 	_accName.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
 	_accNameEdit.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+	_accNameEdit.SetLimitText(10);
 
 	_accType.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
 	_accTypeCombo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);

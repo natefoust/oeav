@@ -63,6 +63,14 @@ AccountTypes PrimaryDocument::getType3()
 	return _accountType3;
 }
 
+std::string PrimaryDocument::getFullName()
+{
+	if (!_code.empty() && !_name.empty())
+		return _code + " - " + _name;
+
+	return {};
+}
+
 AnalyticalType PrimaryDocument::getAnalyt1()
 {
 	return _analyt1;

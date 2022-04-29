@@ -15,6 +15,8 @@
 #define IDD_ACCOUNT_PLAN                111
 #define IDD_ANALYTICAL_TYPES1           111
 #define IDD_OPD                         112
+#define IDD_THO                         113
+#define IDD_DOC_REG                     114
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -216,8 +218,11 @@
 #define IDC_OPD_S_DOC_NAME              1167
 #define IDC_OPD_E_DOC_NAME              1168
 #define IDC_OPD_C_ANALYT3               1169
+#define IDC_DRE_E_DEBET_NAME            1169
 #define IDC_OPD_ACC_ANALYT1             1170
+#define IDC_DRE_E_CREDIT_CODE           1170
 #define IDC_OPD_C_ANALYT1               1171
+#define IDC_DRE_E_CREDIT_NAME           1171
 #define IDC_OPD_ACC_ANALYT2             1172
 #define IDC_OPD_ACC_ANALYT3             1173
 #define IDC_OPD_C_ANALYT2               1174
@@ -227,6 +232,7 @@
 #define IDC_OPD_B_ADD                   1178
 #define IDC_OPD_B_DELETE                1179
 #define IDC_OPD_B_EXIT                  1180
+#define IDC_DRE_B_REGISTER              1181
 #define IDC_OPD_C_TYPE_1                1182
 #define IDC_OPD_C_TYPE_2                1183
 #define IDC_OPD_C_TYPE_3                1184
@@ -234,6 +240,64 @@
 #define IDC_OPD_G_2                     1186
 #define IDC_OPD_G_3                     1187
 #define IDC_OPD_LIST                    1188
+#define IDC_THO_EMPLNAME                1189
+#define IDC_THO_WNDID                   1190
+#define IDC_THO_G_1                     1191
+#define IDC_THO_G_2                     1192
+#define IDC_THO_G_3                     1193
+#define IDC_THO_S_OPERATION             1194
+#define IDC_THO_E_OPERATION             1195
+#define IDC_THO_C_DOC_CODE              1197
+#define IDC_THO_S_DOC_CODE              1198
+#define IDC_THO_S_DEBET                 1199
+#define IDC_THO_S_CREDIT                1200
+#define IDC_THO_B_EXIT                  1201
+#define IDC_THO_B_DELETE                1202
+#define IDC_THO_B_ADD                   1203
+#define IDC_THO_B_NEXT                  1204
+#define IDC_THO_B_PREV                  1205
+#define IDC_THO_B_CHOOSE                1206
+#define IDC_THO_C_CREDIT                1207
+#define IDC_THO_C_DEBET                 1208
+#define IDC_THO_LIST                    1209
+#define IDC_THO_WNDNAME                 1210
+#define IDC_DRE_WNDNAME                 1211
+#define IDC_DRE_WNDID                   1212
+#define IDC_DRE_EMPLNAME                1213
+#define IDC_DRE_LIST                    1214
+#define IDC_DRE_G_1                     1215
+#define IDC_DRE_G_2                     1216
+#define IDC_DRE_D_DATEFROM              1217
+#define IDC_DRE_S_DATE_FROM             1218
+#define IDC_DRE_G_3                     1219
+#define IDC_DRE_S_SLASH                 1220
+#define IDC_DRE_S_ANALYT1               1221
+#define IDC_DRE_S_ANALYT2               1222
+#define IDC_DRE_S_ANALYT3               1223
+#define IDC_DRE_E_A1_VA                 1224
+#define IDC_DRE_E_A2_VA                 1225
+#define IDC_DRE_E_A3_VA                 1226
+#define IDC_DRE_E_A1_T                  1227
+#define IDC_DRE_E_A2_T                  1228
+#define IDC_DRE_E_A3_T                  1229
+#define IDC_DRE_S_SUM                   1233
+#define IDC_DRE_E_SUM                   1234
+#define IDC_DRE_C_DOC                   1235
+#define IDC_DRE_S_DOC                   1236
+#define IDC_DRE_S_SEPARATOR             1237
+#define IDC_DRE_S_OPERATION             1238
+#define IDC_DRE_C_OPERATION             1239
+#define IDC_DRE_E_DEBET_CODE            1240
+#define IDC_DRE_B_CHOOSE                1241
+#define IDC_DRE_B_PREV                  1242
+#define IDC_DRE_B_NEXT                  1243
+#define IDC_DRE_B_ADD                   1244
+#define IDC_DRE_B_DELETE                1245
+#define IDC_DRE_B_EXIT                  1246
+#define IDC_DRE_C_A1_KAU                1247
+#define IDC_DRE_C_A2_KAU                1248
+#define IDC_DRE_C_A1_KAU3               1249
+#define IDC_DRE_C_A3_KAU                1249
 
 // Next default values for new objects
 // 
@@ -241,7 +305,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1189
+#define _APS_NEXT_CONTROL_VALUE         1247
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

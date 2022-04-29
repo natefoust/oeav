@@ -29,11 +29,12 @@ namespace oeav
 			afx_msg void onExitRequsted();
 			afx_msg BOOL OnEraseBkgnd(CDC* cdc);
 			void drawButtonPanel(bool draw = true);
+			void drawShortHeader(bool mode = false);
 
 		private:
 			void drawElegantDialog(CDC& dc);
 
-
+			bool _drawShortHeader;
 			bool _drawButtonPanel;
 		};
 	}

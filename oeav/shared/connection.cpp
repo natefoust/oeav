@@ -11,8 +11,12 @@ boost::shared_ptr<pqxx::result> Connection::execute(const std::string &sql) cons
 {
 	try
 	{
-		pqxx::connection connection("host=localhost port=5432 dbname=oeav user=postgres password=123 client_encoding=WIN1251");
-		pqxx::work worker(connection);
+		//pqxx::connection connection("host=localhost port=5432 dbname=oeav user=postgres password=123 client_encoding=WIN1251");
+
+		if (!_connection->is_open())
+			exit(0);
+			
+		pqxx::work worker(*_connection);
 
 		pqxx::result result = worker.exec(sql);
 		worker.commit();
@@ -26,4 +30,9 @@ boost::shared_ptr<pqxx::result> Connection::execute(const std::string &sql) cons
 		std::string a{ e.what() };
 		std::string b{ e.query() };
 	}
+}
+
+void Connection::createConnection()
+{
+
 }

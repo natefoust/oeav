@@ -36,6 +36,7 @@ namespace oeav
 			afx_msg void onAnalyticalTypesRequested();
 			afx_msg void onAccountPlansRequested();
 			afx_msg void onPrimaryDocumentsDefenitionRequested();
+			afx_msg void onTypicalOperationsRequested();
 
 		private:
 

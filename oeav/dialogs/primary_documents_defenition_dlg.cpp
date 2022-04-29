@@ -36,12 +36,12 @@ namespace
 
 BEGIN_MESSAGE_MAP(PrimaryDocumentsDefenitionDlg, CDialogX)
 	ON_WM_ERASEBKGND()
-	//ON_NOTIFY(NM_CLICK, IDC_PS_LIST, &changeDisplayedItem)
-	//ON_BN_CLICKED(IDC_PS_B_ADD, &onAddRequested)
-	//ON_BN_CLICKED(IDC_PS_B_DELETE, &onDeleteRequested)
-	//ON_BN_CLICKED(IDC_PS_B_EXIT, &onExitRequested)
-	//ON_BN_CLICKED(IDC_PS_B_NEXT, &onNextRequested)
-	//ON_BN_CLICKED(IDC_PS_B_PREV, &onPrevRequested)
+	ON_NOTIFY(NM_CLICK, IDC_OPD_LIST, &changeDisplayedItem)
+	ON_BN_CLICKED(IDC_OPD_B_ADD, &onAddRequested)
+	ON_BN_CLICKED(IDC_OPD_B_DELETE, &onDeleteRequested)
+	ON_BN_CLICKED(IDC_OPD_B_EXIT, &onExitRequested)
+	ON_BN_CLICKED(IDC_OPD_B_NEXT, &onNextRequested)
+	ON_BN_CLICKED(IDC_OPD_B_PREV, &onPrevRequested)
 	ON_BN_CLICKED(IDC_OPD_B_CHOOSE, &onChooseRequested)
 END_MESSAGE_MAP()
 
@@ -50,8 +50,6 @@ PrimaryDocumentsDefenitionDlg::PrimaryDocumentsDefenitionDlg(CWnd* pParent /*=nu
 	: CDialogX(IDD_OPD, pParent),
 	_chooseMode(false)
 {
-	_accounts = InstanceFactory<service::ICardfilesService>::getInstance()->getAccounts();
-	_current = _accounts->size() - 1;
 }
 
 void PrimaryDocumentsDefenitionDlg::DoDataExchange(CDataExchange* pDX)
@@ -101,11 +99,12 @@ BOOL PrimaryDocumentsDefenitionDlg::OnInitDialog()
 	initControls();
 	buildLayout();
 
-	//fillTable();
+	fillTable();
+	_current = _documents->size() - 1;
 
-	//fillComboboxes();
+	fillComboboxes();
 
-	//setSelection(_current);
+	setSelection(_current);
 
 	return TRUE;
 }
@@ -118,20 +117,35 @@ void PrimaryDocumentsDefenitionDlg::initControls()
 
 	_docCode.SetWindowPos(NULL, 0, 0, 175, 22, afxCmd);
 	_docCodeEdit.SetWindowPos(NULL, 0, 0, 75, 22, afxCmd);
+	_docCodeEdit.SetLimitText(2);
 
 	_docName.SetWindowPos(NULL, 0, 0, 205, 22, afxCmd);
 	_docNameEdit.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+	_docNameEdit.SetLimitText(10);
 
-	//_docType.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
-	//_accTypeCombo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
-	//_accTypeCombo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+	_po1.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
+	_type1Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+	_type1Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
 
-	//_analytType1.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
-	//_analyt1Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
-	//_analyt1Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
-	//_analytType2.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
-	//_analyt2Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
-	//_analyt2Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+	_po2.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
+	_type2Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+	_type2Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+
+	_po3.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
+	_type3Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+	_type3Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+
+	_analytType1.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
+	_analyt1Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+	_analyt1Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+
+	_analytType2.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
+	_analyt2Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+	_analyt2Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
+
+	_analytType3.SetWindowPos(NULL, 0, 0, 165, 22, afxCmd);
+	_analyt3Combo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+	_analyt3Combo.SetWindowPos(NULL, 0, 0, 125, 22, afxCmd);
 
 	_bExit.SetIcon(IDI_CANCEL, 22, 22);
 	_bExit.SetWindowPos(NULL, 0, 0, 85, 20, afxCmd);
@@ -178,108 +192,120 @@ void PrimaryDocumentsDefenitionDlg::buildLayout()
 
 void PrimaryDocumentsDefenitionDlg::onAddRequested()
 {
-	//updateContext();
+	updateContext();
 
-	//if (_accounts->empty())
-	//{
-	//	InstanceFactory<service::ICardfilesService>::getInstance()->addAccount({}, {}, {}, {}, {});
-	//	fillTable();
-	//	setSelection(_accounts->size() - 1);
-	//}
+	if (_documents->empty())
+	{
+		InstanceFactory<service::ICardfilesService>::getInstance()->addPrimaryDocument({}, {}, {}, {}, {}, {}, {}, {});
+		fillTable();
+		setSelection(_documents->size() - 1);
+	}
 
-	//int last = _accounts->size() - 1;
-	//if (!_accounts->at(last).getCode().empty() && 
-	//	!_accounts->at(last).getName().empty() &&
-	//	!_accounts->at(last).getAnalyt1().getAnalyticalCode().empty() &&
-	//	!_accounts->at(last).getAnalyt2().getAnalyticalCode().empty())
-	//{
-	//	InstanceFactory<service::ICardfilesService>::getInstance()->addAccount({}, {}, {}, {}, {});
-	//	fillTable();
-	//	setSelection(_accounts->size() - 1);
-	//}
+	int last = _documents->size() - 1;
+	if (!_documents->at(last).getCode().empty() &&
+		!_documents->at(last).getName().empty() &&
+		!_documents->at(last).getAnalyt1().getAnalyticalCode().empty() &&
+		!_documents->at(last).getAnalyt2().getAnalyticalCode().empty() &&
+		!_documents->at(last).getAnalyt3().getAnalyticalCode().empty())
+	{
+		InstanceFactory<service::ICardfilesService>::getInstance()->addPrimaryDocument({}, {}, {}, {}, {}, {}, {}, {});
+		fillTable();
+		setSelection(_documents->size() - 1);
+	}
 }
 
 void PrimaryDocumentsDefenitionDlg::onDeleteRequested()
 {
-	//updateContext();
+	updateContext();
 
-	//if (_accounts->empty())
-	//	return;
+	if (_documents->empty())
+		return;
 
-	//InstanceFactory<service::ICardfilesService>::getInstance()->deleteAccount(_accounts->at(_current).getID());
+	InstanceFactory<service::ICardfilesService>::getInstance()->deletePrimaryDocument(_documents->at(_current).getID());
 
-	//updateContext();
+	updateContext();
 
-	//setSelection(0);
+	setSelection(0);
 }
 
 void PrimaryDocumentsDefenitionDlg::onExitRequested()
 {
-	//updateContext();
+	updateContext();
 
-	//OnCancel();
+	OnCancel();
 }
 
 void PrimaryDocumentsDefenitionDlg::fillTable()
 {
-//	_accounts = InstanceFactory<service::ICardfilesService>::getInstance()->getAccounts();
-//	
-//	_accountsTable.DeleteAllItems();
-//	for (int i = 0; i < _accounts->size(); i++)
-//	{
-//		_accountsTable.InsertItem(i, "");
-//		_accountsTable.SetItemText(i, PS_NUM, std::to_string(i).c_str());
-//		_accountsTable.SetItemText(i, PS_CODE, _accounts->at(i).getCode().c_str());
-//		_accountsTable.SetItemText(i, PS_NAME, _accounts->at(i).getName().c_str());
-//		_accountsTable.SetItemText(i, PS_STYPE, getShortStringRepresentation(_accounts->at(i).getType()).c_str());
-//		_accountsTable.SetItemText(i, PS_VA1, _accounts->at(i).getAnalyt1().getAnalyticalCode().c_str());
-//		_accountsTable.SetItemText(i, PS_VA2, _accounts->at(i).getAnalyt2().getAnalyticalCode().c_str());
-//	}
+	_documents = InstanceFactory<service::ICardfilesService>::getInstance()->getPrimaryDocuments();
+
+	_docTable.DeleteAllItems();
+	for (int i = 0; i < _documents->size(); i++)
+	{
+		_docTable.InsertItem(i, "");
+		_docTable.SetItemText(i, PS_NUM, std::to_string(i).c_str());
+		_docTable.SetItemText(i, PS_CODE, _documents->at(i).getCode().c_str());
+		_docTable.SetItemText(i, PS_NAME, _documents->at(i).getName().c_str());
+		_docTable.SetItemText(i, PS_VA1, getShortStringRepresentation(_documents->at(i).getType1()).c_str());
+		_docTable.SetItemText(i, PS_VAT1, _documents->at(i).getAnalyt1().getAnalyticalCode().c_str());
+		_docTable.SetItemText(i, PS_VA2, getShortStringRepresentation(_documents->at(i).getType2()).c_str());
+		_docTable.SetItemText(i, PS_VAT2, _documents->at(i).getAnalyt2().getAnalyticalCode().c_str());
+		_docTable.SetItemText(i, PS_VA3, getShortStringRepresentation(_documents->at(i).getType3()).c_str());
+		_docTable.SetItemText(i, PS_VAT3, _documents->at(i).getAnalyt3().getAnalyticalCode().c_str());
+	}
 }
 
 void PrimaryDocumentsDefenitionDlg::fillComboboxes()
 {
-	//_accTypeCombo.ResetContent();
-	//_accTypeCombo.AddString(getFullStringRepresentation(AccountTypes::BOTH).c_str());
-	//_accTypeCombo.AddString(getFullStringRepresentation(AccountTypes::PASSIVE).c_str());
-	//_accTypeCombo.AddString(getFullStringRepresentation(AccountTypes::ACTIVE).c_str());
+	for (auto item : { &_type1Combo,  &_type2Combo, &_type3Combo })
+	{
+		item->ResetContent();
+		item->AddString(getFullStringRepresentation(AccountTypes::BOTH).c_str());
+		item->AddString(getFullStringRepresentation(AccountTypes::PASSIVE).c_str());
+		item->AddString(getFullStringRepresentation(AccountTypes::ACTIVE).c_str());
+	}
 
-	//boost::shared_ptr<domain::AnalyticalTypeList> analytList =
-	//	InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalTypes();
+	boost::shared_ptr<domain::AnalyticalTypeList> analytList =
+		InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalTypes();
 
-	//_analyt1Combo.ResetContent();
-	//_analyt2Combo.ResetContent();
+	_analyt1Combo.ResetContent();
+	_analyt2Combo.ResetContent();
+	_analyt3Combo.ResetContent();
 
-	//for (auto item : *analytList)
-	//{
-	//	_analyt1Combo.AddString(item.getFullName().c_str());
-	//	_analyt2Combo.AddString(item.getFullName().c_str());
-	//}
+	for (auto item : *analytList)
+	{
+		_analyt1Combo.AddString(item.getFullName().c_str());
+		_analyt2Combo.AddString(item.getFullName().c_str());
+		_analyt3Combo.AddString(item.getFullName().c_str());
+	}
 
-	//if (!_accounts->empty() && _current >= 0 && _current < _accounts->size())
-	//{
-	//	_accTypeCombo.SelectString(0, getFullStringRepresentation(_accounts->at(_current).getType()).c_str());
-	//	_analyt1Combo.SelectString(0, _accounts->at(_current).getAnalyt1().getFullName().c_str());
-	//	_analyt2Combo.SelectString(0, _accounts->at(_current).getAnalyt2().getFullName().c_str());
-	//}
+	if (!_documents->empty() && _current >= 0 && _current < _documents->size())
+	{
+		_type1Combo.SelectString(0, getFullStringRepresentation(_documents->at(_current).getType1()).c_str());
+		_type2Combo.SelectString(0, getFullStringRepresentation(_documents->at(_current).getType2()).c_str());
+		_type3Combo.SelectString(0, getFullStringRepresentation(_documents->at(_current).getType3()).c_str());
+		_analyt1Combo.SelectString(0, _documents->at(_current).getAnalyt1().getFullName().c_str());
+		_analyt2Combo.SelectString(0, _documents->at(_current).getAnalyt2().getFullName().c_str());
+		_analyt3Combo.SelectString(0, _documents->at(_current).getAnalyt3().getFullName().c_str());
+	}
 }
 
 void PrimaryDocumentsDefenitionDlg::changeDisplayedItem(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	//int selection = _accountsTable.GetSelectionMark();
+	int selection = _docTable.GetSelectionMark();
 
-	//if (selection >= 0 && selection < _accountsTable.GetItemCount())
-	//{
-	//	_current = selection;
-	//	setSelection(_current);
+	if (selection >= 0 && selection < _docTable.GetItemCount())
+	{
+		_current = selection;
+		setSelection(_current);
 
-	//	onChooseRequested();
-	//}
+		onChooseRequested();
+	}
 }
 
 void PrimaryDocumentsDefenitionDlg::onChooseRequested()
 {
-	//updateContext();
+	updateContext();
 
 	DWORD afxCmd = _chooseMode ? SW_SHOW : SW_HIDE;
 
@@ -326,24 +352,50 @@ void PrimaryDocumentsDefenitionDlg::onChooseRequested()
 
 void PrimaryDocumentsDefenitionDlg::setSelection(int itemNum)
 {
-	//if (itemNum < _accounts->size() && itemNum >= 0)
-	//{
-	//	_current = itemNum;
-	//	_accCodeEdit.SetWindowTextA(_accounts->at(_current).getCode().c_str());
-	//	_accNameEdit.SetWindowTextA(_accounts->at(_current).getName().c_str());
+	if (itemNum < _documents->size() && itemNum >= 0)
+	{
+		_current = itemNum;
+		_docCodeEdit.SetWindowTextA(_documents->at(_current).getCode().c_str());
+		_docNameEdit.SetWindowTextA(_documents->at(_current).getName().c_str());
 
-	//	_analyt1Combo.SelectString(0, _accounts->at(_current).getAnalyt1().getFullName().c_str());
-	//	_analyt2Combo.SelectString(0, _accounts->at(_current).getAnalyt2().getFullName().c_str());
-	//	_accTypeCombo.SelectString(0, getFullStringRepresentation(_accounts->at(_current).getType()).c_str());
-	//}
+		if (_documents->at(_current).getAnalyt1().getID() != 0)
+			_analyt1Combo.SelectString(0, _documents->at(_current).getAnalyt1().getFullName().c_str());
+		else
+			_analyt1Combo.SetCurSel(-1);
+
+		if (_documents->at(_current).getAnalyt2().getID() != 0)
+			_analyt2Combo.SelectString(0, _documents->at(_current).getAnalyt2().getFullName().c_str());
+		else
+			_analyt2Combo.SetCurSel(-1);
+
+		if (_documents->at(_current).getAnalyt2().getID() != 0)
+			_analyt3Combo.SelectString(0, _documents->at(_current).getAnalyt3().getFullName().c_str());
+		else
+			_analyt3Combo.SetCurSel(-1);
+
+		if (_documents->at(_current).getType1() != AccountTypes::UNDEFINED)
+			_type1Combo.SelectString(0, getFullStringRepresentation(_documents->at(_current).getType1()).c_str());
+		else
+			_type1Combo.SetCurSel(-1);
+
+		if (_documents->at(_current).getType2() != AccountTypes::UNDEFINED)
+			_type2Combo.SelectString(0, getFullStringRepresentation(_documents->at(_current).getType2()).c_str());
+		else
+			_type2Combo.SetCurSel(-1);
+
+		if (_documents->at(_current).getType2() != AccountTypes::UNDEFINED)
+			_type3Combo.SelectString(0, getFullStringRepresentation(_documents->at(_current).getType3()).c_str());
+		else
+			_type3Combo.SetCurSel(-1);
+	}
 }
 
 void PrimaryDocumentsDefenitionDlg::updateContext()
 {
-	/*if (_accounts->empty())
+	if (_documents->empty())
 	{
-		_accCodeEdit.SetWindowText("");
-		_accNameEdit.SetWindowTextA("");
+		_docCodeEdit.SetWindowText("");
+		_docNameEdit.SetWindowText("");
 
 		if (_analyt1Combo.GetCount() >= 0)
 			_analyt1Combo.SetCurSel(0);
@@ -355,55 +407,76 @@ void PrimaryDocumentsDefenitionDlg::updateContext()
 		else
 			_analyt2Combo.SetCurSel(-1);
 
-		if (_accTypeCombo.GetCount() >= 0)
-			_accTypeCombo.SetCurSel(0);
+		if (_analyt3Combo.GetCount() >= 0)
+			_analyt3Combo.SetCurSel(0);
 		else
-			_accTypeCombo.SetCurSel(-1);
+			_analyt3Combo.SetCurSel(-1);
+
+		if (_type1Combo.GetCount() >= 0)
+			_type1Combo.SetCurSel(0);
+		else
+			_type1Combo.SetCurSel(-1);
+
+		if (_type2Combo.GetCount() >= 0)
+			_type2Combo.SetCurSel(0);
+		else
+			_type2Combo.SetCurSel(-1);
+
+		if (_type3Combo.GetCount() >= 0)
+			_type3Combo.SetCurSel(0);
+		else
+			_type3Combo.SetCurSel(-1);
 
 		return;
 	}
 
-	CString code, name, type, atype1, atype2;
+	CString code, name, atype1, atype2, atype3, type1, type2, type3;
 
-	_accCodeEdit.GetWindowText(code);
-	_accNameEdit.GetWindowText(name);
+	_docCodeEdit.GetWindowText(code);
+	_docNameEdit.GetWindowText(name);
 	_analyt1Combo.GetWindowText(atype1);
 	_analyt2Combo.GetWindowText(atype2);
-	_accTypeCombo.GetWindowText(type);
+	_analyt3Combo.GetWindowText(atype3);
+	_type1Combo.GetWindowText(type1);
+	_type2Combo.GetWindowText(type2);
+	_type3Combo.GetWindowText(type3);
 
-	std::string combo1Id = InstanceFactory<service::ICardfilesService>::getInstance()->findIdByContent(atype1.GetString());
-	std::string combo2Id = InstanceFactory<service::ICardfilesService>::getInstance()->findIdByContent(atype2.GetString());
-	int typeId = getIdByRepresentation(type.GetString());
+	int combo1Id = InstanceFactory<service::ICardfilesService>::getInstance()->findIdByContent(atype1.GetString());
+	int combo2Id = InstanceFactory<service::ICardfilesService>::getInstance()->findIdByContent(atype2.GetString());
+	int combo3Id = InstanceFactory<service::ICardfilesService>::getInstance()->findIdByContent(atype3.GetString());
 
-	if (!combo1Id.empty() && !combo2Id.empty() && typeId)
-		InstanceFactory<service::ICardfilesService>::getInstance()->updateAccount(_accounts->at(_current).getID(),
-			code.GetString(), name.GetString(), typeId, std::stoi(combo1Id), std::stoi(combo2Id));
+	int type1Id = getIdByRepresentation(type1.GetString());
+	int type2Id = getIdByRepresentation(type2.GetString());
+	int type3Id = getIdByRepresentation(type3.GetString());
+
+	InstanceFactory<service::ICardfilesService>::getInstance()->updatePrimaryDocument(_documents->at(_current).getID(),
+		code.GetString(), name.GetString(), combo1Id, type1Id, combo2Id, type2Id, combo3Id, type3Id);
 	
-	_accounts->clear();
-	_accounts = InstanceFactory<service::ICardfilesService>::getInstance()->getAccounts();
+	_documents->clear();
+	_documents = InstanceFactory<service::ICardfilesService>::getInstance()->getPrimaryDocuments();
 
 	fillTable();
-	fillComboboxes();*/
+	fillComboboxes();
 }
 
 void PrimaryDocumentsDefenitionDlg::onNextRequested()
 {
-	/*updateContext();
+	updateContext();
 
 	++_current;
-	if (_current < _accounts->size() && _current >= 0)
+	if (_current < _documents->size() && _current >= 0)
 		setSelection(_current);
 	else
-		--_current;*/
+		--_current;
 }
 
 void PrimaryDocumentsDefenitionDlg::onPrevRequested()
 {
-	/*updateContext();
+	updateContext();
 
 	--_current;
-	if (_current < _accounts->size() && _current >= 0)
+	if (_current < _documents->size() && _current >= 0)
 		setSelection(_current);
 	else
-		++_current;*/
+		++_current;
 }

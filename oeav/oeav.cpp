@@ -2,6 +2,8 @@
 #include "framework.h"
 #include "oeav.h"
 #include "dialogs/main_window_dlg.h"
+#include "shared/iconnection.h"
+#include "shared/instance_factory.h"
 #include <clocale>
 
 #ifdef _DEBUG
@@ -36,6 +38,8 @@ BOOL CoeavApp::InitInstance()
 	CShellManager *pShellManager = new CShellManager;
 
 	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
+
+	InstanceFactory<oeav::domain::IConnection>::getInstance()->createConnection();
 
 	oeav::ui::MainWindowDlg dlg;
 	m_pMainWnd = &dlg;

@@ -203,6 +203,7 @@
     <ClInclude Include="controls\ComboBoxExt.h" />
     <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
+    <ClInclude Include="dialogs\account_plan_dlg.h" />
     <ClInclude Include="dialogs\analytical_codes_dlg.h" />
     <ClInclude Include="dialogs\analytical_types_dlg.h" />
     <ClInclude Include="dialogs\balance_report_dlg.h" />
@@ -213,19 +214,31 @@
     <ClInclude Include="dialogs\look_ab_dlg.h" />
     <ClInclude Include="dialogs\look_rl_dlg.h" />
     <ClInclude Include="dialogs\main_window_dlg.h" />
+    <ClInclude Include="dialogs\oeav_document_registration_dlg.h" />
+    <ClInclude Include="dialogs\oeav_operations_templates.h" />
+    <ClInclude Include="dialogs\primary_documents_defenition_dlg.h" />
     <ClInclude Include="dialogs\registry_list_dlg.h" />
+    <ClInclude Include="domain\account.h" />
+    <ClInclude Include="domain\account_types.h" />
     <ClInclude Include="domain\analytical_accounting_code.h" />
     <ClInclude Include="domain\analytical_type.h" />
+    <ClInclude Include="domain\document.h" />
+    <ClInclude Include="domain\oeav_primary_document.h" />
+    <ClInclude Include="domain\typical_operation.h" />
     <ClInclude Include="ext\Color.h" />
     <ClInclude Include="ext\etslayout.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="oeav.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="repository\cardfiles_repository.h" />
+    <ClInclude Include="repository\documents_repository.h" />
     <ClInclude Include="repository\icardfiles_repository.h" />
+    <ClInclude Include="repository\idocuments_repository.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="services\cardfiles_service.h" />
+    <ClInclude Include="services\documents_service.h" />
     <ClInclude Include="services\icardfiles_service.h" />
+    <ClInclude Include="services\idocuments_service.h" />
     <ClInclude Include="shared\connection.h" />
     <ClInclude Include="shared\iconnection.h" />
     <ClInclude Include="shared\instance_factory.h" />
@@ -237,6 +250,7 @@
     <ClCompile Include="controls\ComboBoxExt.cpp" />
     <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
+    <ClCompile Include="dialogs\account_plan_dlg.cpp" />
     <ClCompile Include="dialogs\analytical_codes_dlg.cpp" />
     <ClCompile Include="dialogs\analytical_types_dlg.cpp" />
     <ClCompile Include="dialogs\balance_report_dlg.cpp" />
@@ -247,9 +261,16 @@
     <ClCompile Include="dialogs\look_ab_dlg.cpp" />
     <ClCompile Include="dialogs\look_rl_dlg.cpp" />
     <ClCompile Include="dialogs\main_window_dlg.cpp" />
+    <ClCompile Include="dialogs\oeav_document_registration_dlg.cpp" />
+    <ClCompile Include="dialogs\oeav_operations_templates.cpp" />
+    <ClCompile Include="dialogs\primary_documents_defenition_dlg.cpp" />
     <ClCompile Include="dialogs\registry_list_dlg.cpp" />
+    <ClCompile Include="domain\account.cpp" />
     <ClCompile Include="domain\analytical_accounting_code.cpp" />
     <ClCompile Include="domain\analytical_type.cpp" />
+    <ClCompile Include="domain\document.cpp" />
+    <ClCompile Include="domain\oeav_primary_document.cpp" />
+    <ClCompile Include="domain\typical_operation.cpp" />
     <ClCompile Include="ext\Color.cpp" />
     <ClCompile Include="ext\ETSLayout.cpp" />
     <ClCompile Include="oeav.cpp" />
@@ -260,7 +281,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="repository\cardfiles_repository.cpp" />
+    <ClCompile Include="repository\documents_repository.cpp" />
     <ClCompile Include="services\cardfiles_service.cpp" />
+    <ClCompile Include="services\documents_service.cpp" />
     <ClCompile Include="shared\connection.cpp" />
     <ClCompile Include="shared\oeav_instance_config.cpp" />
   </ItemGroup>

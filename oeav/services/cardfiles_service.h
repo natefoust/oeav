@@ -14,6 +14,8 @@ namespace oeav
 			void addAnalyticalAccountingCode(const std::string &analyticalCode, int typeId) const override;
 			void deleteAnalyticalAccountCode(int typeId) const override;
 			void updateAnalyticalAccountCode(int itemId, int typeId, const std::string &analyticalCode) const override;
+			boost::shared_ptr<domain::AnalyticalAccountingCode> getAnalyticalAccountingCode(int atId) const override;
+			boost::shared_ptr<domain::AnalyticalAccountingCodeList> getAnalyticalAccountingCodes(int atId) const override;
 
 			void addAnalyticalType(const std::string &analyticalCode, const std::string &analyticalName) const override;
 			boost::shared_ptr<domain::AnalyticalTypeList> getAnalyticalTypes() const override;
@@ -27,6 +29,7 @@ namespace oeav
 			void addAccount(const std::string &code, const std::string &name,
 				int typeId, int analyt1Id, int analyt2Id) const override;
 			void deleteAccount(int id) const override;
+			int findAccIdByContent(const std::string &content) const override;
 
 			// нод
 			boost::shared_ptr<domain::PrimaryDocumentList> getPrimaryDocuments() const override;
@@ -35,6 +38,14 @@ namespace oeav
 			void addPrimaryDocument(const std::string &code, const std::string &name, int analyt1,
 				int type1, int analyt2, int type2, int analyt3, int type3) const override;
 			void deletePrimaryDocument(int id) const override;
+			int findOpdIdByContent(const std::string &content) const override;
+			boost::shared_ptr<domain::PrimaryDocument> getPrimaryDocument(int docId) const override;
+
+			boost::shared_ptr<domain::TypicalOperationList> getTypicalOperations() const override;
+			void updateTypicalOperation(int id, int docId, const std::string &name, int debetIt, int creditId) const override;
+			void addTypicalOperation(int docId, const std::string &name, int debetIt, int creditId) const override;
+			void deleteTypicalOperation(int id) const override;
+			boost::shared_ptr<domain::TypicalOperationList> getTypicalOperationsByDocId(int docId) const override;
 		};
 	}
 }

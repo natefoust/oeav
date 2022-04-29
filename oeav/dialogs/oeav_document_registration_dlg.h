@@ -5,6 +5,7 @@
 #include "../controls/ComboBoxExt.h"
 #include "../domain/oeav_primary_document.h"
 #include "../domain/account_types.h"
+#include "../domain/document.h"
 
 #include <map>
 #include <boost/shared_ptr.hpp>
@@ -14,11 +15,11 @@ namespace oeav
 {
 	namespace ui
 	{
-		class PrimaryDocumentsDefenitionDlg : public CDialogX
+		class DocumentRegistrationDlg : public CDialogX
 		{
 
 		public:
-			PrimaryDocumentsDefenitionDlg(CWnd* pParent = nullptr);
+			DocumentRegistrationDlg(CWnd* pParent = nullptr);
 
 		#ifdef AFX_DESIGN_TIME
 			enum { IDD = IDD_OEAV_DIALOG };
@@ -52,12 +53,14 @@ namespace oeav
 			afx_msg void onPrevRequested();
 			afx_msg void changeDisplayedItem(NMHDR *pNMHDR, LRESULT *pResult);
 			afx_msg void onChooseRequested();
+			afx_msg void onDocumentChanged();
+			afx_msg void onOperationChanged();
 		private:
 			CStaticX _emplName;
 			CStaticX _wndId;
 			CStaticX _wndName;
-			CStaticX _docCode;
-			CStaticX _docName;
+			CStaticX _document;
+			CStaticX _dateFrom;
 			CStaticX _analytType1;
 			CStaticX _analytType2;
 			CStaticX _analytType3;
@@ -66,22 +69,33 @@ namespace oeav
 			CStatic _g2;
 			CStatic _g3;
 
-			CStaticX _po1;
-			CStaticX _po2;
-			CStaticX _po3;
+			CStaticX _sum;
+			CStaticX _sep;
+			CStaticX _operation;
+			CStaticX _slash;
+
+			CDateTimeCtrl _dateFromPicker;
 
 			CListCtrl _docTable;
 			
-			CEdit _docCodeEdit;
-			CEdit _docNameEdit;
+			CEdit _va1Edit;
+			CEdit _va2Edit;
+			CEdit _va3Edit;
+			CEdit _t1Edit;
+			CEdit _t2Edit;
+			CEdit _t3Edit;
+			CEdit _sumEdit;
 			
-			CComboBoxExt _analyt1Combo;
-			CComboBoxExt _analyt2Combo;
-			CComboBoxExt _analyt3Combo;
+			CEdit _dCodeEdit;
+			CEdit _dNameEdit;
+			CEdit _cCodeEdit;
+			CEdit _cNameEdit;
 
-			CComboBoxExt _type1Combo;
-			CComboBoxExt _type2Combo;
-			CComboBoxExt _type3Combo;
+			CComboBoxExt _docCombo;
+			CComboBoxExt _operationCombo;
+			CComboBoxExt _kau1Combo;
+			CComboBoxExt _kau2Combo;
+			CComboBoxExt _kau3Combo;
 
 			CButtonST _bAdd;
 			CButtonST _bDelete;
@@ -89,11 +103,18 @@ namespace oeav
 			CButtonST _bChoose;
 			CButtonST _bNext;
 			CButtonST _bPrev;
+			CButtonST _bRegister;
 
 			bool _chooseMode;
 			int _current;
 
-			boost::shared_ptr<domain::PrimaryDocumentList> _documents = boost::make_shared<domain::PrimaryDocumentList>();
+			std::map<std::string, int> _docComboMap;
+			std::map<std::string, int> _opComboMap;
+			std::map<std::string, int> _kau1ComboMap;
+			std::map<std::string, int> _kau2ComboMap;
+			std::map<std::string, int> _kau3ComboMap;
+
+			boost::shared_ptr<domain::DocumentList> _documents = boost::make_shared<domain::DocumentList>();
 
 		};
 	}

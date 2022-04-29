@@ -32,6 +32,7 @@ namespace oeav
 			void initControls();
 			void buildLayout();
 
+			afx_msg void onRegisterDocumentRequested();
 		private:
 
 			CStaticX _emplName;
