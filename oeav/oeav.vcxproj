@@ -179,6 +179,7 @@
       <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Users\Eugene\source\repos\boost_1_79_0;C:\Users\Eugene\source\repos\oeavd\oeav\oeav\ext\pqxx\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -203,46 +204,47 @@
     <ClInclude Include="controls\ComboBoxExt.h" />
     <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
-    <ClInclude Include="dialogs\account_plan_dlg.h" />
-    <ClInclude Include="dialogs\analytical_codes_dlg.h" />
-    <ClInclude Include="dialogs\analytical_types_dlg.h" />
-    <ClInclude Include="dialogs\balance_report_dlg.h" />
-    <ClInclude Include="dialogs\cardfiles_dlg.h" />
+    <ClInclude Include="dialogs\oeav_ssx.h" />
+    <ClInclude Include="dialogs\oeav_asx.h" />
+    <ClInclude Include="dialogs\oeav_vsx.h" />
+    <ClInclude Include="dialogs\oeav_men_bo.h" />
+    <ClInclude Include="dialogs\oeav_men_k.h" />
     <ClInclude Include="dialogs\CDialogX.h" />
-    <ClInclude Include="dialogs\define_report_forms_dlg.h" />
-    <ClInclude Include="dialogs\documents_dlg.h" />
-    <ClInclude Include="dialogs\look_ab_dlg.h" />
-    <ClInclude Include="dialogs\look_rl_dlg.h" />
-    <ClInclude Include="dialogs\main_window_dlg.h" />
-    <ClInclude Include="dialogs\oeav_document_registration_dlg.h" />
-    <ClInclude Include="dialogs\oeav_operations_templates.h" />
-    <ClInclude Include="dialogs\primary_documents_defenition_dlg.h" />
-    <ClInclude Include="dialogs\registry_list_dlg.h" />
-    <ClInclude Include="domain\account.h" />
-    <ClInclude Include="domain\account_types.h" />
-    <ClInclude Include="domain\analytical_accounting_code.h" />
-    <ClInclude Include="domain\analytical_type.h" />
-    <ClInclude Include="domain\document.h" />
+    <ClInclude Include="dialogs\oeav_csi.h" />
+    <ClInclude Include="dialogs\oeav_men_d.h" />
+    <ClInclude Include="dialogs\oeav_ksr.h" />
+    <ClInclude Include="dialogs\oeav_jsr.h" />
+    <ClInclude Include="dialogs\oeav_men.h" />
+    <ClInclude Include="dialogs\oeav_psx.h" />
+    <ClInclude Include="dialogs\oeav_osx.h" />
+    <ClInclude Include="dialogs\oeav_dsx.h" />
+    <ClInclude Include="dialogs\oeav_men_rj.h" />
+    <ClInclude Include="domain\oeav_account.h" />
+    <ClInclude Include="domain\oeav_account_types.h" />
+    <ClInclude Include="domain\oeav_analytical_accounting_code.h" />
+    <ClInclude Include="domain\oeav_analytical_type.h" />
+    <ClInclude Include="domain\oeav_document.h" />
     <ClInclude Include="domain\oeav_primary_document.h" />
-    <ClInclude Include="domain\typical_operation.h" />
+    <ClInclude Include="domain\oeav_reg_book_item.h" />
+    <ClInclude Include="domain\oeav_typical_operation.h" />
     <ClInclude Include="ext\Color.h" />
     <ClInclude Include="ext\etslayout.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="oeav.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="repository\cardfiles_repository.h" />
-    <ClInclude Include="repository\documents_repository.h" />
-    <ClInclude Include="repository\icardfiles_repository.h" />
-    <ClInclude Include="repository\idocuments_repository.h" />
+    <ClInclude Include="repository\oeav_cardfiles_repository.h" />
+    <ClInclude Include="repository\oeav_documents_repository.h" />
+    <ClInclude Include="repository\oeav_icardfiles_repository.h" />
+    <ClInclude Include="repository\oeav_idocuments_repository.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="services\cardfiles_service.h" />
-    <ClInclude Include="services\documents_service.h" />
-    <ClInclude Include="services\icardfiles_service.h" />
-    <ClInclude Include="services\idocuments_service.h" />
-    <ClInclude Include="shared\connection.h" />
-    <ClInclude Include="shared\iconnection.h" />
-    <ClInclude Include="shared\instance_factory.h" />
-    <ClInclude Include="shared\instance_factory_impl.h" />
+    <ClInclude Include="services\oeav_cardfiles_service.h" />
+    <ClInclude Include="services\oeav_documents_service.h" />
+    <ClInclude Include="services\oeav_icardfiles_service.h" />
+    <ClInclude Include="services\oeav_idocuments_service.h" />
+    <ClInclude Include="shared\oeav_connection.h" />
+    <ClInclude Include="shared\oeav_iconnection.h" />
+    <ClInclude Include="shared\oeav_instance_factory.h" />
+    <ClInclude Include="shared\oeav_instance_factory_impl.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -250,27 +252,28 @@
     <ClCompile Include="controls\ComboBoxExt.cpp" />
     <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
-    <ClCompile Include="dialogs\account_plan_dlg.cpp" />
-    <ClCompile Include="dialogs\analytical_codes_dlg.cpp" />
-    <ClCompile Include="dialogs\analytical_types_dlg.cpp" />
-    <ClCompile Include="dialogs\balance_report_dlg.cpp" />
-    <ClCompile Include="dialogs\cardfiles_dlg.cpp" />
+    <ClCompile Include="dialogs\oeav_ssx.cpp" />
+    <ClCompile Include="dialogs\oeav_asx.cpp" />
+    <ClCompile Include="dialogs\oeav_vsx.cpp" />
+    <ClCompile Include="dialogs\oeav_men_bo.cpp" />
+    <ClCompile Include="dialogs\oeav_men_k.cpp" />
     <ClCompile Include="dialogs\CDialogX.cpp" />
-    <ClCompile Include="dialogs\define_report_forms_dlg.cpp" />
-    <ClCompile Include="dialogs\documents_dlg.cpp" />
-    <ClCompile Include="dialogs\look_ab_dlg.cpp" />
-    <ClCompile Include="dialogs\look_rl_dlg.cpp" />
-    <ClCompile Include="dialogs\main_window_dlg.cpp" />
-    <ClCompile Include="dialogs\oeav_document_registration_dlg.cpp" />
-    <ClCompile Include="dialogs\oeav_operations_templates.cpp" />
-    <ClCompile Include="dialogs\primary_documents_defenition_dlg.cpp" />
-    <ClCompile Include="dialogs\registry_list_dlg.cpp" />
-    <ClCompile Include="domain\account.cpp" />
-    <ClCompile Include="domain\analytical_accounting_code.cpp" />
-    <ClCompile Include="domain\analytical_type.cpp" />
-    <ClCompile Include="domain\document.cpp" />
+    <ClCompile Include="dialogs\oeav_csi.cpp" />
+    <ClCompile Include="dialogs\oeav_men_d.cpp" />
+    <ClCompile Include="dialogs\oeav_ksr.cpp" />
+    <ClCompile Include="dialogs\oeav_jsr.cpp" />
+    <ClCompile Include="dialogs\oeav_men.cpp" />
+    <ClCompile Include="dialogs\oeav_psx.cpp" />
+    <ClCompile Include="dialogs\oeav_osx.cpp" />
+    <ClCompile Include="dialogs\oeav_dsx.cpp" />
+    <ClCompile Include="dialogs\oeav_men_rj.cpp" />
+    <ClCompile Include="domain\oeav_account.cpp" />
+    <ClCompile Include="domain\oeav_analytical_accounting_code.cpp" />
+    <ClCompile Include="domain\oeav_analytical_type.cpp" />
+    <ClCompile Include="domain\oeav_document.cpp" />
     <ClCompile Include="domain\oeav_primary_document.cpp" />
-    <ClCompile Include="domain\typical_operation.cpp" />
+    <ClCompile Include="domain\oeav_reg_book_item.cpp" />
+    <ClCompile Include="domain\oeav_typical_operation.cpp" />
     <ClCompile Include="ext\Color.cpp" />
     <ClCompile Include="ext\ETSLayout.cpp" />
     <ClCompile Include="oeav.cpp" />
@@ -280,11 +283,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="repository\cardfiles_repository.cpp" />
-    <ClCompile Include="repository\documents_repository.cpp" />
-    <ClCompile Include="services\cardfiles_service.cpp" />
-    <ClCompile Include="services\documents_service.cpp" />
-    <ClCompile Include="shared\connection.cpp" />
+    <ClCompile Include="repository\oeav_cardfiles_repository.cpp" />
+    <ClCompile Include="repository\oeav_documents_repository.cpp" />
+    <ClCompile Include="services\oeav_cardfiles_service.cpp" />
+    <ClCompile Include="services\oeav_documents_service.cpp" />
+    <ClCompile Include="shared\oeav_connection.cpp" />
     <ClCompile Include="shared\oeav_instance_config.cpp" />
   </ItemGroup>
   <ItemGroup>

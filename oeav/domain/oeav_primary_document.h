@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "account_types.h"
-#include "analytical_type.h"
+#include "oeav_account_types.h"
+#include "oeav_analytical_type.h"
 
 namespace oeav
 {

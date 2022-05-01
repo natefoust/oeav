@@ -3,20 +3,31 @@
 // Используется oeav.rc
 //
 #define IDD_REGIST_LIST                 9
+#define IDD_MEN_RJ                      9
+#define OEAV_MEN_RJ                     9
 #define IDD_OEAV_DIALOG                 102
 #define IDD_BALANCE_REP                 103
+#define OEAV_MEN_BO                     103
 #define IDD_CARDFILES                   104
+#define OEAV_MEN_K                      104
 #define IDD_DOCUMENTS                   105
+#define OEAV_MEN_D                      105
 #define IDD_LOOK_RL                     106
+#define OEAV_JSR                        106
 #define IDD_LOOK_AB                     107
+#define OEAV_KSR                        107
 #define IDD_DEF_REP_FORM                108
+#define OEAV_CSI                        108
 #define IDD_ANALYTICAL_CODES            109
+#define OEAV_ASX                        109
 #define IDD_ANALYTICAL_TYPES            110
+#define OEAV_VSX                        110
 #define IDD_ACCOUNT_PLAN                111
 #define IDD_ANALYTICAL_TYPES1           111
-#define IDD_OPD                         112
-#define IDD_THO                         113
-#define IDD_DOC_REG                     114
+#define OEAV_SSX                        111
+#define OEAV_DSX                        112
+#define OEAV_OSX                        113
+#define OEAV_PSX                        114
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -104,6 +115,7 @@
 #define IDC_LRJ_NEXT                    1056
 #define IDC_LRJ_EXIT                    1057
 #define IDC_LRJ_PREV                    1058
+#define IDC_LRJ_CHOOSE                  1059
 #define IDC_LAB_EMPLID                  1060
 #define IDC_LAB_WNDID                   1061
 #define IDC_LAB_DATE                    1062
@@ -295,8 +307,8 @@
 #define IDC_DRE_B_DELETE                1245
 #define IDC_DRE_B_EXIT                  1246
 #define IDC_DRE_C_A1_KAU                1247
+#define IDC_LRJ_LIST                    1247
 #define IDC_DRE_C_A2_KAU                1248
-#define IDC_DRE_C_A1_KAU3               1249
 #define IDC_DRE_C_A3_KAU                1249
 
 // Next default values for new objects
@@ -305,7 +317,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1247
+#define _APS_NEXT_CONTROL_VALUE         1248
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

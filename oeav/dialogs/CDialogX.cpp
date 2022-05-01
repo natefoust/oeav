@@ -2,7 +2,7 @@
 
 #include "../framework.h"
 #include "../oeav.h"
-#include "main_window_dlg.h"
+#include "oeav_men.h"
 #include "afxdialogex.h"
 #include "../ext/Color.h"
 
@@ -97,7 +97,7 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		if (_drawButtonPanel)
 		{
 			CRect buttonPanelRect{ myRect };
-			buttonPanelRect.SetRect(myRect.left, myRect.Height() / 1.16, myRect.right, myRect.bottom);
+			buttonPanelRect.SetRect(myRect.left, int(myRect.Height() / 1.16), myRect.right, myRect.bottom);
 
 			CBrush brush2;
 			brush2.CreateSolidBrush(navbarColor);
