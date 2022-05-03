@@ -3,7 +3,6 @@
 // Используется oeav.rc
 //
 #define IDD_REGIST_LIST                 9
-#define IDD_MEN_RJ                      9
 #define OEAV_MEN_RJ                     9
 #define IDD_OEAV_DIALOG                 102
 #define IDD_BALANCE_REP                 103
@@ -28,6 +27,9 @@
 #define OEAV_DSX                        112
 #define OEAV_OSX                        113
 #define OEAV_PSX                        114
+#define OEAV_KRV                        115
+#define OEAV_KRV1                       116
+#define OEAV_KRJ                        116
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -148,6 +150,7 @@
 #define IDC_LAB_NEXT                    1089
 #define IDC_LAB_EXIT                    1090
 #define IDC_LRJ_SEP_1                   1091
+#define IDC_LAB_CHOOSE                  1091
 #define IDC_DRF_B_EXIT                  1092
 #define IDC_DRF_EMPLNAME                1093
 #define IDC_DRF_WNDID                   1094
@@ -309,7 +312,12 @@
 #define IDC_DRE_C_A1_KAU                1247
 #define IDC_LRJ_LIST                    1247
 #define IDC_DRE_C_A2_KAU                1248
+#define IDC_LAB_LIST                    1248
 #define IDC_DRE_C_A3_KAU                1249
+#define IDC_KRV_EDIT                    1249
+#define IDC_KRV_B_EXIT                  1250
+#define IDC_KRJ_B_EXIT                  1251
+#define IDC_KRJ_EDIT                    1252
 
 // Next default values for new objects
 // 
@@ -317,7 +325,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        153
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1248
+#define _APS_NEXT_CONTROL_VALUE         1253
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

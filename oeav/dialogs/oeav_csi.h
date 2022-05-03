@@ -28,6 +28,10 @@ namespace oeav
 
 			virtual BOOL OnInitDialog();
 
+			afx_msg void dateFromChanged(NMHDR * hMHDR, LRESULT * lResult);
+			afx_msg void dateToChanged(NMHDR * hMHDR, LRESULT * lResult);
+			afx_msg void accountChanged();
+
 		private:
 
 			void initControls();

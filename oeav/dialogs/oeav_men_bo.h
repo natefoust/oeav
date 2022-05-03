@@ -33,6 +33,8 @@ namespace oeav
 			void buildLayout();
 
 			afx_msg void onDefineReportFormsRequested();
+			afx_msg void onBORequested();
+			afx_msg void onJORequested();
 
 		private:
 

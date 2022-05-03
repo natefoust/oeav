@@ -204,6 +204,8 @@
     <ClInclude Include="controls\ComboBoxExt.h" />
     <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
+    <ClInclude Include="dialogs\oeav_krj.h" />
+    <ClInclude Include="dialogs\oeav_krv.h" />
     <ClInclude Include="dialogs\oeav_ssx.h" />
     <ClInclude Include="dialogs\oeav_asx.h" />
     <ClInclude Include="dialogs\oeav_vsx.h" />
@@ -221,14 +223,19 @@
     <ClInclude Include="dialogs\oeav_men_rj.h" />
     <ClInclude Include="domain\oeav_account.h" />
     <ClInclude Include="domain\oeav_account_types.h" />
+    <ClInclude Include="domain\oeav_acc_book_item.h" />
     <ClInclude Include="domain\oeav_analytical_accounting_code.h" />
     <ClInclude Include="domain\oeav_analytical_type.h" />
     <ClInclude Include="domain\oeav_document.h" />
     <ClInclude Include="domain\oeav_primary_document.h" />
     <ClInclude Include="domain\oeav_reg_book_item.h" />
     <ClInclude Include="domain\oeav_typical_operation.h" />
+    <ClInclude Include="ext\CeXDib.h" />
     <ClInclude Include="ext\Color.h" />
     <ClInclude Include="ext\etslayout.h" />
+    <ClInclude Include="ext\PPDrawManager.h" />
+    <ClInclude Include="ext\PPHtmlDrawer.h" />
+    <ClInclude Include="ext\PPTooltip.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="oeav.h" />
     <ClInclude Include="pch.h" />
@@ -252,6 +259,8 @@
     <ClCompile Include="controls\ComboBoxExt.cpp" />
     <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
+    <ClCompile Include="dialogs\oeav_krj.cpp" />
+    <ClCompile Include="dialogs\oeav_krv.cpp" />
     <ClCompile Include="dialogs\oeav_ssx.cpp" />
     <ClCompile Include="dialogs\oeav_asx.cpp" />
     <ClCompile Include="dialogs\oeav_vsx.cpp" />
@@ -268,14 +277,19 @@
     <ClCompile Include="dialogs\oeav_dsx.cpp" />
     <ClCompile Include="dialogs\oeav_men_rj.cpp" />
     <ClCompile Include="domain\oeav_account.cpp" />
+    <ClCompile Include="domain\oeav_acc_book_item.cpp" />
     <ClCompile Include="domain\oeav_analytical_accounting_code.cpp" />
     <ClCompile Include="domain\oeav_analytical_type.cpp" />
     <ClCompile Include="domain\oeav_document.cpp" />
     <ClCompile Include="domain\oeav_primary_document.cpp" />
     <ClCompile Include="domain\oeav_reg_book_item.cpp" />
     <ClCompile Include="domain\oeav_typical_operation.cpp" />
+    <ClCompile Include="ext\CeXDib.cpp" />
     <ClCompile Include="ext\Color.cpp" />
     <ClCompile Include="ext\ETSLayout.cpp" />
+    <ClCompile Include="ext\PPDrawManager.cpp" />
+    <ClCompile Include="ext\PPHtmlDrawer.cpp" />
+    <ClCompile Include="ext\PPTooltip.cpp" />
     <ClCompile Include="oeav.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

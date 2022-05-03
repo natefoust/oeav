@@ -29,6 +29,7 @@ namespace oeav
 				int typeId, int analyt1Id, int analyt2Id) const override;
 			void deleteAccount(int id) const override;
 			int findAccIdByContent(const std::string &code, const std::string &name) const override;
+			std::vector<std::tuple<std::string, std::string>> getAccountsFromAccBook() const override;
 
 			// нод
 			boost::shared_ptr<domain::PrimaryDocumentList> getPrimaryDocuments() const override;

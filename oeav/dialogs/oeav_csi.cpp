@@ -4,6 +4,7 @@
 
 #include "../shared/oeav_instance_factory.h"
 #include "../services/oeav_icardfiles_service.h"
+#include "../services/oeav_idocuments_service.h"
 
 using namespace oeav::ui;
 
@@ -12,7 +13,10 @@ using namespace oeav::ui;
 #endif
 
 BEGIN_MESSAGE_MAP(oeav_csi, CDialogX)
-	ON_WM_ERASEBKGND()
+	ON_NOTIFY(DTN_DATETIMECHANGE, IDC_DRF_D_INTERVAL_FROM, &dateFromChanged)
+	ON_NOTIFY(DTN_DATETIMECHANGE, IDC_DRF_D_INTERVAL_TO, &dateToChanged)
+	ON_CBN_SELENDOK(IDC_DRF_C_ACC, &accountChanged)
+	ON_BN_CLICKED(IDC_DRF_B_EXIT, &OnCancel)
 END_MESSAGE_MAP()
 
 
@@ -45,8 +49,6 @@ BOOL oeav_csi::OnInitDialog()
 	initControls();
 	buildLayout();
 
-	//InstanceFactory<service::ICardfilesService>::getInstance()->getAnalyticalAccountingCodes();
-
 	return TRUE;
 }
 
@@ -62,6 +64,26 @@ void oeav_csi::initControls()
 
 	_accountCombo.SetWindowPos(NULL, 0, 0, 150, 22, afxCmd);
 	_accountCombo.SetMode(CComboBoxExt::MODE_AUTOCOMPLETE);
+
+	auto accounts = InstanceFactory<service::ICardfilesService>::getInstance()->getAccountsFromAccBook();
+	for (auto item : accounts)
+		_accountCombo.AddString(std::string(std::get<0>(item) + " - " + std::get<1>(item)).c_str());
+
+	std::string s = InstanceFactory<service::IDocumentsService>::getInstance()->getTargetAccount();
+
+	_accountCombo.SelectString(0, InstanceFactory<service::IDocumentsService>::getInstance()->getTargetAccount().c_str());
+
+	std::string dateFStr = InstanceFactory<service::IDocumentsService>::getInstance()->getDateFrom();
+	COleDateTime df;
+	CTime dateF(std::stoi(dateFStr.substr(0, 4)), std::stoi(dateFStr.substr(5, 7)), std::stoi(dateFStr.substr(8, 10)), 0, 0, 0);
+	df.SetDate(dateF.GetYear(), dateF.GetMonth(), dateF.GetDay());
+	_dateFrom.SetTime(df);
+
+	std::string dateTStr = InstanceFactory<service::IDocumentsService>::getInstance()->getDateTo();
+	COleDateTime dt;
+	CTime dateT(std::stoi(dateTStr.substr(0, 4)), std::stoi(dateTStr.substr(5, 7)), std::stoi(dateTStr.substr(8, 10)), 0, 0 ,0);
+	dt.SetDate(dateT.GetYear(), dateT.GetMonth(), dateT.GetDay());
+	_dateTo.SetTime(dt);
 
 	UpdateWindow();
 }
@@ -101,4 +123,28 @@ void oeav_csi::buildLayout()
 		;
 
 	UpdateLayout();
+}
+
+void oeav_csi::dateFromChanged(NMHDR * hMHDR, LRESULT * lResult)
+{
+	CString date;
+	_dateFrom.GetWindowText(date);
+
+	InstanceFactory<service::IDocumentsService>::getInstance()->updateDateFrom(std::string(date));
+}
+
+void oeav_csi::dateToChanged(NMHDR * hMHDR, LRESULT * lResult)
+{
+	CString date;
+	_dateTo.GetWindowText(date);
+
+	InstanceFactory<service::IDocumentsService>::getInstance()->updateDateTo(std::string(date));
+}
+
+void oeav_csi::accountChanged()
+{
+	CString account;
+	_accountCombo.GetWindowText(account);
+
+	InstanceFactory<service::IDocumentsService>::getInstance()->updateTargetAccount(account.GetString());
 }

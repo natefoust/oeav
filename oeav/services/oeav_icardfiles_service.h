@@ -49,6 +49,7 @@ namespace oeav
 				int typeId, int analyt1Id, int analyt2Id) const = 0;
 			virtual void deleteAccount(int id) const = 0;
 			virtual int findAccIdByContent(const std::string &content) const = 0;
+			virtual std::vector<std::tuple<std::string, std::string>> getAccountsFromAccBook() const = 0;
 
 			// нод
 			virtual boost::shared_ptr<domain::PrimaryDocumentList> getPrimaryDocuments() const = 0;

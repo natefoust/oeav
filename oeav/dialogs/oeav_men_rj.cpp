@@ -6,6 +6,8 @@
 // oeav
 #include "oeav_ksr.h"
 #include "oeav_jsr.h"
+#include "../services/oeav_idocuments_service.h"
+#include "../shared/oeav_instance_factory.h"
 
 using namespace oeav::ui;
 
@@ -13,17 +15,24 @@ using namespace oeav::ui;
 #define new DEBUG_NEW
 #endif
 
+#ifndef IDC_TIMER 
+#define IDC_TIMER 0x00001
+#endif
+
 BEGIN_MESSAGE_MAP(oeav_men_rj, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
 	ON_BN_CLICKED(IDC_RL_B_LOOKRL, &onShowRegListRequested)
 	ON_BN_CLICKED(IDC_RL_B_LOOKAB, &onShowAccBookRequested)
+	ON_BN_CLICKED(IDC_RL_B_GENERATEAB, &onGenerateABRequested)
 	ON_WM_ERASEBKGND()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
 oeav_men_rj::oeav_men_rj(CWnd* pParent /*=nullptr*/)
 	: CDialogX(OEAV_MEN_RJ, pParent)
 {
+	_ttip.Create(this);
 }
 
 void oeav_men_rj::DoDataExchange(CDataExchange* pDX)
@@ -96,4 +105,32 @@ void oeav_men_rj::onShowRegListRequested()
 void oeav_men_rj::onShowAccBookRequested()
 {
 	oeav_ksr(this).DoModal();
+}
+
+void oeav_men_rj::onGenerateABRequested()
+{
+	int count = InstanceFactory<service::IDocumentsService>::getInstance()->generateAccountsBook();
+	CRect rc;
+	_generateAB.GetWindowRect(&rc);
+
+	CPoint p = rc.BottomRight();
+	_ttip.SetDirection(PPTOOLTIP_TOPEDGE_LEFT);
+
+	std::string status;
+	if (count == 0)
+		status = "<b>Пустой РЖ. 0 записей обработано</b>";
+	else
+		status = "<b>" + std::to_string(count) + " записей обработано успешно</b>";
+
+	_ttip.ShowHelpTooltip(&p, status.c_str());
+
+	SetTimer(IDC_TIMER, 3000, NULL);
+}
+
+void oeav_men_rj::OnTimer(UINT_PTR uTime)
+{
+	if (_ttip && _ttip.IsWindowVisible())
+		_ttip.HideTooltip();
+
+	KillTimer(IDC_TIMER);
 }

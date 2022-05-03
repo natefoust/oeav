@@ -315,7 +315,7 @@ boost::shared_ptr<TypicalOperationList> CardfilesRepository::getTypicalOperation
 					" coalesce(a.oeav_sid, 0) as oeav_sid1, coalesce(a.oeav_sn, '') as oeav_sn1, coalesce(a.oeav_sk, '') as oeav_sk1, coalesce(a.oeav_styp, '0') as oeav_styp1,"
 					" coalesce(oat3.oeav_vid, 0) as oeav_vid4, coalesce(oat3.oeav_vk, '') as oeav_vk4, coalesce(oat3.oeav_vn, '') as oeav_vn4,"
 					" coalesce(oat4.oeav_vid, 0) as oeav_vid5, coalesce(oat4.oeav_vk, '') as oeav_vk5, coalesce(oat4.oeav_vn, '') as oeav_vn5,"
-					" coalesce(a1.oeav_sid, 0) as oeav_sid2, coalesce(a.oeav_sn, '') as oeav_sn2, coalesce(a1.oeav_sk, '') as oeav_sk2, coalesce(a1.oeav_styp, '0') as oeav_styp2,"
+					" coalesce(a1.oeav_sid, 0) as oeav_sid2, coalesce(a1.oeav_sn, '') as oeav_sn2, coalesce(a1.oeav_sk, '') as oeav_sk2, coalesce(a1.oeav_styp, '0') as oeav_styp2,"
 					" coalesce(oat5.oeav_vid, 0) as oeav_vid6, coalesce(oat5.oeav_vk, '') as oeav_vk6, coalesce(oat5.oeav_vn, '') as oeav_vn6,"
 					" coalesce(oat6.oeav_vid, 0) as oeav_vid7, coalesce(oat6.oeav_vk, '') as oeav_vk7, coalesce(oat6.oeav_vn, '') as oeav_vn7"
 		
@@ -375,7 +375,7 @@ boost::shared_ptr<TypicalOperationList> CardfilesRepository::getTypicalOperation
 					" coalesce(a.oeav_sid, 0) as oeav_sid1, coalesce(a.oeav_sn, '') as oeav_sn1, coalesce(a.oeav_sk, '') as oeav_sk1, coalesce(a.oeav_styp, '0') as oeav_styp1,"
 					" coalesce(oat3.oeav_vid, 0) as oeav_vid4, coalesce(oat3.oeav_vk, '') as oeav_vk4, coalesce(oat3.oeav_vn, '') as oeav_vn4,"
 					" coalesce(oat4.oeav_vid, 0) as oeav_vid5, coalesce(oat4.oeav_vk, '') as oeav_vk5, coalesce(oat4.oeav_vn, '') as oeav_vn5,"
-					" coalesce(a1.oeav_sid, 0) as oeav_sid2, coalesce(a.oeav_sn, '') as oeav_sn2, coalesce(a1.oeav_sk, '') as oeav_sk2, coalesce(a1.oeav_styp, '0') as oeav_styp2,"
+					" coalesce(a1.oeav_sid, 0) as oeav_sid2, coalesce(a1.oeav_sn, '') as oeav_sn2, coalesce(a1.oeav_sk, '') as oeav_sk2, coalesce(a1.oeav_styp, '0') as oeav_styp2,"
 					" coalesce(oat5.oeav_vid, 0) as oeav_vid6, coalesce(oat5.oeav_vk, '') as oeav_vk6, coalesce(oat5.oeav_vn, '') as oeav_vn6,"
 					" coalesce(oat6.oeav_vid, 0) as oeav_vid7, coalesce(oat6.oeav_vk, '') as oeav_vk7, coalesce(oat6.oeav_vn, '') as oeav_vn7"
 
@@ -514,4 +514,19 @@ boost::shared_ptr<AnalyticalAccountingCodeList> CardfilesRepository::getAnalytic
 			row[6].c_str()), row[3].c_str()));
 
 	return analytCodesList;
+}
+
+std::vector<std::tuple<std::string, std::string>> CardfilesRepository::getAccountsFromAccBook() const
+{
+	std::string sql{ "select distinct coalesce(oeav_ks, 0) as oeav_ks, coalesce(oeav_ksn, '') as oeav_ksn from oeav_k" };
+
+	std::vector<std::tuple<std::string, std::string>> accounts;
+
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute(sql);
+
+	for (auto row : *result)
+		accounts.emplace_back(std::make_tuple(row.at("oeav_ks").c_str(), row.at("oeav_ksn").c_str()));
+
+	return accounts;
 }

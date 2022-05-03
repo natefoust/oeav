@@ -27,7 +27,7 @@ namespace
 }
 
 BEGIN_MESSAGE_MAP(oeav_jsr, CDialogX)
-	//ON_BN_CLICKED(IDCANCEL, &onExitRequested)
+	ON_BN_CLICKED(IDC_LRJ_EXIT, &onExitRequested)
 	ON_BN_CLICKED(IDC_LRJ_NEXT, &onNextRequested)
 	ON_BN_CLICKED(IDC_LRJ_PREV, &onPrevRequested)
 	ON_BN_CLICKED(IDC_LRJ_CHOOSE, &onChooseRequested)
@@ -183,6 +183,11 @@ void oeav_jsr::onPrevRequested()
 		setSelection(_current);
 	else
 		++_current;
+}
+
+void oeav_jsr::onExitRequested()
+{
+	OnCancel();
 }
 
 void oeav_jsr::setSelection(size_t item)

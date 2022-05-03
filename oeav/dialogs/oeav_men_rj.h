@@ -3,6 +3,8 @@
 #include "../controls/CStaticX.h"
 #include "../controls/CButtonX.h"
 
+#include "../ext/PPTooltip.h"
+
 namespace oeav
 {
 	namespace ui
@@ -33,6 +35,8 @@ namespace oeav
 			void buildLayout();
 			afx_msg void onShowRegListRequested();
 			afx_msg void onShowAccBookRequested();
+			afx_msg void onGenerateABRequested();
+			afx_msg void OnTimer(UINT_PTR);
 
 		private:
 
@@ -48,6 +52,7 @@ namespace oeav
 			CButtonST _generateAB;
 			CButtonST _printAB;
 
+			CPPToolTip _ttip;
 		};
 	}
 }

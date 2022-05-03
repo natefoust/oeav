@@ -185,3 +185,8 @@ boost::shared_ptr<AnalyticalAccountingCodeList> CardfilesService::getAnalyticalA
 	return InstanceFactory<domain::ICardfilesRepository>::getInstance()->
 		getAnalyticalAccountingCodes(atId);
 }
+
+std::vector<std::tuple<std::string, std::string>> CardfilesService::getAccountsFromAccBook() const
+{
+	return InstanceFactory<domain::ICardfilesRepository>::getInstance()->getAccountsFromAccBook();
+}

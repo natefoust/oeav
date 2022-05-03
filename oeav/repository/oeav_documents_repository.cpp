@@ -16,6 +16,7 @@
 #include "../domain/oeav_document.h"
 #include "../services/oeav_icardfiles_service.h"
 #include "../domain/oeav_reg_book_item.h"
+#include "../domain/oeav_acc_book_item.h"
 
 using namespace oeav::domain;
 using namespace pqxx;
@@ -168,4 +169,191 @@ boost::shared_ptr<RegBookItemList> DocumentsRepository::getRegisteredDocuments()
 	}
 
 	return _regBookList;
+}
+
+int DocumentsRepository::generateAccountsBook() const
+{
+	InstanceFactory<IConnection>::getInstance()->execute("truncate table oeav_k");
+
+	boost::shared_ptr<RegBookItemList> regBookList = getRegisteredDocuments();
+
+	int i = 0;
+	for (auto item : *regBookList)
+	{
+		InstanceFactory<IConnection>::getInstance()->execute("insert into oeav_k(oeav_kdata, oeav_kdokk, oeav_kdokn, oeav_kdokd,"
+			" oeav_kto, oeav_ks, oeav_ksn, oeav_kks, oeav_kksn,"
+			" oeav_kdb, oeav_kkr) values('" + (item.getDate().empty() ? "infinity" : item.getDate()) + "', '" + item.getDocCode() +"', '" + item.getDocName() + "', '" + (item.getDocDate().empty() ? "infinity" : item.getDocDate()) + "', '"
+			+ item.getOperation() + "', '" + item.getDebetCode() + "', '" + item.getDebetName() + "', '" + item.getCreditCode() + "', '"
+			+ item.getCreditName() + "', '" + item.getSum() + "', '" + "0" + "')");
+
+		InstanceFactory<IConnection>::getInstance()->execute("insert into oeav_k(oeav_kdata, oeav_kdokk, oeav_kdokn, oeav_kdokd,"
+			" oeav_kto, oeav_ks, oeav_ksn, oeav_kks, oeav_kksn,"
+			" oeav_kdb, oeav_kkr) values('" + (item.getDate().empty() ? "infinity" : item.getDate()) + "', '" + item.getDocCode() + "', '" + item.getDocName() + "', '" + (item.getDocDate().empty() ? "infinity" : item.getDocDate()) + "', '"
+			+ item.getOperation() + "', '" + item.getCreditCode() + "', '" + item.getCreditName() + "', '" + item.getDebetCode() + "', '"
+			+ item.getDebetName() + "', '" + "0" + "', '" + item.getSum() + "')");
+		i++;
+	}
+
+	return i;
+}
+
+boost::shared_ptr<AccBookItemList> DocumentsRepository::getAccBookList() const
+{
+	std::string sql{ "select * from oeav_k" };
+
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute(sql);
+
+	boost::shared_ptr<AccBookItemList> accBookList = boost::make_shared<AccBookItemList>();
+
+	std::string date, docDate;
+	for (auto row : *result)
+	{
+		date = row.at("oeav_kdata").c_str();
+		docDate = row.at("oeav_kdokd").c_str();
+
+		if (date == "infinity")
+			date = "";
+		if (docDate == "infinity")
+			docDate = "";
+
+		accBookList->emplace_back(AccBookItem(row.at("oeav_kid").as<int>(), date, row.at("oeav_kdokn").c_str(), row.at("oeav_kdokk").c_str(),
+			docDate, row.at("oeav_kto").c_str(), row.at("oeav_ks").c_str(), row.at("oeav_ksn").c_str(), row.at("oeav_kks").c_str(),
+			row.at("oeav_kksn").c_str(), row.at("oeav_kdb").c_str(), row.at("oeav_kkr").c_str()));
+	}
+
+	return accBookList;
+}
+
+const std::string DocumentsRepository::getBO() const
+{
+	std::string resultStr =
+		"=Огиевич Е.А.=              Балансовая ведомость              =oea_krv=\r\n"
+		"    по счёту " + getTargetAccCode() + "          период с " + getDateFrom() + " по " + getDateTo() + "           \r\n"
+		"-----------------------------------------------------------------------\r\n"
+		"    Счёт                             Корр.счёт                              Дебет\r\n"
+		"-----------------------------------------------------------------------\r\n";
+
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select * from oeav_k where oeav_kdb != 0 and oeav_ks = '" + getTargetAccCode() + "' and oeav_kdata >= '" +
+			getDateFrom() + "' and oeav_kdata <= '" + getDateTo() + "'");
+
+	for (auto row : *result)
+	{
+		resultStr += "      " + std::to_string(row.at("oeav_ks").as<int>()) + "                                    " + std::to_string(row.at("oeav_kks").as<int>()) + 
+			"                                        " + std::to_string(row.at("oeav_kdb").as<int>()) + "\r\n";
+	}
+
+	resultStr += "												                                       Итого по счёту: 0";
+
+	return resultStr;
+}
+
+const std::string DocumentsRepository::getJO() const
+{
+	
+
+	std::string resultStr =
+		"=Огиевич Е.А.=              Журнал-ордер                      =oea_krv=\r\n"
+		"    по счёту " + getTargetAccCode() + "          период с " + getDateFrom() + " по " + getDateTo() + "           \r\n"
+		"-----------------------------------------------------------------------\r\n"
+		"    Счёт                             Корр.счёт                              Кредит\r\n"
+		"-----------------------------------------------------------------------\r\n";
+
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select * from oeav_k where oeav_kkr != 0 and oeav_ks = '" + getTargetAccCode() + "' and oeav_kdata >= '" +
+			getDateFrom() + "' and oeav_kdata <= '" + getDateTo() +  "'");
+
+	for (auto row : *result)
+	{
+		resultStr += "      " + std::to_string(row.at("oeav_ks").as<int>()) + "                                    " + std::to_string(row.at("oeav_kks").as<int>()) +
+			"                                        " + std::to_string(row.at("oeav_kkr").as<int>()) + "\r\n";
+	}
+
+	resultStr += "												                                       Итого по счёту: 0";
+
+	return resultStr;
+}
+
+void DocumentsRepository::updateDateFrom(const std::string &dateFrom) const
+{
+	InstanceFactory<IConnection>::getInstance()->execute("update oeav_c set oeav_cdats = '" + dateFrom + "'");
+}
+
+void DocumentsRepository::updateDateTo(const std::string &dateTo) const
+{
+	InstanceFactory<IConnection>::getInstance()->execute("update oeav_c set oeav_cdatd = '" + dateTo + "'");
+}
+
+void DocumentsRepository::updateTargetAccount(const std::string &code, const std::string &name) const
+{
+	InstanceFactory<IConnection>::getInstance()->execute("update oeav_c set oeav_cs = '" + code + "', oeav_csn = '" + name + "'");
+}
+
+void DocumentsRepository::updateCompanyName(const std::string &name) const
+{
+	InstanceFactory<IConnection>::getInstance()->execute("update oeav_c set oeav_cfirm = '" + name + "'");
+}
+
+void DocumentsRepository::updateCurrentDate(const std::string &date) const
+{
+	InstanceFactory<IConnection>::getInstance()->execute("update oeav_c set oeav_cdatt = '" + date + "'");
+}
+
+std::string DocumentsRepository::getDateFrom() const
+{
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select coalesce(oeav_cdats, '1970-01-01') as oeav_cdats from oeav_c");
+	auto row = result->at(0);
+	
+	return row.at("oeav_cdats").c_str();
+}
+
+std::string DocumentsRepository::getDateTo() const
+{
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select coalesce(oeav_cdatd, '1970-01-01') as oeav_cdatd from oeav_c");
+	auto row = result->at(0);
+
+	return row.at("oeav_cdatd").c_str();
+}
+
+std::string DocumentsRepository::getTargetAccount() const
+{
+	boost::shared_ptr<result> result1 =
+		InstanceFactory<IConnection>::getInstance()->execute("select coalesce(oeav_cs, 0) as oeav_cs, coalesce(oeav_csn, '') as oeav_csn  from oeav_c");
+
+	auto row = result1->at(0);
+
+	std::string acc = std::string(row.at("oeav_cs").c_str()) + " - " + std::string(row.at("oeav_csn").c_str());
+
+	return acc;
+}
+
+std::string DocumentsRepository::getCompanyName() const
+{
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select coalesce(oeav_cfirm, '') as oeav_cfirm from oeav_c");
+	auto row = result->at(0);
+
+	return row.at("oeav_cfirm").c_str();
+}
+
+std::string DocumentsRepository::getCurrentDate() const
+{
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select coalesce(oeav_cdatt, '1970-01-01') as oeav_cdatt from oeav_c");
+	auto row = result->at(0);
+
+	return row.at("oeav_cdatt").c_str();
+}
+
+std::string DocumentsRepository::getTargetAccCode() const
+{
+	boost::shared_ptr<result> result1 =
+		InstanceFactory<IConnection>::getInstance()->execute("select coalesce(oeav_cs, 0) as oeav_cs from oeav_c");
+
+	auto row = result1->at(0);
+
+	return row.at("oeav_cs").c_str();
 }

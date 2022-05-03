@@ -2,6 +2,8 @@
 
 #include "oeav_men_bo.h"
 #include "oeav_csi.h"
+#include "oeav_krv.h"
+#include "oeav_krj.h"
 
 using namespace oeav::ui;
 
@@ -12,6 +14,8 @@ using namespace oeav::ui;
 BEGIN_MESSAGE_MAP(oeav_men_bo, CDialogX)
 	ON_BN_CLICKED(IDCANCEL, &onExitRequsted)
 	ON_BN_CLICKED(IDC_BR_B_REP_DEF, &onDefineReportFormsRequested)
+	ON_BN_CLICKED(IDC_BR_B_BAL_REP_PERIOD, &onBORequested)
+	ON_BN_CLICKED(IDC_BR_B_LIST_O_PERIOD, &onJORequested)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
@@ -82,4 +86,14 @@ void oeav_men_bo::buildLayout()
 void oeav_men_bo::onDefineReportFormsRequested()
 {
 	oeav_csi().DoModal();
+}
+
+void oeav_men_bo::onBORequested()
+{
+	oeav_krv().DoModal();
+}
+
+void oeav_men_bo::onJORequested()
+{
+	oeav_krj().DoModal();
 }
