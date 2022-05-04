@@ -174,6 +174,12 @@
     <ClInclude Include="dialogs\oeav_krj.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="dialogs\oeav_cst.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\oeav_csf.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oeav.cpp">
@@ -305,6 +311,12 @@
     <ClCompile Include="dialogs\oeav_krj.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="dialogs\oeav_cst.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\oeav_csf.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="oeav.rc">
@@ -396,6 +408,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="res\edit.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\calendar.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

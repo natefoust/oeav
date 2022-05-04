@@ -99,10 +99,11 @@
 #define IDC_LRJ_WNDID                   1035
 #define IDC_CF_B_KAY                    1036
 #define IDC_LRJ_WNDNAME                 1036
-#define IDC_CF_B_ARM                    1036
 #define IDC_LRJ_DATE                    1037
 #define IDC_CF_B_KAY2                   1037
 #define IDC_LRJ_DOCUMENT                1038
+#define IDC_CF_B_KAY3                   1038
+#define IDC_CF_B_ARMSET                 1038
 #define IDC_LRJ_OPERATION               1039
 #define IDC_LRJ_E_DATE_FROM             1040
 #define IDC_LRJ_E_DOC_NAME              1041
@@ -333,7 +334,6 @@
 #define IDC_CSF_EMPLNAME                1259
 #define IDC_CSF_WNDNAME                 1260
 #define IDC_CSF_WNDID                   1261
-#define IDC_CSF_ST                      1262
 #define IDC_CSF_NAME                    1262
 #define IDC_CSF_B_EXIT                  1263
 #define IDC_CSF_E_NAME                  1264

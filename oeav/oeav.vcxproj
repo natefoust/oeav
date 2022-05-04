@@ -204,6 +204,8 @@
     <ClInclude Include="controls\ComboBoxExt.h" />
     <ClInclude Include="controls\ComboBoxExtList.h" />
     <ClInclude Include="controls\CStaticX.h" />
+    <ClInclude Include="dialogs\oeav_csf.h" />
+    <ClInclude Include="dialogs\oeav_cst.h" />
     <ClInclude Include="dialogs\oeav_krj.h" />
     <ClInclude Include="dialogs\oeav_krv.h" />
     <ClInclude Include="dialogs\oeav_ssx.h" />
@@ -259,6 +261,8 @@
     <ClCompile Include="controls\ComboBoxExt.cpp" />
     <ClCompile Include="controls\ComboBoxExtList.cpp" />
     <ClCompile Include="controls\CStaticX.cpp" />
+    <ClCompile Include="dialogs\oeav_csf.cpp" />
+    <ClCompile Include="dialogs\oeav_cst.cpp" />
     <ClCompile Include="dialogs\oeav_krj.cpp" />
     <ClCompile Include="dialogs\oeav_krv.cpp" />
     <ClCompile Include="dialogs\oeav_ssx.cpp" />
@@ -315,6 +319,7 @@
     <Image Include="res\book.ico" />
     <Image Include="res\book2.ico" />
     <Image Include="res\business-credit-report.ico" />
+    <Image Include="res\calendar.ico" />
     <Image Include="res\cancel.ico" />
     <Image Include="res\cancel2.ico" />
     <Image Include="res\content-management-system.ico" />

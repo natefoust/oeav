@@ -604,7 +604,7 @@ void oeav_psx::onRegisterDocumentRequested()
 	if (_documents->empty())
 		return;
 
-	std::string date{ "1900-01-01" };
+	std::string date{ InstanceFactory<service::IDocumentsService>::getInstance()->getCurrentDate() };
 	std::string docName{ _documents->at(_current).getPrimaryDocument().getName() };
 	std::string docCode{ _documents->at(_current).getPrimaryDocument().getCode() };
 	std::string docDate{ _documents->at(_current).getDate().Format("%Y-%m-%d") };
