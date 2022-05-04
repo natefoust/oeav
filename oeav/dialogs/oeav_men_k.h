@@ -37,17 +37,20 @@ namespace oeav
 			afx_msg void onAccountPlansRequested();
 			afx_msg void onPrimaryDocumentsDefenitionRequested();
 			afx_msg void onTypicalOperationsRequested();
+			afx_msg void onArmSettingsRequested();
 
 		private:
 
 			CStaticX _emplName;
 			CStaticX _wndName;
+			CStaticX _sep;
 
 			CButtonST _rawDocs;
 			CButtonST _accPlan;
 			CButtonST _typOperations;
 			CButtonST _analitTypes;
 			CButtonST _analitCodes;
+			CButtonST _armSettings;
 		};
 	}
 }

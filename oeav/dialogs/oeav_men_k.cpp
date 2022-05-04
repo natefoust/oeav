@@ -6,6 +6,7 @@
 #include "oeav_ssx.h"
 #include "oeav_dsx.h"
 #include "oeav_osx.h"
+#include "oeav_csf.h"
 
 using namespace oeav::ui;
 
@@ -20,6 +21,7 @@ BEGIN_MESSAGE_MAP(oeav_men_k, CDialogX)
 	ON_BN_CLICKED(IDC_CF_B_PS, &onAccountPlansRequested)
 	ON_BN_CLICKED(IDC_CF_B_OPD, &onPrimaryDocumentsDefenitionRequested)
 	ON_BN_CLICKED(IDC_CF_B_THO, &onTypicalOperationsRequested)
+	ON_BN_CLICKED(IDC_CF_B_ARMSET, &onArmSettingsRequested)
 	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
@@ -40,6 +42,8 @@ void oeav_men_k::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CF_B_THO, _typOperations);
 	DDX_Control(pDX, IDC_CF_B_VA, _analitTypes);
 	DDX_Control(pDX, IDC_CF_B_KAY, _analitCodes);
+	DDX_Control(pDX, IDC_CF_B_ARMSET, _armSettings);
+	DDX_Control(pDX, IDC_CF_SEP, _sep);
 }
 
 BOOL oeav_men_k::OnInitDialog()
@@ -61,6 +65,7 @@ void oeav_men_k::initControls()
 	_typOperations.SetIcon(IDI_OPERATION, 40, 40);
 	_analitTypes.SetIcon(IDI_ANALITIC, 40, 40);
 	_analitCodes.SetIcon(IDI_CODES, 40, 40);
+	_armSettings.SetIcon(IDR_SETTINGS, 40, 40);
 }
 
 void oeav_men_k::buildLayout()
@@ -88,6 +93,14 @@ void oeav_men_k::buildLayout()
 				<< item(&_analitTypes, NORESIZE)
 				<< itemFixed(VERTICAL, 5)
 				<< item(&_analitCodes, NORESIZE)
+				)
+			)
+		<< (pane(HORIZONTAL)
+			<< itemFixed(HORIZONTAL, 20)
+			<< (pane(VERTICAL)
+				<< itemFixed(VERTICAL, 5)
+				<< item(&_sep, NORESIZE)
+				<< item(&_armSettings, NORESIZE)
 				)
 			)
 		;
@@ -118,4 +131,9 @@ void oeav_men_k::onPrimaryDocumentsDefenitionRequested()
 void oeav_men_k::onTypicalOperationsRequested()
 {
 	oeav_osx().DoModal();
+}
+
+void oeav_men_k::onArmSettingsRequested()
+{
+	oeav_csf().DoModal();
 }

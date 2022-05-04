@@ -20,7 +20,9 @@ END_MESSAGE_MAP()
 
 CDialogX::CDialogX(UINT nID, CWnd* pParent /*=nullptr*/)
 	: ETSLayoutDialog(nID, pParent),
-	_drawButtonPanel(false)
+	_drawButtonPanel(false),
+	_drawShortHeader(false),
+	_drawWideHeader(false)
 {
 }
 
@@ -88,6 +90,8 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		myRect.Height() < 250 ? navbarCf = 4 : navbarCf = 5;
 		if (_drawShortHeader)
 			navbarCf = 7;
+		if (_drawWideHeader)
+			navbarCf = 3;
 
 		navbarRect.SetRect(myRect.left, myRect.top, myRect.right, myRect.bottom / navbarCf);
 
@@ -140,7 +144,6 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		dc.MoveTo(70, 70);
 		dc.LineTo(myRect.Width() - 70, 70);
 	}
-	
 
 	borderPen.DeleteObject();
 	brush.DeleteObject();
@@ -173,4 +176,9 @@ void CDialogX::drawButtonPanel(bool draw)
 void CDialogX::drawShortHeader(bool mode)
 {
 	_drawShortHeader = mode;
+}
+
+void CDialogX::drawWideHeader(bool mode)
+{
+	_drawWideHeader = mode;
 }

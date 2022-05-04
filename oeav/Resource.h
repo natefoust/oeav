@@ -28,8 +28,9 @@
 #define OEAV_OSX                        113
 #define OEAV_PSX                        114
 #define OEAV_KRV                        115
-#define OEAV_KRV1                       116
 #define OEAV_KRJ                        116
+#define OEAV_CST                        117
+#define OEAV_CSF                        118
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -52,6 +53,7 @@
 #define IDI_ADD                         147
 #define IDI_ACCEPT                      149
 #define IDI_EDIT                        152
+#define IDI_CALENDAR                    153
 #define IDC_STATIC_MAIN_MENU            1000
 #define IDC_OPD_PO_1                    1000
 #define IDC_STATIC_ID                   1001
@@ -83,6 +85,7 @@
 #define IDC_CF_TITLE                    1028
 #define IDC_CF_EMPLID                   1029
 #define IDC_BR_B_REP_DEF                1030
+#define IDC_CF_SEP                      1030
 #define IDC_BR_B_OSV_PERIOD             1031
 #define IDC_BR_B_LIST_O_PERIOD          1032
 #define IDC_CF_B_OPD                    1032
@@ -91,11 +94,14 @@
 #define IDC_DC_B_MINV                   1033
 #define IDC_CF_B_THO                    1034
 #define IDC_LRJ_EMPLID                  1034
+#define IDC_DC_B_DATE                   1034
 #define IDC_CF_B_VA                     1035
 #define IDC_LRJ_WNDID                   1035
 #define IDC_CF_B_KAY                    1036
 #define IDC_LRJ_WNDNAME                 1036
+#define IDC_CF_B_ARM                    1036
 #define IDC_LRJ_DATE                    1037
+#define IDC_CF_B_KAY2                   1037
 #define IDC_LRJ_DOCUMENT                1038
 #define IDC_LRJ_OPERATION               1039
 #define IDC_LRJ_E_DATE_FROM             1040
@@ -318,14 +324,27 @@
 #define IDC_KRV_B_EXIT                  1250
 #define IDC_KRJ_B_EXIT                  1251
 #define IDC_KRJ_EDIT                    1252
+#define IDC_CST_ST                      1253
+#define IDC_CST_DATE                    1254
+#define IDC_CST_B_EXIT                  1255
+#define IDC_CST_WNDID                   1256
+#define IDC_CST_WNDNAME                 1257
+#define IDC_CST_EMPLNAME                1258
+#define IDC_CSF_EMPLNAME                1259
+#define IDC_CSF_WNDNAME                 1260
+#define IDC_CSF_WNDID                   1261
+#define IDC_CSF_ST                      1262
+#define IDC_CSF_NAME                    1262
+#define IDC_CSF_B_EXIT                  1263
+#define IDC_CSF_E_NAME                  1264
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        153
+#define _APS_NEXT_RESOURCE_VALUE        154
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1253
+#define _APS_NEXT_CONTROL_VALUE         1265
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

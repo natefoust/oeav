@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CDialogX.h"
 #include "../controls/CStaticX.h"
 #include "../controls/CButtonX.h"
@@ -7,14 +7,14 @@ namespace oeav
 {
 	namespace ui
 	{
-		class oeav_men_d : public CDialogX
+		class oeav_csf : public CDialogX
 		{
 
 		public:
-			oeav_men_d(CWnd* pParent = nullptr);
+			oeav_csf(CWnd* pParent = nullptr);
 
 		#ifdef AFX_DESIGN_TIME
-			enum { IDD = IDD_REGIST_LIST };
+			enum { IDD = IDD_OEAV_DIALOG };
 		#endif
 
 		protected:
@@ -26,23 +26,22 @@ namespace oeav
 			HICON m_hIcon;
 
 			virtual BOOL OnInitDialog();
+			void OnCancel() override;
 
 		private:
 
 			void initControls();
 			void buildLayout();
 
-			afx_msg void onRegisterDocumentRequested();
-			afx_msg void onChangeDateRequested();
-		private:
-
 			CStaticX _emplName;
+			CStaticX _wndId;
 			CStaticX _wndName;
+			CStaticX _nameST;
 
-			CButtonST _rawDocInput;
-			CButtonST _dateInput;
+			CButtonST _bExit;
 
+			CEdit _name;
 		};
+
 	}
 }
-
