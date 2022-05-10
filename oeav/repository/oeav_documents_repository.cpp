@@ -238,21 +238,22 @@ const std::string DocumentsRepository::getBO() const
 		InstanceFactory<IConnection>::getInstance()->execute("select * from oeav_k where oeav_kdb != 0 and oeav_ks = '" + getTargetAccCode() + "' and oeav_kdata >= '" +
 			getDateFrom() + "' and oeav_kdata <= '" + getDateTo() + "'");
 
+	int debet = 0;
 	for (auto row : *result)
 	{
 		resultStr += "      " + std::to_string(row.at("oeav_ks").as<int>()) + "                                    " + std::to_string(row.at("oeav_kks").as<int>()) + 
 			"                                        " + std::to_string(row.at("oeav_kdb").as<int>()) + "\r\n";
+
+		debet += row.at("oeav_kdb").as<int>();
 	}
 
-	resultStr += "												                                       Итого по счёту: 0";
+	resultStr += "												                                       Итого по счёту: " + std::to_string(debet);
 
 	return resultStr;
 }
 
 const std::string DocumentsRepository::getJO() const
 {
-	
-
 	std::string resultStr =
 		"=Огиевич Е.А.=              Журнал-ордер                      =oea_krv=\r\n"
 		"    по счёту " + getTargetAccCode() + "          период с " + getDateFrom() + " по " + getDateTo() + "           \r\n"
@@ -264,13 +265,16 @@ const std::string DocumentsRepository::getJO() const
 		InstanceFactory<IConnection>::getInstance()->execute("select * from oeav_k where oeav_kkr != 0 and oeav_ks = '" + getTargetAccCode() + "' and oeav_kdata >= '" +
 			getDateFrom() + "' and oeav_kdata <= '" + getDateTo() +  "'");
 
+	int credit = 0;
 	for (auto row : *result)
 	{
 		resultStr += "      " + std::to_string(row.at("oeav_ks").as<int>()) + "                                    " + std::to_string(row.at("oeav_kks").as<int>()) +
 			"                                        " + std::to_string(row.at("oeav_kkr").as<int>()) + "\r\n";
+		
+		credit += row.at("oeav_kkr").as<int>();
 	}
 
-	resultStr += "												                                       Итого по счёту: 0";
+	resultStr += "												                                       Итого по счёту: " + std::to_string(credit);
 
 	return resultStr;
 }
@@ -356,4 +360,73 @@ std::string DocumentsRepository::getTargetAccCode() const
 	auto row = result1->at(0);
 
 	return row.at("oeav_cs").c_str();
+}
+
+const std::string DocumentsRepository::getKS() const
+{
+	std::string resultStr =
+		"=Огиевич Е.А.=                           Книга счетов                       =oea_krx=\r\n"
+		"-------------------------------------------------------------------------------------\r\n"
+		" Дата          Документ     Операция          Счёт      К.Счёт       Дебет     Кредит\r\n"
+		"-------------------------------------------------------------------------------------\r\n";
+
+	boost::shared_ptr<AccBookItemList> accBookList = getAccBookList();
+
+	const auto f = [&](std::string str, int size) {
+		
+		std::string s{};
+		for (int i = 0; i < size - str.length(); i++)
+			s.append(" ");
+
+		return s;
+	};
+
+	for (auto &item : *accBookList)
+	{
+		resultStr += item.getDate() + f(item.getDate(), 15) + item.getDocCode() + f(item.getDocCode(), 13) + item.getOperation() + f(item.getOperation(), 23) + item.getAccountCode()
+			+ f(item.getAccountCode(), 12) + item.getCorCode() + f(item.getCorCode(), 16) + item.getSumDb() + f(item.getSumDb(), 12) + item.getSumKr() + "\r\n";
+	}
+
+	return resultStr;
+}
+
+const std::string DocumentsRepository::getOSV() const
+{
+	std::string resultStr =
+		"=Огиевич Е.А.=                           Книга счетов                       =oea_kro=\r\n"
+		"    по счёту " + getTargetAccCode() + "          период с " + getDateFrom() + " по " + getDateTo() + "           \r\n"
+		"                                   входящее и исходящее сальдо не считать            \r\n"
+		"-------------------------------------------------------------------------------------\r\n"
+		" Дата             Документ       Операция          Счёт      К.Счёт         Оборот     \r\n"
+		"                                                                                             дб      кр    \r\n"
+		"-------------------------------------------------------------------------------------\r\n";
+
+	boost::shared_ptr<result> result =
+		InstanceFactory<IConnection>::getInstance()->execute("select * from oeav_k where oeav_ks = '" + getTargetAccCode() + "' and oeav_kdata >= '" +
+			getDateFrom() + "' and oeav_kdata <= '" + getDateTo() + "'");
+
+	const auto f = [&](std::string str, int size) {
+
+		std::string s{};
+		for (int i = 0; i < size - str.length(); i++)
+			s.append(" ");
+
+		return s;
+	};
+
+	int countDb = 0, countKr = 0;
+	for (auto &row : *result)
+	{
+		resultStr += std::string(row.at("oeav_kdata").c_str()) + f(row.at("oeav_kdata").c_str(), 15) + std::string(row.at("oeav_kdokn").c_str()) +
+			f(row.at("oeav_kdokn").c_str(), 15) + std::string(row.at("oeav_kto").c_str()) + f(row.at("oeav_kto").c_str(), 22) + std::string(row.at("oeav_ks").c_str()) +
+			f(row.at("oeav_ks").c_str(), 12) +
+			std::string(row.at("oeav_kks").c_str()) + f(row.at("oeav_kks").c_str(), 12) + std::string(row.at("oeav_kdb").c_str()) + f(row.at("oeav_kdb").c_str(), 9)
+			+ std::string(row.at("oeav_kkr").c_str()) + "\r\n";
+
+		countDb += row.at("oeav_kdb").as<int>();
+		countKr += row.at("oeav_kkr").as<int>();
+	}
+	resultStr += f("", 69) + "Итого по счёту: " + std::to_string(countDb) + f(std::to_string(countDb), 9) + std::to_string(countKr);
+
+	return resultStr;
 }

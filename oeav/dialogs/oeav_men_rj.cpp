@@ -6,6 +6,7 @@
 // oeav
 #include "oeav_ksr.h"
 #include "oeav_jsr.h"
+#include "oeav_krx.h"
 #include "../services/oeav_idocuments_service.h"
 #include "../shared/oeav_instance_factory.h"
 
@@ -24,6 +25,7 @@ BEGIN_MESSAGE_MAP(oeav_men_rj, CDialogX)
 	ON_BN_CLICKED(IDC_RL_B_LOOKRL, &onShowRegListRequested)
 	ON_BN_CLICKED(IDC_RL_B_LOOKAB, &onShowAccBookRequested)
 	ON_BN_CLICKED(IDC_RL_B_GENERATEAB, &onGenerateABRequested)
+	ON_BN_CLICKED(IDC_RL_B_PRINT_AB, &onPrintABRequested)
 	ON_WM_ERASEBKGND()
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
@@ -133,4 +135,9 @@ void oeav_men_rj::OnTimer(UINT_PTR uTime)
 		_ttip.HideTooltip();
 
 	KillTimer(IDC_TIMER);
+}
+
+void oeav_men_rj::onPrintABRequested()
+{
+	oeav_krx().DoModal();
 }

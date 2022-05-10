@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "CDialogX.h"
+#include "../controls/CButtonX.h"
 
 namespace oeav
 {
@@ -35,6 +36,7 @@ namespace oeav
 		private:
 			
 			CEdit _joEdit;
+			CButtonST _bExit;
 		};
 
 	}

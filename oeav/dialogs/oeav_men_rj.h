@@ -37,6 +37,7 @@ namespace oeav
 			afx_msg void onShowAccBookRequested();
 			afx_msg void onGenerateABRequested();
 			afx_msg void OnTimer(UINT_PTR);
+			afx_msg void onPrintABRequested();
 
 		private:
 

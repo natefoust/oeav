@@ -26,6 +26,8 @@ namespace oeav
 
 			const std::string getBO() const override;
 			const std::string getJO() const override;
+			const std::string getKS() const override;
+			const std::string getOSV() const override;
 
 			void updateDateFrom( std::string &date) const override;
 			void updateDateTo( std::string & date) const override;

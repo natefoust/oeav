@@ -207,7 +207,9 @@
     <ClInclude Include="dialogs\oeav_csf.h" />
     <ClInclude Include="dialogs\oeav_cst.h" />
     <ClInclude Include="dialogs\oeav_krj.h" />
+    <ClInclude Include="dialogs\oeav_kro.h" />
     <ClInclude Include="dialogs\oeav_krv.h" />
+    <ClInclude Include="dialogs\oeav_krx.h" />
     <ClInclude Include="dialogs\oeav_ssx.h" />
     <ClInclude Include="dialogs\oeav_asx.h" />
     <ClInclude Include="dialogs\oeav_vsx.h" />
@@ -264,7 +266,9 @@
     <ClCompile Include="dialogs\oeav_csf.cpp" />
     <ClCompile Include="dialogs\oeav_cst.cpp" />
     <ClCompile Include="dialogs\oeav_krj.cpp" />
+    <ClCompile Include="dialogs\oeav_kro.cpp" />
     <ClCompile Include="dialogs\oeav_krv.cpp" />
+    <ClCompile Include="dialogs\oeav_krx.cpp" />
     <ClCompile Include="dialogs\oeav_ssx.cpp" />
     <ClCompile Include="dialogs\oeav_asx.cpp" />
     <ClCompile Include="dialogs\oeav_vsx.cpp" />

@@ -134,3 +134,13 @@ std::string DocumentsService::getCurrentDate() const
 {
 	return InstanceFactory<domain::IDocumentsRepository>::getInstance()->getCurrentDate();
 }
+
+const std::string DocumentsService::getKS() const
+{
+	return InstanceFactory<domain::IDocumentsRepository>::getInstance()->getKS();
+}
+
+const std::string DocumentsService::getOSV() const
+{
+	return InstanceFactory<domain::IDocumentsRepository>::getInstance()->getOSV();
+}

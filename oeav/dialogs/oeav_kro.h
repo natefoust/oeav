@@ -6,11 +6,11 @@ namespace oeav
 {
 	namespace ui
 	{
-		class oeav_krv : public CDialogX
+		class oeav_kro : public CDialogX
 		{
 
 		public:
-			oeav_krv(CWnd* pParent = nullptr);
+			oeav_kro(CWnd* pParent = nullptr);
 
 		#ifdef AFX_DESIGN_TIME
 			enum { IDD = IDD_OEAV_DIALOG };
@@ -35,7 +35,7 @@ namespace oeav
 
 		private:
 			
-			CEdit _boEdit;
+			CEdit _osvEdit;
 			CButtonST _bExit;
 		};
 

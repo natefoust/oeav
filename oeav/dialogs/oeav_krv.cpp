@@ -36,6 +36,7 @@ void oeav_krv::DoDataExchange(CDataExchange* pDX)
 	CDialogX::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_KRV_EDIT, _boEdit);
+	DDX_Control(pDX, IDC_KRV_B_EXIT, _bExit);
 }
 
 BOOL oeav_krv::OnInitDialog()
@@ -54,10 +55,8 @@ void oeav_krv::initControls()
 {
 	DWORD afxCmd = SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER;
 
-
+	_bExit.SetIcon(IDI_CANCEL, 20, 20);
 	UpdateWindow();
-
-	std::string s = InstanceFactory<service::IDocumentsService>::getInstance()->getBO();
 
 	_boEdit.SetWindowText(InstanceFactory<service::IDocumentsService>::getInstance()->getBO().c_str());
 }

@@ -29,6 +29,7 @@ void oeav_krj::DoDataExchange(CDataExchange* pDX)
 	CDialogX::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_KRJ_EDIT, _joEdit);
+	DDX_Control(pDX, IDC_KRJ_B_EXIT, _bExit);
 }
 
 BOOL oeav_krj::OnInitDialog()
@@ -49,7 +50,8 @@ void oeav_krj::initControls()
 
 
 	UpdateWindow();
-
+	
+	_bExit.SetIcon(IDI_CANCEL, 20, 20);
 	_joEdit.SetWindowText(InstanceFactory<service::IDocumentsService>::getInstance()->getJO().c_str());
 }
 

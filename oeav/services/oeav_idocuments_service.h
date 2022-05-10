@@ -41,6 +41,8 @@ namespace oeav
 
 			virtual const std::string getBO() const = 0;
 			virtual const std::string getJO() const = 0;
+			virtual const std::string getKS() const = 0;
+			virtual const std::string getOSV() const = 0;
 
 			virtual void updateDateFrom( std::string & date) const = 0;
 			virtual void updateDateTo( std::string & date) const = 0;
