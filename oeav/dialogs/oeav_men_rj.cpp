@@ -44,7 +44,7 @@ void oeav_men_rj::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RL_B_LOOKAB, _lookAB);
 	DDX_Control(pDX, IDC_RL_B_PRINT_AB, _printAB);
 	DDX_Control(pDX, IDC_RL_B_GENERATEAB, _generateAB);
-	DDX_Control(pDX, IDC_RS_EMPLID, _emplName);
+	//DDX_Control(pDX, IDC_RS_EMPLID, _emplName);
 	DDX_Control(pDX, IDC_RS_TITLE, _wndName);
 }
 
@@ -74,7 +74,7 @@ void oeav_men_rj::buildLayout()
 {
 	CreateRoot(VERTICAL)
 		<< (pane(HORIZONTAL, RELATIVE_VERT)
-			<< item(&_emplName, NORESIZE)
+			//<< item(&_emplName, NORESIZE)
 			)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< itemFixed(HORIZONTAL, getWindowCenterForLayout(5))

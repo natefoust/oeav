@@ -43,6 +43,7 @@ namespace oeav
 			afx_msg void onNextRequested();
 			afx_msg void onPrevRequested();
 			afx_msg void onChooseRequested();
+			//afx_msg void onDeleteRequested();
 			afx_msg void changeDisplayedItem(NMHDR *pNMHDR, LRESULT *pResult);
 
 		private:

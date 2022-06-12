@@ -151,10 +151,11 @@ void oeav_ksr::initControls()
 	_sep3.SetWindowPos(NULL, 0, 0, 5, 9, afxCmd);
 
 	_docTable.SetWindowPos(NULL, 0, 0, 550, 200, afxCmd);
+	_docTable.InsertColumn(0, "", LVCFMT_CENTER, 30);
 	_docTable.InsertColumn(LAB_NUM + 1, "№", LVCFMT_CENTER, 30);
 	_docTable.InsertColumn(LAB_DATE + 1, "Дата", LVCFMT_CENTER, 100);
-	_docTable.InsertColumn(LAB_DOCCODE + 1, "Код док-та", LVCFMT_CENTER, 100);
-	_docTable.InsertColumn(LAB_DOCNAME + 1, "Имя док-та", LVCFMT_CENTER, 100);
+	_docTable.InsertColumn(LAB_DOCCODE + 1, "Код документа", LVCFMT_CENTER, 100);
+	_docTable.InsertColumn(LAB_DOCNAME + 1, "Имя документа", LVCFMT_CENTER, 100);
 	_docTable.InsertColumn(LAB_DOCDATE + 1, "От", LVCFMT_CENTER, 100);
 	_docTable.InsertColumn(LAB_OPER + 1, "Операция", LVCFMT_CENTER, 100);
 	_docTable.InsertColumn(LAB_ACODE + 1, "Счёт", LVCFMT_CENTER, 100);
@@ -240,6 +241,9 @@ void oeav_ksr::onChooseRequested()
 	_accNameEdit.ShowWindow(afxCmd);
 	_accIdEdit.ShowWindow(afxCmd);
 	_accSt.ShowWindow(afxCmd);
+	_bPrev.ShowWindow(afxCmd);
+	_bNext.ShowWindow(afxCmd);
+	_bDelete.ShowWindow(afxCmd);
 
 	if (!_chooseMode)
 	{

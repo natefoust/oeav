@@ -136,7 +136,7 @@ void CDialogX::drawElegantDialog(CDC& dc)
 		dc.LineTo(myRect.left, myRect.bottom-1); // handle collision
 		dc.LineTo(myRect.right-1, myRect.bottom-1);
 		dc.LineTo(myRect.right-1, myRect.top);
-		dc.LineTo(myRect.left+493, myRect.top);
+		dc.LineTo(myRect.left+523, myRect.top);
 
 		//dc.Rectangle(myRect);
 

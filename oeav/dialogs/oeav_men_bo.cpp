@@ -33,7 +33,7 @@ void oeav_men_bo::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BR_B_OSV_PERIOD, _oSVPer);
 	DDX_Control(pDX, IDC_BR_B_BAL_REP_PERIOD, _balanceRepPer);
 	DDX_Control(pDX, IDC_BR_B_LIST_O_PERIOD, _listOrdPer);
-	DDX_Control(pDX, IDC_BR_EMPLID, _emplName);
+	//DDX_Control(pDX, IDC_BR_EMPLID, _emplName);
 	DDX_Control(pDX, IDC_BR_TITLE, _wndName);
 }
 
@@ -61,7 +61,7 @@ void oeav_men_bo::buildLayout()
 {
 	CreateRoot(VERTICAL)
 		<< (pane(HORIZONTAL, RELATIVE_VERT)
-			<< item(&_emplName, NORESIZE)
+			//<< item(&_emplName, NORESIZE)
 			)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< itemFixed(HORIZONTAL, getWindowCenterForLayout(3))

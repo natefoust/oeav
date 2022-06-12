@@ -32,8 +32,9 @@
 #define OEAV_CST                        117
 #define OEAV_CSF                        118
 #define OEAV_KRX                        119
-#define OEAV_KRX1                       120
 #define OEAV_KRO                        120
+#define OEAV_MEN_A                      121
+#define OEAV_MEN_V                      122
 #define IDR_MAINFRAME                   128
 #define IDI_CREATE                      129
 #define IDI_PRINT                       131
@@ -64,6 +65,8 @@
 #define IDC_STATIC_NAME                 1002
 #define IDC_RS_TITLE                    1002
 #define IDC_OPD_PO_3                    1002
+#define IDC_STATIC_ID2                  1002
+#define IDC_STATIC_ID3                  1003
 #define IDC_TAB_CONTROLLER              1005
 #define IDC_BUTTON_SETTINGS             1006
 #define IDC_BUTTON_EXIT                 1007
@@ -86,7 +89,9 @@
 #define IDC_DC_TITLE                    1026
 #define IDC_DC_EMPLID                   1027
 #define IDC_CF_TITLE                    1028
+#define IDC_DC_TITLE2                   1028
 #define IDC_CF_EMPLID                   1029
+#define IDC_DC_TITLE3                   1029
 #define IDC_BR_B_REP_DEF                1030
 #define IDC_CF_SEP                      1030
 #define IDC_BR_B_OSV_PERIOD             1031
@@ -344,6 +349,7 @@
 #define IDC_KRX_EDIT                    1266
 #define IDC_KRO_EDIT                    1267
 #define IDC_KRO_B_EXIT                  1268
+#define IDC_DC_B_EXITP                  1269
 
 // Next default values for new objects
 // 
@@ -351,7 +357,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        154
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1269
+#define _APS_NEXT_CONTROL_VALUE         1270
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -239,12 +239,12 @@ void oeav_dsx::fillTable()
 		_docTable.SetItemText(i, PS_NUM, std::to_string(i).c_str());
 		_docTable.SetItemText(i, PS_CODE, _documents->at(i).getCode().c_str());
 		_docTable.SetItemText(i, PS_NAME, _documents->at(i).getName().c_str());
-		_docTable.SetItemText(i, PS_VA1, getShortStringRepresentation(_documents->at(i).getType1()).c_str());
-		_docTable.SetItemText(i, PS_VAT1, _documents->at(i).getAnalyt1().getAnalyticalCode().c_str());
-		_docTable.SetItemText(i, PS_VA2, getShortStringRepresentation(_documents->at(i).getType2()).c_str());
-		_docTable.SetItemText(i, PS_VAT2, _documents->at(i).getAnalyt2().getAnalyticalCode().c_str());
-		_docTable.SetItemText(i, PS_VA3, getShortStringRepresentation(_documents->at(i).getType3()).c_str());
-		_docTable.SetItemText(i, PS_VAT3, _documents->at(i).getAnalyt3().getAnalyticalCode().c_str());
+		_docTable.SetItemText(i, PS_VA1, _documents->at(i).getAnalyt1().getAnalyticalCode().c_str());
+		_docTable.SetItemText(i, PS_VAT1, getShortStringRepresentation(_documents->at(i).getType1()).c_str());
+		_docTable.SetItemText(i, PS_VA2, _documents->at(i).getAnalyt2().getAnalyticalCode().c_str());
+		_docTable.SetItemText(i, PS_VAT2, getShortStringRepresentation(_documents->at(i).getType2()).c_str());
+		_docTable.SetItemText(i, PS_VA3, _documents->at(i).getAnalyt3().getAnalyticalCode().c_str());
+		_docTable.SetItemText(i, PS_VAT3, getShortStringRepresentation(_documents->at(i).getType3()).c_str());
 	}
 }
 

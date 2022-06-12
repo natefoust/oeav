@@ -5,6 +5,8 @@
 #include "oeav_men_bo.h"
 #include "oeav_men_d.h"
 #include "oeav_men_k.h"
+#include "oeav_men_a.h"
+#include "oeav_men_v.h"
 
 using namespace oeav::ui;
 
@@ -32,8 +34,10 @@ void oeav_men::DoDataExchange(CDataExchange* pDX)
 	ETSLayoutDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STATIC_ID, _emplName);
 	DDX_Control(pDX, IDC_TAB_CONTROLLER, _mainTab);
-	DDX_Control(pDX, IDC_BUTTON_SETTINGS, _btnSettings);
-	DDX_Control(pDX, IDC_BUTTON_EXIT, _btnExit);
+	DDX_Control(pDX, IDC_STATIC_ID2, _wndName);
+	DDX_Control(pDX, IDC_STATIC_ID3, _wndId);
+	//DDX_Control(pDX, IDC_BUTTON_SETTINGS, _btnSettings);
+	//DDX_Control(pDX, IDC_BUTTON_EXIT, _btnExit);
 }
 
 BOOL oeav_men::OnInitDialog()
@@ -50,18 +54,20 @@ BOOL oeav_men::OnInitDialog()
 
 void oeav_men::initControls()
 {
-	_btnSettings.DrawTransparent();
-	_btnSettings.SetIcon(IDR_SETTINGS, 45, 45);
-	_btnSettings.SetAlign(CButtonST::ST_ALIGN_VERT);
+	//_btnSettings.DrawTransparent();
+	//_btnSettings.SetIcon(IDR_SETTINGS, 45, 45);
+	//_btnSettings.SetAlign(CButtonST::ST_ALIGN_VERT);
 
-	_btnExit.DrawTransparent();
-	_btnExit.SetIcon(IDR_EXIT, 45, 45);
-	_btnExit.SetAlign(CButtonST::ST_ALIGN_VERT);
+	//_btnExit.DrawTransparent();
+	//_btnExit.SetIcon(IDR_EXIT, 45, 45);
+	//_btnExit.SetAlign(CButtonST::ST_ALIGN_VERT);
 
 	oeav_men_rj *tabRJ = new oeav_men_rj;
 	oeav_men_bo *tabBO = new oeav_men_bo;
 	oeav_men_k *tabKF = new oeav_men_k;
 	oeav_men_d *tabDK = new oeav_men_d;
+	oeav_men_a *tabAR = new oeav_men_a;
+	oeav_men_v *tabVI = new oeav_men_v;
 
 	TC_ITEM tci;
 
@@ -79,6 +85,12 @@ void oeav_men::initControls()
 	tci.pszText = _T("oea_картотеки");
 	_mainTab.InsertItem(3, &tci);
 
+	tci.pszText = _T("oea_архив");
+	_mainTab.InsertItem(4, &tci);
+
+	tci.pszText = _T("oea_выход");
+	_mainTab.InsertItem(5, &tci);
+
 	tci.mask = TCIF_PARAM;
 	tci.lParam = (LPARAM)tabDK;
 	_mainTab.SetItem(0, &tci);
@@ -92,19 +104,31 @@ void oeav_men::initControls()
 	tci.lParam = (LPARAM)tabKF;
 	_mainTab.SetItem(3, &tci);
 
+	tci.lParam = (LPARAM)tabAR;
+	_mainTab.SetItem(4, &tci);
+
+	tci.lParam = (LPARAM)tabVI;
+	_mainTab.SetItem(5, &tci);
+
 	tabRJ->Create(IDD_REGIST_LIST, &_mainTab);
 	tabBO->Create(IDD_BALANCE_REP, &_mainTab);
 	tabKF->Create(IDD_CARDFILES, &_mainTab);
 	tabDK->Create(IDD_DOCUMENTS, &_mainTab);
+	tabAR->Create(OEAV_MEN_A, &_mainTab);
+	tabVI->Create(OEAV_MEN_V, &_mainTab);
 
 	setTabPos(tabRJ);
 	setTabPos(tabBO);
 	setTabPos(tabKF);
 	setTabPos(tabDK);
+	setTabPos(tabAR);
+	setTabPos(tabVI);
 
 	tabRJ->ShowWindow(SW_HIDE);
 	tabBO->ShowWindow(SW_HIDE);
 	tabKF->ShowWindow(SW_HIDE);
+	tabAR->ShowWindow(SW_HIDE);
+	tabVI->ShowWindow(SW_HIDE);
 	tabDK->ShowWindow(SW_SHOW);
 
 	UpdateWindow();
@@ -119,8 +143,8 @@ void oeav_men::buildLayout()
 				)
 			<< itemGrowing(HORIZONTAL)
 			<< (pane(HORIZONTAL)
-				<< item(&_btnSettings, NORESIZE)
-				<< item(&_btnExit, NORESIZE)
+				//<< item(&_btnSettings, NORESIZE)
+				//<< item(&_btnExit, NORESIZE)
 				)
 			)
 		<< itemFixed(VERTICAL, 5)

@@ -40,6 +40,8 @@ namespace oeav
 
 		private:
 			CStaticX _emplName;
+			CStaticX _wndName;
+			CStaticX _wndId;
 
 			CTabCtrl _mainTab;
 

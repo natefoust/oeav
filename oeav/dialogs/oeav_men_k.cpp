@@ -34,7 +34,7 @@ oeav_men_k::oeav_men_k(CWnd* pParent /*=nullptr*/)
 void oeav_men_k::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogX::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_CF_EMPLID, _emplName);
+	//DDX_Control(pDX, IDC_CF_EMPLID, _emplName);
 	DDX_Control(pDX, IDC_CF_TITLE, _wndName);
 
 	DDX_Control(pDX, IDC_CF_B_OPD, _rawDocs);
@@ -72,7 +72,7 @@ void oeav_men_k::buildLayout()
 {
 	CreateRoot(VERTICAL)
 		<< (pane(HORIZONTAL, RELATIVE_VERT)
-			<< item(&_emplName, NORESIZE)
+			//<< item(&_emplName, NORESIZE)
 			)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< itemFixed(HORIZONTAL, getWindowCenterForLayout(3) + 25)

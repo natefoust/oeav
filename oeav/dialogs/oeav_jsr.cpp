@@ -235,6 +235,9 @@ void oeav_jsr::onChooseRequested()
 	_sep1.ShowWindow(afxCmd);
 	_sep2.ShowWindow(afxCmd);
 	_sep3.ShowWindow(afxCmd);
+	_bPrev.ShowWindow(afxCmd);
+	_bNext.ShowWindow(afxCmd);
+	_bDelete.ShowWindow(afxCmd);
 
 	if (!_chooseMode)
 	{

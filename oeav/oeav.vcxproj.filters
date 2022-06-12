@@ -186,6 +186,12 @@
     <ClInclude Include="dialogs\oeav_kro.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="dialogs\oeav_men_a.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="dialogs\oeav_men_v.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="oeav.cpp">
@@ -327,6 +333,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="dialogs\oeav_kro.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\oeav_men_a.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogs\oeav_men_v.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
